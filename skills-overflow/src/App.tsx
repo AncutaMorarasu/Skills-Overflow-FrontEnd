@@ -1,13 +1,21 @@
 import React from "react";
 import "./App.css";
-import Button from "react-bootstrap/Button";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NotFoundPage from "./pages/not-found-page";
+import LoginPage from "./pages/login-page";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-center">Hello Skills Overflow</h1>
-      <Button variant="info">info</Button>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <LoginPage />
+        </Route>
+        <Route path="*">
+          <NotFoundPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
