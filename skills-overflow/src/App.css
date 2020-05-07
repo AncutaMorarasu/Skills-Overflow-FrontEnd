@@ -10,14 +10,12 @@
     color: white;
     padding: 32px 0 8px;
     font-weight: 400;
-    /* margin-bottom: 70px; */
 }
 
 .containerRecPage {
     flex-direction: column;
     align-items: center;
     display: flex;
-    /* padding-top: 150px; */
 }
 
 .recPage {
@@ -39,7 +37,7 @@
 
 .container h1 {
     font-size: 4rem;
-    margin: 3rem 0 5rem 0;
+    margin: 3rem 0;
 }
 
 .container h2 {
@@ -58,7 +56,7 @@
     border-radius: 5px;
     background: white;
     color: #393e46;
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
 
 form {
@@ -72,6 +70,10 @@ form {
 }
 
 .loginBtn:hover {
+    background-color: #21bf73;
+}
+
+.loginBtn:active {
     background-color: #21bf73;
 }
 
