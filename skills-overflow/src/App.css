@@ -5,3 +5,35 @@
 .container {
   margin-top: 3rem;
 }
+
+.form-control{
+  width: 250px;
+}
+
+.contentHeader{
+  font-size: 3.2rem;
+  line-height: 1.25;
+  font-weight: 400;
+  color:white;
+  padding: 32px 0 8px;
+  font-weight: 400;
+  margin-bottom: 70px;
+}
+
+.containerRecPage{
+  flex-direction:column;
+  align-items:center;
+  display: flex;
+  margin-top: 150px;
+
+}
+
+.recPage{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  margin-left: 10px;
+}
