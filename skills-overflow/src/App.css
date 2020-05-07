@@ -1,39 +1,106 @@
 .alert {
-  font-size: 2rem;
+    font-size: 2rem;
+}
+
+
+.contentHeader {
+    font-size: 3.2rem;
+    line-height: 1.25;
+    font-weight: 400;
+    color: white;
+    padding: 32px 0 8px;
+    font-weight: 400;
+    /* margin-bottom: 70px; */
+}
+
+.containerRecPage {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    /* padding-top: 150px; */
+}
+
+.recPage {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    width: 25%;
+}
+
+.btn-success {
+    margin-left: 10px;
 }
 
 .container {
-  margin-top: 3rem;
+    text-align: center;
+    font-weight: 200;
+    margin-top: -4rem;
 }
 
-.form-control{
-  width: 250px;
+.container h1 {
+    font-size: 4rem;
+    margin: 3rem 0 5rem 0;
 }
 
-.contentHeader{
-  font-size: 3.2rem;
-  line-height: 1.25;
-  font-weight: 400;
-  color:white;
-  padding: 32px 0 8px;
-  font-weight: 400;
-  margin-bottom: 70px;
+.container h2 {
+    font-size: 40px;
+    padding: 20px;
 }
 
-.containerRecPage{
-  flex-direction:column;
-  align-items:center;
-  display: flex;
-  margin-top: 150px;
-
+.form-control,
+.loginBtn {
+    width: 100%;
 }
 
-.recPage{
-  margin: 20px;
-  display: flex;
-  justify-content: center;
+.formContainer {
+    width: 370px;
+    height: 400px;
+    border-radius: 5px;
+    background: white;
+    color: #393e46;
+    margin-top: 3rem;
 }
 
-.btn {
-  margin-left: 10px;
+form {
+    padding: 2rem;
+}
+
+.loginBtn {
+    background-color: #21bf73;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.loginBtn:hover {
+    background-color: #21bf73;
+}
+
+.loginBtn:active {
+    background-color: #21bf73;
+}
+
+input::placeholder,
+.loginBtn {
+    font-size: 1.2rem;
+}
+
+.help-links {
+    display: flex;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.flex-column {
+    margin-top: 1.5rem;
+}
+
+.header {
+    margin: 20px 0 0 50px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .formContainer {
+        width: 300px;
+    }
 }
