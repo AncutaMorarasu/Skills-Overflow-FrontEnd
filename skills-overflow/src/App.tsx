@@ -12,12 +12,14 @@ function App() {
         <Route exact path="/">
           <LoginPage />
         </Route>
-        <Route path="/not">
-          <NotFoundPage />
-        </Route>
+        
         <Route exact path="/recovery">
         <PasswordRecPage/>  
-        </Route>  
+        </Route> 
+
+        <Route path="">
+          <NotFoundPage />
+        </Route> 
       </Switch>
     </Router>
   );
