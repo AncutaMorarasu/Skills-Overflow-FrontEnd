@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PasswordRecPage from "../pages/password-rec-page";
 import RegisterPage from "../pages/register-page";
+import axios from "axios";
 
 function LoginPage() {
   const [values, setValues] = useState({ email: "", password: "" });
@@ -18,9 +19,21 @@ function LoginPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    setValues({ email: "", password: "" });
+    axios.post("localhost:8080", values).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
   function submit() {
     console.log(values);
+    if (values.email.length === 0 || values.email.length === 0) {
+      alert("nope");
+    }
   }
   return (
     <div className="container">
