@@ -106,3 +106,34 @@ input::placeholder,
         width: 300px;
     }
 }
+
+.register_container{
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.register__container h1{
+    font-size: 4rem;
+}
+
+.alig{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#register-submit-btn{
+    margin-top: 18px;
+}
+
+.formRegisterContainer {
+    width: 370px;
+    height: 450px;
+    border-radius: 5px;
+    background: white;
+    color: #393e46;
+    margin-top: 4rem;
+}
