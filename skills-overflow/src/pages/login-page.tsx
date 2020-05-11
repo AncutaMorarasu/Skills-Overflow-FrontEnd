@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory
+} from "react-router-dom";
 import PasswordRecPage from "../pages/password-rec-page";
 import RegisterPage from "../pages/register-page";
 import axios from "axios";
+import Dashboard from "./dashboard-page";
+// import { useRoutes, useRedirect } from "hookrouter";
 
 function LoginPage() {
   const [values, setValues] = useState({ email: "", password: "" });
@@ -28,13 +36,13 @@ function LoginPage() {
         console.log(error);
       }
     );
+    history.push("/dashboard");
   }
+  const history = useHistory();
   function submit() {
     console.log(values);
-    if (values.email.length === 0 || values.email.length === 0) {
-      alert("nope");
-    }
   }
+
   return (
     <div className="container">
       <h1>Welcome to Skills Overflow</h1>
@@ -48,6 +56,7 @@ function LoginPage() {
               name="email"
               value={values.email}
               onChange={handleChange}
+              required
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -57,6 +66,8 @@ function LoginPage() {
               name="password"
               value={values.password}
               onChange={handleChange}
+              required
+              minLength={5}
             />
           </Form.Group>
           <Button
@@ -82,6 +93,9 @@ function LoginPage() {
               </Route>
               <Route path="/register">
                 <RegisterPage />
+              </Route>
+              <Route path="/dashboard">
+                <Dashboard />
               </Route>
             </Switch>
           </Router>
