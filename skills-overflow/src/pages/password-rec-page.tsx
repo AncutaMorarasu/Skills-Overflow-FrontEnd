@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 function PasswordRecPage() {
 
   const [values, setValues] = useState({ email: "" });
-
   function handleChange(event: any) {
     const { name, value } = event.target;
     setValues({
@@ -37,7 +36,7 @@ function PasswordRecPage() {
   return (
     <div className="containerRecPage" >
       <Container className="formRecoveryContainer">
-        <h2 className="border-bottom">First, let's find your account</h2>
+        <h2 className="border-bottom">Please enter your email to search for your account</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Control

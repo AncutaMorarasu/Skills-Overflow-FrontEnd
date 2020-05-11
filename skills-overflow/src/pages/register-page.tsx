@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 
 function RegisterPage() {
   const [values, setValues] = useState({ email: "", userName: "", password: "", secPassword: "" });
+  const [check, setCheck] = useState(true);
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -28,20 +29,34 @@ function RegisterPage() {
     setValues({ email: "", userName: "", password: "", secPassword: "" });
   }
 
+  function checkRegister(event: any){
+    axios.get("http://localhost:8080/singUp")
+  }
+
   function submit() {
     if (!(values.password.localeCompare(values.secPassword)) === false) {
-      alert("Passwords do not match");
+      alert("Passwords do not match.");
+    }else if(values.password.length === 0 || values.secPassword.length === 0){
+      alert("Please insert a valid password.");
     }
     console.log(values);
   }
 
+  function checkBox(check: boolean){
+    if(check){
+      setCheck(false);
+    }else{
+      setCheck(true);
+    }
+    console.log(check);
+}
 
   return (
 
     <div className="container">
       <h1>Welcome to Skills Overflow</h1>
       <Container className="formRegisterContainer">
-        <h2 className="border-bottom">Log In</h2>
+        <h2 className="border-bottom">Register</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="validationCustomUsername">
             <Form.Control
@@ -85,9 +100,10 @@ function RegisterPage() {
           </Form.Group>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
-            <label className="custom-control-label" htmlFor="defaultUnchecked">I accept the terms and conditions</label>
+            <label className="custom-control-label" htmlFor="defaultUnchecked" onClick={()=>checkBox(check)}>I accept the terms and conditions</label>
           </div>
           <Button
+            disabled={check}
             variant="primary"
             type="submit"
             className="loginBtn .btn-block"
