@@ -13,7 +13,7 @@ import PasswordRecPage from "../pages/password-rec-page";
 import RegisterPage from "../pages/register-page";
 import axios from "axios";
 import Dashboard from "./dashboard-page";
-// import { useRoutes, useRedirect } from "hookrouter";
+import cogoToast from "cogo-toast";
 
 function LoginPage() {
   const [values, setValues] = useState({ email: "", password: "" });
@@ -25,22 +25,36 @@ function LoginPage() {
     });
   }
 
+  const history = useHistory();
   function handleSubmit(event: any) {
     event.preventDefault();
     setValues({ email: "", password: "" });
-    axios.post("localhost:8080", values).then(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    history.push("/dashboard");
   }
-  const history = useHistory();
   function submit() {
-    console.log(values);
+    if (values.email.length === 0 || values.password.length === 0) {
+      cogoToast.error("Please fill in both your email adress and password.", {
+        position: "top-center"
+      });
+      return;
+    } else {
+      axios.post("http://localhost:8080/logIn", values).then(
+        response => {
+          if (response.data === "user does not exist") {
+            cogoToast.error("Incorrect username or password", {
+              position: "top-center"
+            });
+          } else {
+            cogoToast.success("Yay, you're logged in.");
+            history.push("/dashboard");
+          }
+        },
+        error => {
+          cogoToast.error("Something went wrong, please try again.", {
+            position: "top-center"
+          });
+        }
+      );
+    }
   }
 
   return (
@@ -56,7 +70,6 @@ function LoginPage() {
               name="email"
               value={values.email}
               onChange={handleChange}
-              required
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -66,7 +79,6 @@ function LoginPage() {
               name="password"
               value={values.password}
               onChange={handleChange}
-              required
               minLength={5}
             />
           </Form.Group>
