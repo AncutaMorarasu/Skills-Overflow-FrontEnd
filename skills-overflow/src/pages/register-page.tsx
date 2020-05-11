@@ -3,10 +3,15 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import Modal from 'react-modal';
+//git import Modal from 'react-modal';
 
 function RegisterPage() {
-  const [values, setValues] = useState({ email: "", userName: "", password: "", secPassword: "" });
+  const [values, setValues] = useState({
+    email: "",
+    userName: "",
+    password: "",
+    secPassword: ""
+  });
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -37,7 +42,6 @@ function RegisterPage() {
 
 
   return (
-
     <div className="container">
       <h1>Welcome to Skills Overflow</h1>
       <Container className="formRegisterContainer">
@@ -50,7 +54,10 @@ function RegisterPage() {
               name="userName"
               value={values.userName}
               onChange={handleChange}
+<<<<<<< HEAD
               required
+=======
+>>>>>>> loginTask
             />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
@@ -60,7 +67,10 @@ function RegisterPage() {
               name="email"
               value={values.email}
               onChange={handleChange}
+<<<<<<< HEAD
               required
+=======
+>>>>>>> loginTask
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -70,7 +80,10 @@ function RegisterPage() {
               name="password"
               value={values.password}
               onChange={handleChange}
+<<<<<<< HEAD
               required
+=======
+>>>>>>> loginTask
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -80,12 +93,26 @@ function RegisterPage() {
               name="secPassword"
               value={values.secPassword}
               onChange={handleChange}
+<<<<<<< HEAD
               required
             />
           </Form.Group>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
             <label className="custom-control-label" htmlFor="defaultUnchecked">I accept the terms and conditions</label>
+=======
+            />
+          </Form.Group>
+          <div className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="defaultUnchecked"
+            />
+            <label className="custom-control-label" htmlFor="defaultUnchecked">
+              I accept the terms and conditions
+            </label>
+>>>>>>> loginTask
           </div>
           <Button
             variant="primary"
@@ -96,15 +123,18 @@ function RegisterPage() {
           >
             Register
           </Button>{" "}
+<<<<<<< HEAD
 
 
         </Form>
 
       </Container>
 
+=======
+        </Form>
+      </Container>
+>>>>>>> loginTask
     </div>
-
-
   );
 }
 
