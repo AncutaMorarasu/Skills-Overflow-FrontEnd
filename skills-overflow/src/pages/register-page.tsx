@@ -93,26 +93,12 @@ function RegisterPage() {
               name="secPassword"
               value={values.secPassword}
               onChange={handleChange}
-<<<<<<< HEAD
               required
             />
           </Form.Group>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
             <label className="custom-control-label" htmlFor="defaultUnchecked">I accept the terms and conditions</label>
-=======
-            />
-          </Form.Group>
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="defaultUnchecked"
-            />
-            <label className="custom-control-label" htmlFor="defaultUnchecked">
-              I accept the terms and conditions
-            </label>
->>>>>>> loginTask
           </div>
           <Button
             variant="primary"
@@ -123,17 +109,12 @@ function RegisterPage() {
           >
             Register
           </Button>{" "}
-<<<<<<< HEAD
 
 
         </Form>
 
       </Container>
 
-=======
-        </Form>
-      </Container>
->>>>>>> loginTask
     </div>
   );
 }
