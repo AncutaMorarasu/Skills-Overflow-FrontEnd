@@ -1,21 +1,63 @@
-import React from "react";
-//import Button from "react-bootstrap/Button";
+import React, { useState } from "react";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+
 
 function PasswordRecPage() {
+
+  const [values, setValues] = useState({ email: "" });
+
+  function handleChange(event: any) {
+    const { name, value } = event.target;
+    setValues({
+      ...values,
+      [name]: value
+    });
+  }
+
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    setValues({ email: '' });
+    axios.post("localhost:8080", values).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      });
+      setValues({email:''});
+  }
+
+  function submit(){
+    console.log(values);
+  }
+
   return (
-    <div className="containerRecPage">
-      <h2 className="contentHeader">First, let's find your account</h2>
-      <div className="recPage">
-        <input
-          id="input-char-counter"
-          type="email"
-          className="form-control"
-          placeholder="Please enter your email address"
-        />
-        <button type="button" className="btn btn-success btn-rounded">
-          Submit
-        </button>
-      </div>
+    <div className="containerRecPage" >
+      <Container className="formRecoveryContainer">
+        <h2 className="border-bottom">First, let's find your account</h2>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Control
+              type="email"
+              placeholder="Enter your email address"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            type="submit"
+            className="loginBtn .btn-block"
+            onClick={submit}
+          >
+            Submit
+          </Button>{" "}
+          </Form>
+          </Container>
     </div>
   );
 }

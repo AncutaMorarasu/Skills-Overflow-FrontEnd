@@ -137,3 +137,12 @@ input::placeholder,
     color: #393e46;
     margin-top: 4rem;
 }
+
+.formRecoveryContainer{
+    width: 600px;
+    height: 250px;
+    border-radius: 5px;
+    background: white;
+    color: #393e46;
+    margin-top: 9rem;
+}
