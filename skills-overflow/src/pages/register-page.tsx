@@ -29,17 +29,17 @@ function RegisterPage() {
       },
       error => {
         console.log(error);
-      });
+      }
+    );
     setValues({ email: "", userName: "", password: "", secPassword: "" });
   }
 
   function submit() {
-    if (!(values.password.localeCompare(values.secPassword)) === false) {
+    if (!values.password.localeCompare(values.secPassword) === false) {
       alert("Passwords do not match");
     }
     console.log(values);
   }
-
 
   return (
     <div className="container">
@@ -54,10 +54,6 @@ function RegisterPage() {
               name="userName"
               value={values.userName}
               onChange={handleChange}
-<<<<<<< HEAD
-              required
-=======
->>>>>>> loginTask
             />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
@@ -67,10 +63,6 @@ function RegisterPage() {
               name="email"
               value={values.email}
               onChange={handleChange}
-<<<<<<< HEAD
-              required
-=======
->>>>>>> loginTask
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -80,10 +72,6 @@ function RegisterPage() {
               name="password"
               value={values.password}
               onChange={handleChange}
-<<<<<<< HEAD
-              required
-=======
->>>>>>> loginTask
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -97,8 +85,14 @@ function RegisterPage() {
             />
           </Form.Group>
           <div className="custom-control custom-checkbox">
-            <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
-            <label className="custom-control-label" htmlFor="defaultUnchecked">I accept the terms and conditions</label>
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="defaultUnchecked"
+            />
+            <label className="custom-control-label" htmlFor="defaultUnchecked">
+              I accept the terms and conditions
+            </label>
           </div>
           <Button
             variant="primary"
@@ -109,12 +103,8 @@ function RegisterPage() {
           >
             Register
           </Button>{" "}
-
-
         </Form>
-
       </Container>
-
     </div>
   );
 }
