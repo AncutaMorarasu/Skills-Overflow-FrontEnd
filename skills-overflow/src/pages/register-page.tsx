@@ -3,11 +3,20 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
-import Modal from 'react-modal';
+//git import Modal from 'react-modal';
 
 function RegisterPage() {
+<<<<<<< HEAD
   const [values, setValues] = useState({ email: "", userName: "", password: "", secPassword: "" });
   const [check, setCheck] = useState(true);
+=======
+  const [values, setValues] = useState({
+    email: "",
+    userName: "",
+    password: "",
+    secPassword: ""
+  });
+>>>>>>> 5a6884529fc942364b84991f7ce160fed20ab373
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -25,7 +34,8 @@ function RegisterPage() {
       },
       error => {
         console.log(error);
-      });
+      }
+    );
     setValues({ email: "", userName: "", password: "", secPassword: "" });
   }
 
@@ -52,7 +62,6 @@ function RegisterPage() {
 }
 
   return (
-
     <div className="container">
       <h1>Welcome to Skills Overflow</h1>
       <Container className="formRegisterContainer">
@@ -65,7 +74,6 @@ function RegisterPage() {
               name="userName"
               value={values.userName}
               onChange={handleChange}
-              required
             />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
@@ -75,7 +83,6 @@ function RegisterPage() {
               name="email"
               value={values.email}
               onChange={handleChange}
-              required
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -85,7 +92,6 @@ function RegisterPage() {
               name="password"
               value={values.password}
               onChange={handleChange}
-              required
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -99,8 +105,19 @@ function RegisterPage() {
             />
           </Form.Group>
           <div className="custom-control custom-checkbox">
+<<<<<<< HEAD
             <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
             <label className="custom-control-label" htmlFor="defaultUnchecked" onClick={()=>checkBox(check)}>I accept the terms and conditions</label>
+=======
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="defaultUnchecked"
+            />
+            <label className="custom-control-label" htmlFor="defaultUnchecked">
+              I accept the terms and conditions
+            </label>
+>>>>>>> 5a6884529fc942364b84991f7ce160fed20ab373
           </div>
           <Button
             disabled={check}
@@ -112,15 +129,9 @@ function RegisterPage() {
           >
             Register
           </Button>{" "}
-
-
         </Form>
-
       </Container>
-
     </div>
-
-
   );
 }
 
