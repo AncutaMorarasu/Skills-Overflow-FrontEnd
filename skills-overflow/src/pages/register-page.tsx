@@ -6,17 +6,13 @@ import axios from "axios";
 //git import Modal from 'react-modal';
 
 function RegisterPage() {
-<<<<<<< HEAD
-  const [values, setValues] = useState({ email: "", userName: "", password: "", secPassword: "" });
-  const [check, setCheck] = useState(true);
-=======
   const [values, setValues] = useState({
     email: "",
     userName: "",
     password: "",
     secPassword: ""
   });
->>>>>>> 5a6884529fc942364b84991f7ce160fed20ab373
+  const [check, setCheck] = useState(true);
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -28,7 +24,7 @@ function RegisterPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    axios.post("http://localhost:8080/singUp", values).then(
+    axios.post("http://localhost:8080/signUp", values).then(
       response => {
         console.log(response);
       },
@@ -39,27 +35,30 @@ function RegisterPage() {
     setValues({ email: "", userName: "", password: "", secPassword: "" });
   }
 
-  function checkRegister(event: any){
-    axios.get("http://localhost:8080/singUp")
+  function checkRegister(event: any) {
+    axios.get("http://localhost:8080/singUp");
   }
 
   function submit() {
-    if (!(values.password.localeCompare(values.secPassword)) === false) {
+    if (!values.password.localeCompare(values.secPassword) === false) {
       alert("Passwords do not match.");
-    }else if(values.password.length === 0 || values.secPassword.length === 0){
+    } else if (
+      values.password.length === 0 ||
+      values.secPassword.length === 0
+    ) {
       alert("Please insert a valid password.");
     }
     console.log(values);
   }
 
-  function checkBox(check: boolean){
-    if(check){
+  function checkBox(check: boolean) {
+    if (check) {
       setCheck(false);
-    }else{
+    } else {
       setCheck(true);
     }
     console.log(check);
-}
+  }
 
   return (
     <div className="container">
@@ -105,19 +104,18 @@ function RegisterPage() {
             />
           </Form.Group>
           <div className="custom-control custom-checkbox">
-<<<<<<< HEAD
-            <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
-            <label className="custom-control-label" htmlFor="defaultUnchecked" onClick={()=>checkBox(check)}>I accept the terms and conditions</label>
-=======
             <input
               type="checkbox"
               className="custom-control-input"
               id="defaultUnchecked"
             />
-            <label className="custom-control-label" htmlFor="defaultUnchecked">
+            <label
+              className="custom-control-label"
+              htmlFor="defaultUnchecked"
+              onClick={() => checkBox(check)}
+            >
               I accept the terms and conditions
             </label>
->>>>>>> 5a6884529fc942364b84991f7ce160fed20ab373
           </div>
           <Button
             disabled={check}
