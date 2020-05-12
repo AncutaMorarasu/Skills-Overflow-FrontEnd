@@ -11,8 +11,8 @@ import Dashboard from "./pages/dashboard-page";
 function App() {
   return (
     <div>
-      <Header />
       <Router>
+        <Header />
         <Switch>
           <Route exact path="/">
             <LoginPage />

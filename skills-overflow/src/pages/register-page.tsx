@@ -19,7 +19,7 @@ function RegisterPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    axios.post("http://localhost:8080/singUp", values).then(
+    axios.post("http://localhost:8080/signUp", values).then(
       response => {
         console.log(response);
       },
@@ -30,27 +30,30 @@ function RegisterPage() {
     setValues({ email: "", userName: "", password: "", secPassword: "" });
   }
 
-  function checkRegister(event: any){
-    axios.get("http://localhost:8080/singUp")
+  function checkRegister(event: any) {
+    axios.get("http://localhost:8080/singUp");
   }
 
   function submit() {
-    if (!(values.password.localeCompare(values.secPassword)) === false) {
+    if (!values.password.localeCompare(values.secPassword) === false) {
       alert("Passwords do not match.");
-    }else if(values.password.length === 0 || values.secPassword.length === 0){
+    } else if (
+      values.password.length === 0 ||
+      values.secPassword.length === 0
+    ) {
       alert("Please insert a valid password.");
     }
     console.log(values);
   }
 
-  function checkBox(check: boolean){
-    if(check){
+  function checkBox(check: boolean) {
+    if (check) {
       setCheck(false);
-    }else{
+    } else {
       setCheck(true);
     }
     console.log(check);
-}
+  }
 
   return (
     <div className="container">
