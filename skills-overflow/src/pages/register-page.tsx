@@ -24,7 +24,7 @@ function RegisterPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    axios.post("http://localhost:8080/signUp", values).then(
+    axios.post("http://localhost:8081/signUp", values).then(
       response => {
         console.log(response);
       },

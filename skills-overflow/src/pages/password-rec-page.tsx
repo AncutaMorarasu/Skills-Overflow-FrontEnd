@@ -4,9 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
-
 function PasswordRecPage() {
-
   const [values, setValues] = useState({ email: "" });
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -18,25 +16,28 @@ function PasswordRecPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    setValues({ email: '' });
-    axios.post("localhost:8080", values).then(
+    setValues({ email: "" });
+    axios.post("localhost:8081", values).then(
       response => {
         console.log(response);
       },
       error => {
         console.log(error);
-      });
-      setValues({email:''});
+      }
+    );
+    setValues({ email: "" });
   }
 
-  function submit(){
+  function submit() {
     console.log(values);
   }
 
   return (
-    <div className="containerRecPage" >
+    <div className="containerRecPage">
       <Container className="formRecoveryContainer">
-        <h2 className="border-bottom">Please enter your email to search for your account</h2>
+        <h2 className="border-bottom">
+          Please enter your email to search for your account
+        </h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Control
@@ -55,8 +56,8 @@ function PasswordRecPage() {
           >
             Submit
           </Button>{" "}
-          </Form>
-          </Container>
+        </Form>
+      </Container>
     </div>
   );
 }
