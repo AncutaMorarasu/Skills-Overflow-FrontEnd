@@ -14,7 +14,11 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "cogo-toast": "^4.2.3",
+<<<<<<< HEAD
     "jquery": "^3.5.1",
+=======
+    "jquery": "^1.9.1",
+>>>>>>> finalStage
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

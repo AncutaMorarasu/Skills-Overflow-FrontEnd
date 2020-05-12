@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
 
-function PasswordRecPage() {
+export default function PasswordRecPage() {
 
   const [values, setValues] = useState({ email: "" });
   function handleChange(event: any) {
@@ -61,4 +61,3 @@ function PasswordRecPage() {
   );
 }
 
-export default PasswordRecPage;
