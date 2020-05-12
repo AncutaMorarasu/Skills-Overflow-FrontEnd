@@ -13,6 +13,7 @@
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "cogo-toast": "^4.2.3",
     "jquery": "^1.9.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
