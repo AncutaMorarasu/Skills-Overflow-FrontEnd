@@ -6,11 +6,12 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cogoToast from "cogo-toast";
 import { useParams } from "react-router";
+import { stringify } from "querystring";
 export default function ChangePasswordPage() {
 
   const [password, setPassword] = useState({ password: "", secPassword: "" });
   const history = useHistory();
-  const token = useParams();
+  const token: any = useParams();
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -38,12 +39,18 @@ export default function ChangePasswordPage() {
   
 
   function submit() {
+    let config = {
+      headers:{'Content-Type': 'application/json'}
+    };
+
+    console.log(token.token);
+    console.log(JSON.stringify(password));
     if (!(password.password.localeCompare(password.secPassword)) === false) {
       cogoToast.error("Passwords do not match.");
     } else if (password.password.length === 0 || password.secPassword.length === 0) {
       cogoToast.error("Please insert a valid password.");
     }else{
-      axios.put(`http://localhost:8081/savePassword?token=${token}`, password.password).then(
+      axios.put(`http://localhost:8081/savePassword?token=${token.token}`, JSON.stringify(password), config).then(
       response => {
         console.log(response)
         console.log(password.password)
