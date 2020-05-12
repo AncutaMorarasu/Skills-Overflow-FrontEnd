@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 
-function PasswordRecPage() {
+export default function PasswordRecPage() {
   const [values, setValues] = useState({ email: "" });
+
   function handleChange(event: any) {
     const { name, value } = event.target;
     setValues({
@@ -16,8 +16,12 @@ function PasswordRecPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    console.log(values);
     setValues({ email: "" });
-    axios.post("localhost:8081", values).then(
+  }
+
+  function submit() {
+    axios.post("http://localhost:8080", values).then(
       response => {
         console.log(response);
       },
@@ -25,41 +29,27 @@ function PasswordRecPage() {
         console.log(error);
       }
     );
-    setValues({ email: "" });
-  }
-
-  function submit() {
-    console.log(values);
   }
 
   return (
     <div className="containerRecPage">
-      <Container className="formRecoveryContainer">
-        <h2 className="border-bottom">
-          Please enter your email to search for your account
-        </h2>
+      <h2>First, let's find your account</h2>
+      <div id="recPage">
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="validationCustomUsername">
             <Form.Control
               type="email"
-              placeholder="Enter your email address"
+              placeholder="Enter your email"
               name="email"
               value={values.email}
               onChange={handleChange}
             />
           </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-            className="loginBtn .btn-block"
-            onClick={submit}
-          >
+          <Button type="button" className="btn btn-success" onClick={submit}>
             Submit
-          </Button>{" "}
+          </Button>
         </Form>
-      </Container>
+      </div>
     </div>
   );
 }
-
-export default PasswordRecPage;

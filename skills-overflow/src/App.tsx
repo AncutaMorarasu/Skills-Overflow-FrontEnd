@@ -7,6 +7,7 @@ import PasswordRecPage from "./pages/password-rec-page";
 import RegisterPage from "./pages/register-page";
 import Header from "./components/header";
 import Dashboard from "./pages/dashboard-page";
+import ChangePasswordPage from "./pages/change-password-page";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
 
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/change-password">
+            <ChangePasswordPage/>
           </Route>
           <Route path="/dashboard">
             <Dashboard />
