@@ -41,7 +41,7 @@ export default function RegisterPage() {
 
   function submit() {
     checkPassword();
-    axios.post("http://localhost:8080/signUp", values).then(
+    axios.post("http://localhost:8081/signUp", values).then(
       response => {
         if (
           JSON.stringify(values.backValueEmail) ===

@@ -21,7 +21,7 @@ export default function PasswordRecPage() {
   }
 
   function submit() {
-    axios.post("http://localhost:8080", values).then(
+    axios.post("http://localhost:8081", values).then(
       response => {
         console.log(response);
       },
