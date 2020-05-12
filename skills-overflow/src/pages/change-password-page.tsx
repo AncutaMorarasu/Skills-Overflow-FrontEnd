@@ -43,7 +43,7 @@ export default function ChangePasswordPage() {
     } else if (password.password.length === 0 || password.secPassword.length === 0) {
       cogoToast.error("Please insert a valid password.");
     }else{
-      axios.post(`http://localhost:8081/savePassword?token=${token}`, password.password).then(
+      axios.put(`http://localhost:8081/savePassword?token=${token}`, password.password).then(
       response => {
         console.log(response)
         console.log(password.password)

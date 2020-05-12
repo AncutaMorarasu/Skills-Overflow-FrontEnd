@@ -14,15 +14,15 @@ export default function PasswordRecPage(){
     });
   }
 
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    console.log(values);
+    setValues({ email: "" });
+  }
 
-function handleSubmit(event: any) {
-  event.preventDefault();
-  console.log(values);
-  setValues({email: ""});
-}
 
-function submit() {
-    axios.post(`http://localhost:8081/resetPassword?email=${values.email}`, values.email).then(
+  function submit() {
+    axios.post(`http://localhost:8081/resetPassword?email=${values.email}`, values).then(
       response => {
         console.log(response);
       },

@@ -6,7 +6,7 @@ import axios from "axios";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 
-export default function RegisterPage(){
+export default function RegisterPage() {
   const [values, setValues] = useState({
     email: "",
     userName: "",
@@ -40,28 +40,32 @@ export default function RegisterPage(){
   }
 
   function submit() {
+
     checkPassword();
-      axios.post("http://localhost:8081/signUp", values).then(
-        response => {
-          if(JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
-            cogoToast.error('This email is already taken.');
-          }else if(JSON.stringify(values.backValueUser) === JSON.stringify(response.data)){
-            cogoToast.error('This username is already taken.');
-          }else {
-            cogoToast.success(' Thanks for joining us. You will receive a confirmation email in the following minutes.');
-            console.log(values);
-            history.push("/");
-          }
-          console.log(response);
-        },
-        error => {
-          console.log(error);
+    axios.post("http://localhost:8081/signUp", values).then(
+      response => {
+        if (
+          JSON.stringify(values.backValueEmail) ===
+          JSON.stringify(response.data)
+        ) {
+          cogoToast.error("This email is already taken.");
+        } else if (
+          JSON.stringify(values.backValueUser) === JSON.stringify(response.data)
+        ) {
+          cogoToast.error("This username is already taken.");
+        } else {
+          cogoToast.success(
+            " Thanks for joining us. You will receive a confirmation email in the following minutes."
+          );
+          console.log(values);
+          history.push("/");
         }
-        
-      )
-      console.log(values);
-      };
-  
+      }
+    )
+    console.log(values);
+
+  };
+
 
   function checkPassword() {
     if (values.password.length === 0 || values.secPassword.length === 0) {
