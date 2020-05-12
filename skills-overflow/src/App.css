@@ -12,18 +12,7 @@
     font-weight: 400;
 }
 
-.containerRecPage {
-    flex-direction: column;
-    align-items: center;
-    display: flex;
-}
 
-.recPage {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    width: 25%;
-}
 
 .btn-success {
     margin-left: 10px;
@@ -138,20 +127,38 @@ input::placeholder,
     margin-top: 4rem;
 }
 
-.formRecoveryContainer{
-    width: 570px;
-    height: 300px;
-    border-radius: 5px;
-    background: white;
-    color: #393e46;
-    margin-top: 9rem;
+.containerRecPage h2{
+    font-size: 60px;
+    line-height: 1.25;
 }
 
 .formRecoveryPageContainer{
     width: 370px;
-    height: 340px;
+    height: 350px;
     border-radius: 5px;
     background: white;
     color: #393e46;
     margin-top: 4rem;
 }
+
+
+.containerRecPage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;    
+}
+
+#recPage {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.rec_page_input{
+    width: 500px;
+    border-radius: 4px;
+}
+
+
+
+
