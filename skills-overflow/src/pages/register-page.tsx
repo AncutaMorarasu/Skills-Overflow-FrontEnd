@@ -41,31 +41,25 @@ export default function RegisterPage() {
 
   function submit() {
     checkPassword();
-    axios.post("http://localhost:8080/signUp", values).then(
-      response => {
-        if (
-          JSON.stringify(values.backValueEmail) ===
-          JSON.stringify(response.data)
-        ) {
-          cogoToast.error("This email is already taken.");
-        } else if (
-          JSON.stringify(values.backValueUser) === JSON.stringify(response.data)
-        ) {
-          cogoToast.error("This username is already taken.");
-        } else {
-          cogoToast.success(
-            " Thanks for joining us. You will receive a confirmation email in the following minutes."
-          );
-          console.log(values);
-          history.push("/");
+      axios.post("http://localhost:8081/signUp", values).then(
+        response => {
+          if(JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
+            cogoToast.error('This email is already taken.');
+          }else if(JSON.stringify(values.backValueUser) === JSON.stringify(response.data)){
+            cogoToast.error('This username is already taken.');
+          }else {
+            cogoToast.success(' Thanks for joining us. You will receive a confirmation email in the following minutes.');
+            console.log(values);
+            history.push("/");
+          }
+          console.log(response);
+        },
+        error => {
+          console.log(error);
         }
         console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+      });
+  
 
   function checkPassword() {
     if (values.password.length === 0 || values.secPassword.length === 0) {

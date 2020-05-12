@@ -14,14 +14,24 @@ export default function PasswordRecPage() {
     });
   }
 
-  function handleSubmit(event: any) {
-    event.preventDefault();
-    console.log(values);
-    setValues({ email: "" });
-  }
+const [values, setValues] = useState({email:""});
+  
+function handleChange(event: any) {
+  const { name, value } = event.target;
+  setValues({
+    ...values,
+    [name]: value
+  });
+}
 
-  function submit() {
-    axios.post("http://localhost:8080", values).then(
+function handleSubmit(event: any) {
+  event.preventDefault();
+  console.log(values);
+  setValues({email: ""});
+}
+
+function submit() {
+    axios.post(`http://localhost:8081/resetPassword?email=${values.email}`, values.email).then(
       response => {
         console.log(response);
       },
