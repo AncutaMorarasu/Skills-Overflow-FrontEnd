@@ -6,17 +6,11 @@ import axios from "axios";
 import cogoToast from 'cogo-toast';
 import { useHistory } from "react-router-dom";
 
-<<<<<<< HEAD
-function RegisterPage() {
-  const [values, setValues] = useState({ email: "", userName: "", password: "", secPassword: "" });
-  const [check, setCheck] = useState(true);
-=======
 
 export default function RegisterPage() {
   const [values, setValues] = useState({ email: "", userName: "", password: "", secPassword: "", backValue: "email or username already taken" });
   const [check, setCheck] = useState(true);
   const history = useHistory();
->>>>>>> finalStage
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -27,33 +21,7 @@ export default function RegisterPage() {
   }
 
   function handleSubmit(event: any) {
-    //de rezolvat
     event.preventDefault();
-<<<<<<< HEAD
-    axios.post("http://localhost:8080/signUp", values).then(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    setValues({ email: "", userName: "", password: "", secPassword: "" });
-  }
-
-  function checkRegister(event: any) {
-    axios.get("http://localhost:8080/singUp");
-  }
-
-  function submit() {
-    if (!values.password.localeCompare(values.secPassword) === false) {
-      alert("Passwords do not match.");
-    } else if (
-      values.password.length === 0 ||
-      values.secPassword.length === 0
-    ) {
-      alert("Please insert a valid password.");
-=======
     console.log(values);
     setValues({ email: "", userName: "", password: "", secPassword: "", backValue: "email or username already taken" });
   }
@@ -83,7 +51,6 @@ export default function RegisterPage() {
       cogoToast.error("Please insert a valid password.");
     }else if(!(values.password.localeCompare(values.secPassword)) === false) {
       cogoToast.error("Passwords do not match.");
->>>>>>> finalStage
     }
   }
 
@@ -141,11 +108,7 @@ export default function RegisterPage() {
           </Form.Group>
           <div className="custom-control custom-checkbox">
             <input type="checkbox" className="custom-control-input" id="defaultUnchecked" />
-<<<<<<< HEAD
-            <label className="custom-control-label" htmlFor="defaultUnchecked" onClick={()=>checkBox(check)}>I accept the terms and conditions</label>
-=======
             <label className="custom-control-label" htmlFor="defaultUnchecked" onClick={() => checkBox(check)}>I accept the terms and conditions</label>
->>>>>>> finalStage
           </div>
           <Button
             disabled={check}
@@ -163,8 +126,3 @@ export default function RegisterPage() {
   );
 }
 
-<<<<<<< HEAD
-export default RegisterPage;
-=======
-
->>>>>>> finalStage
