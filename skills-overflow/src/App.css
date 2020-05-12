@@ -107,7 +107,7 @@ input::placeholder,
     }
 }
 
-.register_container{
+.register_container {
     display: flex;
     justify-content: center;
     align-content: space-between;
@@ -115,17 +115,17 @@ input::placeholder,
     text-align: center;
 }
 
-.register__container h1{
+.register__container h1 {
     font-size: 4rem;
 }
 
-.alig{
+.alig {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-#register-submit-btn{
+#register-submit-btn {
     margin-top: 18px;
 }
 
@@ -138,7 +138,7 @@ input::placeholder,
     margin-top: 4rem;
 }
 
-.formRecoveryContainer{
+.formRecoveryContainer {
     width: 570px;
     height: 300px;
     border-radius: 5px;
