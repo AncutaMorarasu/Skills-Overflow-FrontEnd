@@ -6,7 +6,7 @@ import axios from "axios";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 
-export default function RegisterPage() {
+export default function RegisterPage(){
   const [values, setValues] = useState({
     email: "",
     userName: "",
@@ -57,8 +57,10 @@ export default function RegisterPage() {
         error => {
           console.log(error);
         }
-        console.log(response);
-      });
+        
+      )
+      console.log(values);
+      };
   
 
   function checkPassword() {
@@ -150,3 +152,4 @@ export default function RegisterPage() {
     </div>
   );
 }
+

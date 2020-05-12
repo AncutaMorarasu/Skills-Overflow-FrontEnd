@@ -3,7 +3,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export default function PasswordRecPage() {
+export default function PasswordRecPage(){
   const [values, setValues] = useState({ email: "" });
 
   function handleChange(event: any) {
@@ -14,15 +14,6 @@ export default function PasswordRecPage() {
     });
   }
 
-const [values, setValues] = useState({email:""});
-  
-function handleChange(event: any) {
-  const { name, value } = event.target;
-  setValues({
-    ...values,
-    [name]: value
-  });
-}
 
 function handleSubmit(event: any) {
   event.preventDefault();
