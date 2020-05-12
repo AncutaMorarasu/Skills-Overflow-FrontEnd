@@ -37,7 +37,7 @@ function LoginPage() {
       });
       return;
     } else {
-      axios.post("http://localhost:8080/logIn", values).then(
+      axios.post("http://localhost:8081/logIn", values).then(
         response => {
           if (response.data === "user does not exist") {
             cogoToast.error("Incorrect username or password", {

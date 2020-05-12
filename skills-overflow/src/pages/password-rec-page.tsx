@@ -19,11 +19,11 @@ function handleChange(event: any) {
 function handleSubmit(event: any) {
   event.preventDefault();
   console.log(values);
-  setValues({ email: ""});
+  setValues({email: ""});
 }
 
 function submit() {
-    axios.post("http://localhost:8080", values).then(
+    axios.post(`http://localhost:8081/resetPassword?email=${values.email}`, values.email).then(
       response => {
         console.log(response);
       },

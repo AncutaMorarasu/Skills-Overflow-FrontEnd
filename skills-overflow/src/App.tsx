@@ -26,7 +26,7 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
-          <Route path="/change-password">
+          <Route path="/changePassword/:token">
             <ChangePasswordPage/>
           </Route>
           <Route path="/dashboard">
