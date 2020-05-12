@@ -8,6 +8,7 @@ import RegisterPage from "./pages/register-page";
 import Header from "./components/header";
 import Dashboard from "./pages/dashboard-page";
 import ChangePasswordPage from "./pages/change-password-page";
+import RegisterConfirm from "./pages/register-confirmation";
 
 function App() {
   return (
@@ -27,10 +28,13 @@ function App() {
             <RegisterPage />
           </Route>
           <Route path="/changePassword/:token">
-            <ChangePasswordPage/>
+            <ChangePasswordPage />
           </Route>
           <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/register-confirmation">
+            <RegisterConfirm />
           </Route>
 
           <Route path="">
