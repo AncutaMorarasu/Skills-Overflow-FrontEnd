@@ -6,7 +6,7 @@ import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 
 export default function PasswordRecPage() {
-  const [values, setValues] = useState({ email: "" });
+  const [values, setValues] = useState({ email: "", backEndValue: "No email found"});
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -19,6 +19,8 @@ export default function PasswordRecPage() {
   function handleSubmit(event: any) {
     event.preventDefault();
     console.log(values);
+    setValues({ email: "", backEndValue: "No email found"});
+
   }
   const history = useHistory();
   function submit() {
@@ -26,18 +28,24 @@ export default function PasswordRecPage() {
       .post(`http://localhost:8081/resetPassword?email=${values.email}`, values)
       .then(
         response => {
-          console.log(response);
-          cogoToast.success(
-            "Check your inbox, instructions are on their way.",
-            { hideAfter: 5 }
-          );
-          history.push("/");
-        },
-        error => {
-          console.log(error);
-        }
+          if (
+            JSON.stringify(values.backEndValue) ===
+            JSON.stringify(response.data)
+          ) {
+            cogoToast.error("This email is not in our database.");
+            console.log(response);
+            
+          }else{
+            cogoToast.success(
+              "Check your inbox, instructions are on their way.",
+              { hideAfter: 5 }
+            );
+            history.push("/");
+          }},
+          error => {
+            console.log(error);
+          }
       );
-    setValues({ email: "" });
   }
 
   return (
