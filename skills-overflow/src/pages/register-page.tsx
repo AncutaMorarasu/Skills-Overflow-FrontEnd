@@ -124,7 +124,6 @@ export default function RegisterPage() {
               name="secPassword"
               value={values.secPassword}
               onChange={handleChange}
-              required
             />
           </Form.Group>
           <div className="custom-control custom-checkbox">

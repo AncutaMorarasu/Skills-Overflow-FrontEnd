@@ -17,7 +17,7 @@ export default function PasswordRecPage(){
   function handleSubmit(event: any) {
     event.preventDefault();
     console.log(values);
-    setValues({ email: "" });
+    
   }
 
 
@@ -30,13 +30,14 @@ export default function PasswordRecPage(){
         console.log(error);
       }
     );
+    setValues({ email: "" });
   }
 
   return (
     <div className="containerRecPage">
       <h2>First, let's find your account</h2>
       <div id="recPage">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="recoveryForm">
           <Form.Group controlId="validationCustomUsername">
             <Form.Control
               type="email"

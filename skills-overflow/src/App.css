@@ -161,6 +161,14 @@ input::placeholder,
 }
 
 .rec_page_input {
-    width: 500px;
+    width: 10rem;
     border-radius: 4px;
+}
+
+.recoveryForm{
+    display: flex;
+}
+
+.recoveryForm>button{
+    height: 2.4rem;
 }
