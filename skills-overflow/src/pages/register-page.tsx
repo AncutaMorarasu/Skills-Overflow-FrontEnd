@@ -40,38 +40,33 @@ export default function RegisterPage() {
   }
 
   function submit() {
-
     checkPassword();
-    axios.post("http://localhost:8081/signUp", values).then(
-      response => {
-        if (
-          JSON.stringify(values.backValueEmail) ===
-          JSON.stringify(response.data)
-        ) {
-          cogoToast.error("This email is already taken.");
-        } else if (
-          JSON.stringify(values.backValueUser) === JSON.stringify(response.data)
-        ) {
-          cogoToast.error("This username is already taken.");
-        } else {
-          cogoToast.success(
-            " Thanks for joining us. You will receive a confirmation email in the following minutes."
-          );
-          console.log(values);
-          history.push("/");
-        }
+    axios.post("http://localhost:8081/signUp", values).then(response => {
+      if (
+        JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)
+      ) {
+        cogoToast.error("This email is already taken.", { hideAfter: 5 });
+      } else if (
+        JSON.stringify(values.backValueUser) === JSON.stringify(response.data)
+      ) {
+        cogoToast.error("This username is already taken.", { hideAfter: 5 });
+      } else {
+        cogoToast.success(
+          " Thanks for joining us. You will receive a confirmation email in the following minutes.",
+          { hideAfter: 5 }
+        );
+        console.log(values);
+        history.push("/");
       }
-    )
+    });
     console.log(values);
-
-  };
-
+  }
 
   function checkPassword() {
     if (values.password.length === 0 || values.secPassword.length === 0) {
-      cogoToast.error("Please insert a valid password.");
+      cogoToast.error("Please insert a valid password.", { hideAfter: 5 });
     } else if (!values.password.localeCompare(values.secPassword) === false) {
-      cogoToast.error("Passwords do not match.");
+      cogoToast.error("Passwords do not match.", { hideAfter: 5 });
     }
   }
 
@@ -155,4 +150,3 @@ export default function RegisterPage() {
     </div>
   );
 }
-

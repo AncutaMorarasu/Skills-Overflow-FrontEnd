@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import cogoToast from "cogo-toast";
+import { useHistory } from "react-router-dom";
 
-export default function PasswordRecPage(){
+export default function PasswordRecPage() {
   const [values, setValues] = useState({ email: "" });
 
   function handleChange(event: any) {
@@ -17,19 +19,24 @@ export default function PasswordRecPage(){
   function handleSubmit(event: any) {
     event.preventDefault();
     console.log(values);
-    
   }
-
-
+  const history = useHistory();
   function submit() {
-    axios.post(`http://localhost:8081/resetPassword?email=${values.email}`, values).then(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    axios
+      .post(`http://localhost:8081/resetPassword?email=${values.email}`, values)
+      .then(
+        response => {
+          console.log(response);
+          cogoToast.success(
+            "Check your inbox, instructions are on their way.",
+            { hideAfter: 5 }
+          );
+          history.push("/");
+        },
+        error => {
+          console.log(error);
+        }
+      );
     setValues({ email: "" });
   }
 
@@ -45,9 +52,14 @@ export default function PasswordRecPage(){
               name="email"
               value={values.email}
               onChange={handleChange}
+              className="rec_page_input"
             />
           </Form.Group>
-          <Button type="button" className="btn btn-success" onClick={submit}>
+          <Button
+            type="button"
+            className="btn btn-success passReset-btn"
+            onClick={submit}
+          >
             Submit
           </Button>
         </Form>

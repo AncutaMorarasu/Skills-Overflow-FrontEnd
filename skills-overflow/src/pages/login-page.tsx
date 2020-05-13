@@ -33,7 +33,8 @@ function LoginPage() {
   function submit() {
     if (values.email.length === 0 || values.password.length === 0) {
       cogoToast.error("Please fill in both your email adress and password.", {
-        position: "top-center"
+        position: "top-center",
+        hideAfter: 5
       });
       return;
     } else {
@@ -41,16 +42,18 @@ function LoginPage() {
         response => {
           if (response.data === "user does not exist") {
             cogoToast.error("Incorrect username or password", {
-              position: "top-center"
+              position: "top-center",
+              hideAfter: 5
             });
           } else {
-            cogoToast.success("Yay, you're logged in.");
+            cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
             history.push("/dashboard");
           }
         },
         error => {
           cogoToast.error("Something went wrong, please try again.", {
-            position: "top-center"
+            position: "top-center",
+            hideAfter: 5
           });
         }
       );

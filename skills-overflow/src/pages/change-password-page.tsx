@@ -6,9 +6,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import cogoToast from "cogo-toast";
 import { useParams } from "react-router";
-import { stringify } from "querystring";
 export default function ChangePasswordPage() {
-
   const [password, setPassword] = useState({ password: "", secPassword: "" });
   const history = useHistory();
   const token: any = useParams();
@@ -19,50 +17,48 @@ export default function ChangePasswordPage() {
       ...password,
       [name]: value
     });
-
   }
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    /* axios.post(`http://localhost:8081/savePassword?token=${token}`, password.password).then(
-      response => {
-        console.log(response)
-      },
-      error => {
-        console.log(error);
-      }
-    ) */
-    //history.push("/");
+    setPassword({ password: "", secPassword: "" });
   }
-
-  
 
   function submit() {
     let config = {
-      headers:{'Content-Type': 'application/json'}
+      headers: { "Content-Type": "application/json" }
     };
 
     console.log(token.token);
     console.log(JSON.stringify(password));
-    if (!(password.password.localeCompare(password.secPassword)) === false) {
-      cogoToast.error("Passwords do not match.");
-    } else if (password.password.length === 0 || password.secPassword.length === 0) {
-      cogoToast.error("Please insert a valid password.");
-    }else{
-      axios.put(`http://localhost:8081/savePassword?token=${token.token}`, JSON.stringify(password), config).then(
-      response => {
-        console.log(response)
-      },
-      error => {
-        console.log(error);
-      }
-    )
+    if (!password.password.localeCompare(password.secPassword) === false) {
+      cogoToast.error("Passwords do not match.", { hideAfter: 5 });
+      return;
+    } else if (
+      password.password.length === 0 ||
+      password.secPassword.length === 0
+    ) {
+      cogoToast.error("Please insert a valid password.", { hideAfter: 5 });
+      return;
+    } else {
+      axios
+        .put(
+          `http://localhost:8081/savePassword?token=${token.token}`,
+          JSON.stringify(password),
+          config
+        )
+        .then(
+          response => {
+            console.log(response);
+          },
+          error => {
+            console.log(error);
+          }
+        );
     }
-    cogoToast.success(' Your password was reset.');
+    cogoToast.success(" Your password was reset.", { hideAfter: 5 });
     history.push("/");
-    }
-    
-  
+  }
 
   return (
     <div className="container">
@@ -102,6 +98,4 @@ export default function ChangePasswordPage() {
       </Container>
     </div>
   );
-
-
 }

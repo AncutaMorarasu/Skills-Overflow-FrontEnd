@@ -161,14 +161,20 @@ input::placeholder,
 }
 
 .rec_page_input {
-    width: 10rem;
+    width: 15rem;
     border-radius: 4px;
 }
 
-.recoveryForm{
+.recoveryForm {
     display: flex;
 }
 
-.recoveryForm>button{
+.recoveryForm>button {
     height: 2.4rem;
+}
+
+.btn-primary:disabled {
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: black
 }
