@@ -32,7 +32,6 @@ export default function ChangePasswordPage() {
         console.log(error);
       }
     ) */
-    cogoToast.success(' Your password was reset.');
     //history.push("/");
   }
 
@@ -53,14 +52,14 @@ export default function ChangePasswordPage() {
       axios.put(`http://localhost:8081/savePassword?token=${token.token}`, JSON.stringify(password), config).then(
       response => {
         console.log(response)
-        console.log(password.password)
       },
       error => {
         console.log(error);
       }
     )
     }
-    console.log(password);      
+    cogoToast.success(' Your password was reset.');
+    history.push("/");
     }
     
   
