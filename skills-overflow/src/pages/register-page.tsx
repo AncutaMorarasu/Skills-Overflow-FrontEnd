@@ -40,24 +40,8 @@ export default function RegisterPage() {
   }
 
   function submit() {
-
-    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0) {
-      cogoToast.error("Please complete all required the fields.", { hideAfter: 5 });
-      return;
-    } else if (values.userName.length < 2) {
-      cogoToast.error("Your username must have at least 2 characters.", { hideAfter: 5 });
-      return;
-    } else if (values.password.length < 5 || values.secPassword.length < 5 || values.password.length > 20 || values.secPassword.length > 20) {
-      cogoToast.error("Your password should containt at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
-    } else if (!values.password.localeCompare(values.secPassword) === false) {
-      cogoToast.error("Passwords do not match.", { hideAfter: 5 });
-      return;
-    } else if (checkForSpaces()) {
-      cogoToast.error("Your password must not contain white spaces.", { hideAfter: 5 });
-      return;
-    } else {
-      checkAndRegister();
-    }
+    checkPassword();
+    checkAndRegister();
   }
 
   function checkAndRegister() {
@@ -79,6 +63,23 @@ export default function RegisterPage() {
     )
   };
 
+  function checkPassword(){
+    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0) {
+      cogoToast.error("Please complete all required the fields.", { hideAfter: 5 });
+      return;
+    } else if (values.userName.length < 2) {
+      cogoToast.error("Your username must have at least 2 characters.", { hideAfter: 5 });
+      return;
+    } else if (values.password.length < 5 || values.secPassword.length < 5 || values.password.length > 20 || values.secPassword.length > 20) {
+      cogoToast.error("Your password should containt at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
+    } else if (!values.password.localeCompare(values.secPassword) === false) {
+      cogoToast.error("Passwords do not match.", { hideAfter: 5 });
+      return;
+    } else if (checkForSpaces()) {
+      cogoToast.error("Your password must not contain white spaces.", { hideAfter: 5 });
+      return;
+    }
+  }
 
   function checkBox(check: boolean) {
     if (check) {
