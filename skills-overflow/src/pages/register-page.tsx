@@ -40,35 +40,45 @@ export default function RegisterPage() {
   }
 
   function submit() {
-    checkPassword();
-    axios.post("http://localhost:8081/signUp", values).then(response => {
-      if (
-        JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)
-      ) {
-        cogoToast.error("This email is already taken.", { hideAfter: 5 });
-      } else if (
-        JSON.stringify(values.backValueUser) === JSON.stringify(response.data)
-      ) {
-        cogoToast.error("This username is already taken.", { hideAfter: 5 });
-      } else {
-        cogoToast.success(
-          " Thanks for joining us. You will receive a confirmation email in the following minutes.",
-          { hideAfter: 5 }
-        );
-        console.log(values);
-        history.push("/");
-      }
-    });
-    console.log(values);
-  }
 
-  function checkPassword() {
-    if (values.password.length === 0 || values.secPassword.length === 0) {
-      cogoToast.error("Please insert a valid password.", { hideAfter: 5 });
+    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0) {
+      cogoToast.error("Please complete all required the fields.", { hideAfter: 5 });
+      return;
+    } else if (values.userName.length < 2) {
+      cogoToast.error("Your username must have at least 2 characters.", { hideAfter: 5 });
+      return;
+    } else if (values.password.length < 5 || values.secPassword.length < 5 || values.password.length > 20 || values.secPassword.length > 20) {
+      cogoToast.error("Your password should containt at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
     } else if (!values.password.localeCompare(values.secPassword) === false) {
       cogoToast.error("Passwords do not match.", { hideAfter: 5 });
+      return;
+    } else if (checkForSpaces()) {
+      cogoToast.error("Your password must not contain white spaces.", { hideAfter: 5 });
+      return;
+    } else {
+      checkAndRegister();
     }
   }
+
+  function checkAndRegister() {
+    axios.post("http://localhost:8081/signUp", values).then(
+      response => {
+        if (JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
+          cogoToast.error("This email is already taken.", { hideAfter: 5 });
+          return;
+        } else if (JSON.stringify(values.backValueUser) === JSON.stringify(response.data)) {
+          cogoToast.error("This username is already taken.", { hideAfter: 5 });
+          return;
+        } else {
+          cogoToast.success(" Thanks for joining us. You will receive a confirmation email in the following minutes.", { hideAfter: 5 });
+          history.push("/");
+        }
+      }, error => {
+        console.log(error);
+      }
+    )
+  };
+
 
   function checkBox(check: boolean) {
     if (check) {
@@ -77,6 +87,14 @@ export default function RegisterPage() {
       setCheck(true);
     }
     console.log(check);
+  }
+
+  function checkForSpaces() {
+    if (/\s/g.test(values.password) && /\s/g.test(values.secPassword)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   return (

@@ -23,8 +23,13 @@ export default function PasswordRecPage() {
 
   }
   const history = useHistory();
+  
   function submit() {
-    axios
+    if (values.email.length === 0) {
+      cogoToast.error("Please complete the required the field.", { hideAfter: 5 });
+      return;
+    }else{
+      axios
       .post(`http://localhost:8081/resetPassword?email=${values.email}`, values)
       .then(
         response => {
@@ -34,6 +39,8 @@ export default function PasswordRecPage() {
           ) {
             cogoToast.error("This email is not in our database.");
             console.log(response);
+            setValues({ email: "", backEndValue: "No email found"});
+
             
           }else{
             cogoToast.success(
@@ -46,6 +53,7 @@ export default function PasswordRecPage() {
             console.log(error);
           }
       );
+    }    
   }
 
   return (
