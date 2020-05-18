@@ -47,6 +47,7 @@ export default function RegisterPage() {
   function checkAndRegister() {
     axios.post("http://localhost:8081/signUp", values).then(
       response => {
+        console.log(response.data);
         if (JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
           cogoToast.error("This email is already taken.", { hideAfter: 5 });
           return;
