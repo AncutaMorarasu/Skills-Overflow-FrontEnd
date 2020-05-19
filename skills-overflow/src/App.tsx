@@ -14,6 +14,7 @@ import ExistingProfiles from "./pages/admin/existing-profiles";
 import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
+import QuestionCard from "./components/question-cards";
 
 function App() {
   return (
@@ -33,9 +34,12 @@ function App() {
           <Route path="/changePassword/:token">
             <ChangePasswordPage />
           </Route>
-          <Route path="/dashboard">
+
+          <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
+            <QuestionCard/>
           </Route>
+
           <Route path="/pending-users">
             <PendingUsers />
           </Route>
