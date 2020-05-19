@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import cogoToast from "cogo-toast";
-import { useHistory } from "react-router-dom";
 import ModalComponent from "../../components/modal";
 
 export default function ExistingProfiles() {
-  const [getUserId, setUserId] = useState<number>(0);
+  const [getUserId, setGetUserId] = useState<number>(0);
   const [userProfile, setUserProfile] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [save, setSave] = useState(false);
-
+  let token = localStorage.getItem("user");
+  let tokenCheck: any;
+  
+  
+  function localData(){
+    if (typeof token === "string") {
+      tokenCheck = JSON.parse(token);
+    }
+  }
 
   // Get users from database
   useEffect(() => {
-    axios.get('http://localhost:8081/users').then(
+    localData();
+    axios.get('http://localhost:8081/allPendingUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
       }
     )
-  });
+  }, []);
 
 //Post user to database
   function updateUserRole(){
-    axios.put(`http://localhost:8081/promoteToAdmin/${getUserId}`).then(
+    localData();
+    axios.put(`http://localhost:8081/promoteToAdmin/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
+        getUsers()
       console.log(response);
       },
       error => {
@@ -36,14 +45,26 @@ export default function ExistingProfiles() {
 }
 
 function updateBlockUser(){
-  axios.put(`http://localhost:8081/blockUser/${getUserId}`).then(
+  localData()
+  axios.put(`http://localhost:8081/admin/blockUser/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
     response => {
+      getUsers()
     console.log(response);
     },
     error => {
       console.log(error);
   }
 );
+}
+
+function getUsers(){
+  localData()
+  axios.get('http://localhost:8081/allPendingUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+    response => {
+      const setData = response.data;
+      setUserProfile(setData);
+    }
+  )
 }
 
   //Upgrade user to admin
@@ -95,9 +116,9 @@ function updateBlockUser(){
                   <td>{role}</td>
                   <td>
                     <Button type="button" className="btn btn-success btn-table-update" onClick={() => 
-                      {toggle(); setModalMessage("Are you sure you want to promote this user to admin?");}}>Upgrade to admin</Button>
+                      {toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to promote this user to admin?");}}>Upgrade to admin</Button>
                     <Button type="button" className="btn btn-danger btn-table-update"onClick={() => 
-                      {toggle(); setModalMessage("Are you sure you want to block this user?")}}>Block user</Button>
+                      {toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to block this user?")}}>Block user</Button>
                   </td>
                 </tr>
               ))}

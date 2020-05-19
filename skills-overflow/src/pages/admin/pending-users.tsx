@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import cogoToast from "cogo-toast";
-import { useHistory } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
 import ModalComponent from "../../components/modal";
 
 export default function PendingUsers() {
+
   const [getUserId, setGetUserId] = useState<number>(0);
   const [userProfile, setUserProfile] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [save, setSave] = useState(false);
+  let token = localStorage.getItem("user");
+  let tokenCheck: any;
+
+  function localData(){
+    if (typeof token === "string") {
+      tokenCheck = JSON.parse(token);
+    }
+  }
 
   //Get users from database for table
   useEffect(() => {
-    axios.get("http://localhost:8081/allPendingUsers").then(
+    localData();
+    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
@@ -24,12 +31,14 @@ export default function PendingUsers() {
         console.log(error);
       }
     );
-  }, [userProfile]);
+  }, []);
 
   // Approve user
   function updateUserRole() {
-    axios.put(`http://localhost:8081/approveRequest/${getUserId}`).then(
+    localData();
+    axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
+        getUsers()
         console.log(response);
       },
       error => {
@@ -39,8 +48,10 @@ export default function PendingUsers() {
   }
 
   function declineUser() {
-    axios.put(`http://localhost:8081/declineRequest/${getUserId}`).then(
+    localData()
+    axios.put(`http://localhost:8081/admin/declineRequest/${getUserId}`, {} ,{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
+        getUsers()
         console.log(response);
       },
       error => {
@@ -51,7 +62,8 @@ export default function PendingUsers() {
 
   // Display pending users
   function getUsers() {
-    axios.get("http://localhost:8081/allPendingUsers").then(response => {
+    localData();
+    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(response => {
       const setData = response.data;
       setUserProfile(setData);
     });
@@ -106,7 +118,7 @@ export default function PendingUsers() {
                     <td>{lastName}</td>
                     <td>{email}</td>
                     <td>
-                      <button
+                      <Button
                         type="button"
                         className="btn btn-success btn-table"
                         onClick={() => {
@@ -119,8 +131,8 @@ export default function PendingUsers() {
                         }}
                       >
                         Approve
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         type="button"
                         className="btn btn-danger btn-table"
                         onClick={() => {
@@ -133,7 +145,7 @@ export default function PendingUsers() {
                         }}
                       >
                         Decline
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 )

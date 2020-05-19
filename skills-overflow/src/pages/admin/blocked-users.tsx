@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import cogoToast from "cogo-toast";
-import Modal from 'react-bootstrap/Modal'
 import ModalComponent from "../../components/modal";
 
 export default function BlockedUsers() {
@@ -12,11 +10,21 @@ export default function BlockedUsers() {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [save, setSave] = useState(false);
+  let token = localStorage.getItem("user");
+  let tokenCheck: any;
+
+  function localData(){
+    if (typeof token === "string") {
+      tokenCheck = JSON.parse(token);
+    }
+  }
 
   //Get users from database
    useEffect(() => {
-    axios.get('http://localhost:8081/allBlockedUsers').then(
+    localData();
+    axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
+        getUsers();
         const setData = response.data;
         setUserProfile(setData);
       }
@@ -25,14 +33,26 @@ export default function BlockedUsers() {
 
   //Approve user
   function updateUserRole(){
-    axios.put(`http://localhost:8081/unblockUser/${getUserId}`).then(
+    localData();
+    axios.put(`http://localhost:8081/admin/unblockUser/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
+        getUsers()
       },
       error => {
         console.log(error);
       }
     );
     
+  }
+
+  function getUsers(){
+    localData();
+    axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+      response => {
+      const setData = response.data;
+      setUserProfile(setData);
+      }
+    )
   }
 
   //Unblock request function

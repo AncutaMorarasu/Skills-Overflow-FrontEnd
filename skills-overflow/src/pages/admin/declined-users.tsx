@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import cogoToast from "cogo-toast";
-import { useHistory } from "react-router-dom";
 import ModalComponent from "../../components/modal";
 
 export default function DeclinedUsers() {
@@ -11,10 +9,19 @@ export default function DeclinedUsers() {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [save, setSave] = useState(false);
+  let token = localStorage.getItem("user");
+  let tokenCheck: any;
+
+  function localData(){
+    if (typeof token === "string") {
+      tokenCheck = JSON.parse(token);
+    }
+  }
 
   //Get users from database
   useEffect(() => {
-    axios.get('http://localhost:8081/allDeclinedUsers').then(
+    localData();
+    axios.get('http://localhost:8081/allDeclinedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
@@ -22,10 +29,13 @@ export default function DeclinedUsers() {
     )
   }, [setUserProfile]);
 
+
   //Approve user
   function updateUserRole(){
-    axios.put(`http://localhost:8081/approveRequest/${getUserId}`).then(
+    localData();
+    axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
+        getUsers()
       },
       error => {
         console.log(error);
@@ -35,18 +45,22 @@ export default function DeclinedUsers() {
 
   //Delete users from data baste
   function deleteUser(){
-    axios.delete(`http://localhost:8081/remove/${getUserId}`).then((response) => {
+    localData();
+    axios.delete(`http://localhost:8081/admin/remove/${getUserId}`, {headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
+      response => {
+      getUsers()
       console.log(response)
     },
     error => {
       console.log(error);
     }
-    )
-  }   
+  );
+}   
 
   //Display declined requests
   function getUsers(){
-    axios.get('http://localhost:8081/allPendingUsers').then(
+    localData();
+    axios.get('http://localhost:8081/allDeclinedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
