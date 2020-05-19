@@ -29,8 +29,6 @@ export default function ChangePasswordPage() {
       headers: { "Content-Type": "application/json" }
     };
 
-    console.log(token.token);
-    console.log(JSON.stringify(password));
     if (!password.password.localeCompare(password.secPassword) === false) {
       cogoToast.error("Passwords do not match.", { hideAfter: 5 });
       return;

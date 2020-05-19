@@ -10,6 +10,11 @@ import Footer from "./components/footer";
 import Dashboard from "./pages/dashboard-page";
 import ChangePasswordPage from "./pages/change-password-page";
 import RegisterConfirm from "./pages/register-confirmation";
+import ExistingProfiles from "./pages/admin/existing-profiles";
+import DeclinedUsers from "./pages/admin/declined-users";
+import PendingUsers from "./pages/admin/pending-users";
+import BlockedUsers from "./pages/admin/blocked-users";
+
 
 function App() {
   return (
@@ -24,7 +29,6 @@ function App() {
           <Route path="/recovery">
             <PasswordRecPage />
           </Route>
-
           <Route path="/register">
             <RegisterPage />
           </Route>
@@ -34,10 +38,21 @@ function App() {
           <Route path="/dashboard">
             <Dashboard />
           </Route>
+          <Route path="/pending-users">
+            <PendingUsers />
+          </Route>
+          <Route path="/declined-users">
+            <DeclinedUsers />
+          </Route>
+          <Route path="/blocked-users">
+            <BlockedUsers />
+          </Route>
+          <Route path="/existing-profiles">
+            <ExistingProfiles/>
+          </Route>
           <Route path="/register-confirmation">
             <RegisterConfirm />
           </Route>
-
           <Route path="">
             <NotFoundPage />
           </Route>

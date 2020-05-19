@@ -320,3 +320,102 @@ textarea {
   border-radius: .25rem;
   height: 2.4rem;
 }
+
+.table_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  width: 100%;
+  text-align: center;
+
+}
+
+.table-bordered {
+  height: 100%;
+  border-collapse: collapse;
+
+}
+
+.table__container {
+  background-color: #cfd8dc;
+  width: 80rem;
+}
+
+.table_head {
+  background-color: black;
+  color: white;
+}
+
+.btn-table {
+  width: 5rem;
+
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #a7a1a1;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tables {
+  margin-top: 5rem;
+  margin-left: 20rem;
+}
+
+.tables_declined_users {
+  margin-top: 5rem;
+}
+
+.pending_requests_page {
+  height: 100%;
+}
+
+.modal {
+  color: black;
+}
+
+.admin-page {
+  margin-left: 2.5rem;
+}
+
+.table_container_declined_users {
+  display: flex;
+  margin-top: 3rem;
+  width: 100%;
+  text-align: center;
+}
+
+.declined_requests_page {
+  height: 100%;
+}
+
+.table_container_banned_users {
+  display: flex;
+  margin-top: 3rem;
+  width: 100%;
+  text-align: center;
+}
+
+.banned_users_page {
+  height: 100%;
+}
+
+.declined_header {
+  margin-left: -0.5rem;
+}
+
+.btn-table {
+  margin-right: 0.5rem;
+}
+
+.btn-table-update {
+  margin-right: 0.5rem;
+
+}
