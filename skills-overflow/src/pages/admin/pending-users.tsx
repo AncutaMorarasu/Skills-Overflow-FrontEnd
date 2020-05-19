@@ -24,7 +24,7 @@ export default function PendingUsers() {
         console.log(error);
       }
     )
-  }, []);
+  }, [userProfile]);
 
   // Approve user
   function updateUserRole(){
