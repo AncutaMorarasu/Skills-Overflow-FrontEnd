@@ -23,7 +23,7 @@ export default function ExistingProfiles() {
   }, [setUserProfile]);
 
 //Post user to database
-  function updateUser(){
+  function updateUserRole(){
     axios.put(`http://localhost:8081/promoteToAdmin/${getUserId}`).then(
       response => {
       console.log(response);
@@ -48,7 +48,7 @@ function updateBlockUser(){
   //Upgrade user to admin
   function upgradeUser(){
     toggle();
-    updateUser();
+    updateUserRole();
   }
 
   //Ban existing user

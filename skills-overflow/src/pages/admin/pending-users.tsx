@@ -24,10 +24,10 @@ export default function PendingUsers() {
         console.log(error);
       }
     )
-  }, [setUserProfile]);
+  }, []);
 
   // Approve user
-  function updateUser(){
+  function updateUserRole(){
     axios.put(`http://localhost:8081/approveRequest/${getUserId}`).then((response) => {
       console.log(response)
     },
@@ -60,17 +60,15 @@ export default function PendingUsers() {
   //Approve request
   function approveRequest() {
     toggle();
-    updateUser();
-    getUsers();
+    updateUserRole();
     console.log(save);
-}
+  }
 
   //Decline request function
   function declineRequest() {
     toggle();
-    updateUser();
+    updateUserRole();
     declineUser();
-    getUsers();
     console.log(save);
 
   }

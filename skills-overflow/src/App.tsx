@@ -24,7 +24,6 @@ function App() {
           <Route exact path="/">
             <LoginPage />
           </Route>
-
           <Route path="/recovery">
             <PasswordRecPage />
           </Route>
