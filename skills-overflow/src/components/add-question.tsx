@@ -9,18 +9,18 @@ function QuestionModal() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setNewQuestion({ questionTitle: "", questionBody: "", questionTags: [] });
+    setNewQuestion({ title: "", body: "", topics: [] });
   };
   const handleShowModal = () => setShowModal(true);
 
   const [newQuestion, setNewQuestion] = useState<{
-    questionTags: string[];
-    questionTitle: string;
-    questionBody: string;
+    topics: string[];
+    title: string;
+    body: string;
   }>({
-    questionTitle: "",
-    questionBody: "",
-    questionTags: []
+    title: "",
+    body: "",
+    topics: []
   });
 
   function handleChange(event: any) {
@@ -33,21 +33,17 @@ function QuestionModal() {
 
   const handleCheckbox = (event: any) => {
     let topicValue = event.target.value;
-    let array = newQuestion.questionTags;
+    let array = newQuestion.topics;
 
     for (let i = 0; i < array.length; i++) {
       if (array[i] === topicValue) {
         array.splice(i, 1);
-        setNewQuestion({ ...newQuestion, questionTags: array });
-
-        console.log(array);
+        setNewQuestion({ ...newQuestion, topics: array });
         return;
       }
     }
     array.push(topicValue);
-    setNewQuestion({ ...newQuestion, questionTags: array });
-
-    console.log(array);
+    setNewQuestion({ ...newQuestion, topics: array });
   };
   function handleSubmit(event: any) {
     event.preventDefault();
@@ -64,9 +60,10 @@ function QuestionModal() {
     if (typeof token === "string") {
       tokenCkecked = JSON.parse(token);
     }
+    console.log(tokenCkecked.token);
     axios
       .post("http://localhost:8081/createPost", newQuestion, {
-        headers: { Authorization: "Bearer" + tokenCkecked.token }
+        headers: { Authorization: "Bearer " + tokenCkecked.token }
       })
       .then(response => {
         console.log(response.data);
@@ -91,63 +88,66 @@ function QuestionModal() {
             <Form.Label>Add a question title</Form.Label>
             <Form.Control
               type="text"
-              name="questionTitle"
+              name="title"
               onChange={handleChange}
-              value={newQuestion.questionTitle}
+              value={newQuestion.title}
             />
             <Form.Label>Add a question text</Form.Label>
             <textarea
               className="d-block rounded-2"
               rows={5}
               cols={55}
-              name="questionBody"
+              name="body"
               onChange={handleChange}
-              value={newQuestion.questionBody}
+              value={newQuestion.body}
             ></textarea>
-            <Form.Group id="questionTags" onChange={handleCheckbox}>
+            <Form.Group
+            // id="topics"
+            // onChange={handleCheckbox}
+            >
               <div className="row">
                 <div className="column col-md-4">
                   <Form.Check
                     type="checkbox"
                     label="Java"
-                    name="questionTags"
+                    name="topics"
                     value="Java"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Springboot"
-                    name="questionTags"
+                    name="topics"
                     value="Springboot"
                     // onChange={handleCheckbox}
                   />
                   <Form.Check
                     type="checkbox"
                     label="SQL"
-                    name="questionTags"
+                    name="topics"
                     value="SQL"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Tomcat"
-                    name="questionTags"
+                    name="topics"
                     value="Tomcat"
                   />
                   <Form.Check
                     type="checkbox"
                     label="JPA"
-                    name="questionTags"
+                    name="topics"
                     value="JPA"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Google Cloud"
-                    name="questionTags"
+                    name="topics"
                     value="Google Cloud"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Hibernate"
-                    name="questionTags"
+                    name="topics"
                     value="Hibernate"
                   />
                 </div>
@@ -155,43 +155,43 @@ function QuestionModal() {
                   <Form.Check
                     type="checkbox"
                     label="HTML"
-                    name="questionTags"
+                    name="topics"
                     value="HTML"
                   />
                   <Form.Check
                     type="checkbox"
                     label="CSS"
-                    name="questionTags"
+                    name="topics"
                     value="CSS"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Javascript"
-                    name="questionTags"
+                    name="topics"
                     value="Javascript"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Bootstrap"
-                    name="questionTags"
+                    name="topics"
                     value="Bootstrap"
                   />
                   <Form.Check
                     type="checkbox"
                     label="React"
-                    name="questionTags"
+                    name="topics"
                     value="React"
                   />
                   <Form.Check
                     type="checkbox"
                     label="Angular"
-                    name="questionTags"
+                    name="topics"
                     value="Angular"
                   />
                   <Form.Check
                     type="checkbox"
                     label="JQuery"
-                    name="questionTags"
+                    name="topics"
                     value="Jquery"
                   />
                 </div>
