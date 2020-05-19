@@ -82,7 +82,7 @@ function LoginPage() {
         });
         break;
       default:
-        cogoToast.info("Something is off.");
+        cogoToast.error("Something is off, please try again.");
     }
   }
   return (

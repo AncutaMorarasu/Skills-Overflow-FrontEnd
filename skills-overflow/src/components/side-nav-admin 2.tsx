@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Link } from "react-router-dom";
+//import Link from "react-router-dom";
 
 function SidenavAdmin() {
   return (
@@ -17,27 +17,18 @@ function SidenavAdmin() {
           admin dashboard
         </a>
         <div className="dropdown-menu dd-menu ">
-          <Link
-            to="/existing-profiles"
-            className="dropdown-item dd-item border-bottom"
-          >
+          <a className="dropdown-item dd-item border-bottom" href="#">
             user profiles
-          </Link>
-          <Link
-            className="dropdown-item dd-item border-bottom "
-            to="/pending-users"
-          >
+          </a>
+          <a className="dropdown-item dd-item border-bottom " href="#">
             account requests
-          </Link>
-          <Link
-            className="dropdown-item dd-item border-bottom"
-            to="/blocked-users"
-          >
+          </a>
+          <a className="dropdown-item dd-item border-bottom" href="#">
             blocked users
-          </Link>
-          <Link className="dropdown-item dd-item" to="/declined-users">
+          </a>
+          <a className="dropdown-item dd-item" href="#">
             declined requests
-          </Link>
+          </a>
         </div>
       </ListGroup.Item>
       <ListGroup.Item variant="light" className="nav-item">

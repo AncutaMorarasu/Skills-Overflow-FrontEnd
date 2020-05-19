@@ -15,7 +15,6 @@ import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
 
-
 function App() {
   return (
     <div>
@@ -48,7 +47,7 @@ function App() {
             <BlockedUsers />
           </Route>
           <Route path="/existing-profiles">
-            <ExistingProfiles/>
+            <ExistingProfiles />
           </Route>
           <Route path="/register-confirmation">
             <RegisterConfirm />
