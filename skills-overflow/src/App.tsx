@@ -14,7 +14,6 @@ import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
 
-
 function App() {
   return (
     <div>
@@ -24,7 +23,6 @@ function App() {
           <Route exact path="/">
             <LoginPage />
           </Route>
-
           <Route path="/recovery">
             <PasswordRecPage />
           </Route>

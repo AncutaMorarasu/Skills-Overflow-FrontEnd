@@ -23,7 +23,7 @@ export default function DeclinedUsers() {
   }, [setUserProfile]);
 
   //Approve user
-  function updateUser(){
+  function updateUserRole(){
     axios.put(`http://localhost:8081/approveRequest/${getUserId}`).then(
       response => {
       },
@@ -57,7 +57,7 @@ export default function DeclinedUsers() {
   //Approve request function
   function approveRequest(){
     toggle();
-    updateUser();
+    updateUserRole();
   }
 
   //Decline request function
@@ -65,7 +65,6 @@ export default function DeclinedUsers() {
     toggle();
     deleteUser();
   }
-
 
   //Show modal
   function toggle() {

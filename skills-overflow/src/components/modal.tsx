@@ -1,6 +1,4 @@
 import React from "react";
-import Logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal'
 import Button from "react-bootstrap/Button";
 
@@ -30,6 +28,3 @@ const ModalComponent: React.SFC<ModalProps> = ({modal, toggle, modalM, approveRe
 }
 
 export default ModalComponent;
-
-   
-
