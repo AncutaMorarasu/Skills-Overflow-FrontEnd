@@ -11,7 +11,7 @@ function QuestionCard() {
   const [questions, setQuestions] = useState({
     topics: ["spring", "java"],
     posts: [],
-    totalPosts: 76
+    totalPosts: 0
   });
   const [post, setPost] = useState({
     title: "",
