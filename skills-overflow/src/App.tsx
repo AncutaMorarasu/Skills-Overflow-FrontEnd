@@ -37,7 +37,6 @@ function App() {
 
           <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
-            <QuestionCard/>
           </Route>
 
           <Route path="/pending-users">
