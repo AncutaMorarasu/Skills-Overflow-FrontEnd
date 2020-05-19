@@ -8,6 +8,32 @@ function QuestionModal() {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
+  const [newQuestion, setNewQuestion] = useState({
+    questionTitle: "",
+    questionBody: "",
+    questionTags: ""
+  });
+
+  function handleChange(event: any) {
+    const { name, value } = event.target;
+    setNewQuestion({
+      ...newQuestion,
+      [name]: value
+    });
+  }
+
+  function submitQuestion() {
+    console.log(newQuestion);
+    handleCloseModal();
+  }
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    setNewQuestion({
+      questionTitle: "",
+      questionBody: "",
+      questionTags: ""
+    });
+  }
   return (
     <div className="d-flex justify-content-between quest-cont">
       <span className="all-questions">All Questions</span>
@@ -23,14 +49,22 @@ function QuestionModal() {
           <Modal.Title>Ask a question</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="modal-form">
+          <Form className="modal-form" onSubmit={handleSubmit}>
             <Form.Label>Add a question title</Form.Label>
-            <Form.Control type="text" />
+            <Form.Control
+              type="text"
+              name="questionTitle"
+              onChange={handleChange}
+              value={newQuestion.questionTitle}
+            />
             <Form.Label>Add a question text</Form.Label>
             <textarea
               className="d-block rounded-2"
               rows={5}
               cols={55}
+              name="questionBody"
+              onChange={handleChange}
+              value={newQuestion.questionBody}
             ></textarea>
             <Form.Group id="questionTags">
               <div className="row">
@@ -60,7 +94,7 @@ function QuestionModal() {
           <Button variant="secondary" onClick={handleCloseModal}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleCloseModal}>
+          <Button variant="primary" onClick={submitQuestion}>
             Post question
           </Button>
         </Modal.Footer>
