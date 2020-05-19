@@ -6,6 +6,7 @@ import LoginPage from "./pages/login-page";
 import PasswordRecPage from "./pages/password-rec-page";
 import RegisterPage from "./pages/register-page";
 import Header from "./components/header";
+import Footer from "./components/footer";
 import Dashboard from "./pages/dashboard-page";
 import ChangePasswordPage from "./pages/change-password-page";
 import RegisterConfirm from "./pages/register-confirmation";
@@ -42,6 +43,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }

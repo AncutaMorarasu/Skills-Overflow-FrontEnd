@@ -1,180 +1,322 @@
 .alert {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
-
 .contentHeader {
-    font-size: 3.2rem;
-    line-height: 1.25;
-    font-weight: 400;
-    color: white;
-    padding: 32px 0 8px;
-    font-weight: 400;
+  font-size: 3.2rem;
+  line-height: 1.25;
+  font-weight: 400;
+  color: white;
+  padding: 32px 0 8px;
+  font-weight: 400;
 }
 
 .registerConf {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .btn-success {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .container {
-    text-align: center;
-    font-weight: 200;
-    margin-top: -4rem;
+  text-align: center;
+  font-weight: 200;
+  margin-top: -4rem;
 }
 
 .registerConf {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .container h1 {
-    font-size: 4rem;
-    margin: 3rem 0;
+  font-size: 4rem;
+  margin: 3rem 0;
 }
 
 .container h2 {
-    font-size: 40px;
-    padding: 20px;
+  font-size: 40px;
+  padding: 20px;
 }
 
 .form-control,
 .loginBtn {
-    width: 100%;
+  width: 100%;
 }
 
 .formContainer {
-    width: 370px;
-    height: 400px;
-    border-radius: 5px;
-    background: white;
-    color: #393e46;
-    margin-top: 4rem;
+  width: 370px;
+  height: 400px;
+  border-radius: 5px;
+  background: white;
+  color: #393e46;
+  margin-top: 4rem;
 }
 
 form {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .loginBtn {
-    background-color: #21bf73;
-    border: none;
-    margin-bottom: 1.5rem;
+  background-color: #21bf73;
+  border: none;
+  margin-bottom: 1.5rem;
 }
 
 .loginBtn:hover {
-    background-color: #21bf73;
+  background-color: #21bf73;
 }
 
 .loginBtn:active {
-    background-color: #21bf73;
+  background-color: #21bf73;
 }
 
 .loginBtn:active {
-    background-color: #21bf73;
+  background-color: #21bf73;
 }
 
 input::placeholder,
 .loginBtn {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .help-links {
-    display: flex;
-    font-size: 1.1rem;
-    text-align: left;
+  display: flex;
+  font-size: 1.1rem;
+  text-align: left;
 }
 
 .flex-column {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .header {
-    margin: 20px 0 0 50px;
+  margin: 20px 0 0 50px;
 }
 
-
 @media only screen and (max-width: 768px) {
-    .formContainer {
-        width: 300px;
-    }
+  .formContainer {
+    width: 300px;
+  }
 }
 
 .register_container {
-    display: flex;
-    justify-content: center;
-    align-content: space-between;
-    margin-top: 5px;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .register__container h1 {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 
 .alig {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #register-submit-btn {
-    margin-top: 18px;
+  margin-top: 18px;
 }
 
 .formRegisterContainer {
-    width: 370px;
-    height: 450px;
-    border-radius: 5px;
-    background: white;
-    color: #393e46;
-    margin-top: 4rem;
+  width: 370px;
+  height: 450px;
+  border-radius: 5px;
+  background: white;
+  color: #393e46;
+  margin-top: 4rem;
 }
 
 .containerRecPage h2 {
-    font-size: 60px;
-    line-height: 1.25;
+  font-size: 60px;
+  line-height: 1.25;
 }
 
 .formRecoveryPageContainer {
-    width: 370px;
-    height: 350px;
-    border-radius: 5px;
-    background: white;
-    color: #393e46;
-    margin-top: 4rem;
+  width: 370px;
+  height: 350px;
+  border-radius: 5px;
+  background: white;
+  color: #393e46;
+  margin-top: 4rem;
 }
 
-
 .containerRecPage {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 #recPage {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
 }
 
 .rec_page_input {
-    width: 15rem;
-    border-radius: 4px;
+  width: 15rem;
+  border-radius: 4px;
 }
 
 .recoveryForm {
-    display: flex;
+  display: flex;
 }
 
 .recoveryForm>button {
-    height: 2.4rem;
+  height: 2.4rem;
 }
 
 .btn-primary:disabled {
-    background-color: #cccccc;
-    border-color: #cccccc;
-    color: black
+  background-color: #cccccc;
+  border-color: #cccccc;
+  color: black;
+}
+
+.sidenav {
+  width: 15%;
+  margin-left: 1rem;
+  position: fixed;
+  z-index: 1;
+  top: 7rem;
+  overflow-x: hidden;
+}
+
+.nav-link,
+.dropdown-item {
+  text-transform: uppercase;
+  color: darkslategrey;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.dd-menu {
+  margin-left: 1.5rem !important;
+  margin-top: -0.9rem !important;
+  position: relative !important;
+  transform: translate3d(-25px, 5px, 5px) !important;
+  top: 0px !important;
+  left: 0px !important;
+  will-change: transform !important;
+}
+
+.dd-item {
+  height: 2.5rem;
+}
+
+.dd-item:active {
+  background-color: initial;
+}
+
+.dashboard {
+  margin-top: -4rem;
+}
+
+*:focus {
+  outline: none;
+}
+
+.accountBtn {
+  display: block;
+  height: 40px;
+  border: 3px solid white;
+  margin: -2rem 2rem 0 0;
+}
+
+.form-control::placeholder {
+  font-size: 1.1rem;
+  color: dimgray;
+
+}
+
+.searchInput {
+  margin-left: 1rem;
+  width: 30rem;
+}
+
+.rounded-pill {
+  background-color: white;
+}
+
+.cardText,
+.modal-header,
+.modal-body {
+  color: #393e46;
+}
+
+.questions {
+  width: 60rem;
+  height: 8rem;
+  margin-left: 17rem;
+  margin-top: -0.4rem;
+}
+
+.card,
+.quest-cont {
+  margin-bottom: 1rem;
+}
+
+.custom-dash {
+  margin-top: -3rem;
+}
+
+.all-questions {
+  font-size: 2rem;
+}
+
+.modal-form {
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+#questionTags {
+  margin-top: 1rem;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.add-quest-btn {
+  font-weight: 600;
+}
+
+.footer {
+  position: fixed;
+  left: 1rem;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+textarea {
+  border-radius: 5px;
+  border-color: #ced4da;
+}
+
+.filter-form {
+  width: 20rem;
+  padding: 1rem;
+}
+
+.filter-btn {
+  margin: 0 1rem 1rem 0;
+}
+
+.sort-select {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+  vertical-align: middle;
+  font-weight: 400;
+  text-align: center;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .25rem;
+  height: 2.4rem;
 }

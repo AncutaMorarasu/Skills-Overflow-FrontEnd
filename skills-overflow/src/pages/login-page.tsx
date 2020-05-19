@@ -40,26 +40,51 @@ function LoginPage() {
     } else {
       axios.post("http://localhost:8081/logIn", values).then(
         response => {
-          if (response.data === "user does not exist") {
-            cogoToast.error("Incorrect username or password", {
-              position: "top-center",
+          if (response.status === 200) {
+            let userLog = JSON.stringify(response.data);
+            localStorage.setItem("user", userLog);
+            validateRole(response.data.role);
+          } else if (response.status === 403) {
+            cogoToast.success("Incorrect username or password", {
               hideAfter: 5
             });
-          } else {
-            cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
-            history.push("/dashboard");
+            console.log(response.status);
           }
         },
         error => {
-          cogoToast.error("Something went wrong, please try again.", {
+          cogoToast.error("Incorrect username or password", {
             position: "top-center",
             hideAfter: 5
           });
+          console.log(error);
         }
       );
     }
   }
-
+  function validateRole(role: any) {
+    switch (role) {
+      case "[admin]":
+        history.push("/dashboard");
+        cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
+        break;
+      case "[approved user]":
+        history.push("/dashboard");
+        cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
+        break;
+      case "[pending user]":
+        cogoToast.warn("Your account request is pending approval.", {
+          hideAfter: 5
+        });
+        break;
+      case "[blocked user]":
+        cogoToast.error("Your account is blocked for the moment.", {
+          hideAfter: 5
+        });
+        break;
+      default:
+        cogoToast.info("Something is off.");
+    }
+  }
   return (
     <div className="container">
       <h1>Welcome to Skills Overflow</h1>
