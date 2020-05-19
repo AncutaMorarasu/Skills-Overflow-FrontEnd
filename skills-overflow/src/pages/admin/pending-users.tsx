@@ -24,7 +24,7 @@ export default function PendingUsers() {
         console.log(error);
       }
     )
-  }, [setUserProfile]);
+  }, [userProfile]);
 
   // Approve user
   function updateUser(){

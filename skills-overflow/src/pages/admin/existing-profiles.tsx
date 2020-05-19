@@ -12,6 +12,7 @@ export default function ExistingProfiles() {
   const [modalMessage, setModalMessage] = useState('');
   const [save, setSave] = useState(false);
 
+
   // Get users from database
   useEffect(() => {
     axios.get('http://localhost:8081/users').then(
@@ -20,7 +21,7 @@ export default function ExistingProfiles() {
         setUserProfile(setData);
       }
     )
-  }, [setUserProfile]);
+  });
 
 //Post user to database
   function updateUser(){
