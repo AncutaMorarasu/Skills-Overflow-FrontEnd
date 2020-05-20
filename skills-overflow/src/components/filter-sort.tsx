@@ -11,6 +11,7 @@ function FilterSort(props: any) {
 
   const handleRedirect = (e: any) => {
     const criteria = e.target.value;
+    console.log(criteria)
     history.push({
       pathname: `/posts/0/${criteria}`,
       state: { topics: props.filterTopics }
@@ -127,7 +128,7 @@ function FilterSort(props: any) {
         <select
           className="sort-select"
           title=""
-          onClick={(e: any) => {
+          onChange={(e: any) => {
             if (e.target.value != 0) handleRedirect(e);
           }}
         >

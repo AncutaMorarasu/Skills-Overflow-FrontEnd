@@ -102,7 +102,7 @@ function QuestionCard() {
             <Card.Text>{body}</Card.Text>
 
             <Card.Text>
-              Created on: {createDate} {console.log(createDate)}
+              Created on: {createDate}
             </Card.Text>
 
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
