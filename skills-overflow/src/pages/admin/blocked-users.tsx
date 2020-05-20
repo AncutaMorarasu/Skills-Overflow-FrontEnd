@@ -63,7 +63,6 @@ export default function BlockedUsers() {
       response => {
         if (response.status === 200) {
           getUsers();
-          cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
       const setData = response.data;
       setUserProfile(setData);
