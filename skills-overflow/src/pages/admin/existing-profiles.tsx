@@ -40,7 +40,7 @@ export default function ExistingProfiles() {
 //Post user to database
   function updateUserRole(){
     localData();
-    axios.put(`http://localhost:8081/promoteToAdmin/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
+    axios.put(`http://localhost:8081/admin/promoteToAdmin/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
         if (response.status === 200) {
           getUsers();

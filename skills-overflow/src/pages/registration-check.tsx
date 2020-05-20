@@ -3,12 +3,11 @@ import Container from "react-bootstrap/Container";
 
 
 
-function RegisterConfirm() {
+export default function RegistrationInvalidToken() {
   return (
     <Container className="registerConf">
-      <h2>Your registration request has been processed.</h2>
+      <h2>This link is not valid anymore</h2>
     </Container>
   );
 }
 
-export default RegisterConfirm;

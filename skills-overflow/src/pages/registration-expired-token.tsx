@@ -3,12 +3,11 @@ import Container from "react-bootstrap/Container";
 
 
 
-function RegisterConfirm() {
+export default function RegistrationExpiredToken() {
   return (
     <Container className="registerConf">
-      <h2>Your registration request has been processed.</h2>
+      <h2>You're request has expired. Please register again.</h2>
     </Container>
   );
 }
 
-export default RegisterConfirm;

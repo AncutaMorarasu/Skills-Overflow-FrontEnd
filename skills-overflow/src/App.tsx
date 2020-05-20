@@ -16,6 +16,8 @@ import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
 import QuestionCard from "./components/question-cards";
 import ForbiddenPage from "./pages/forbidden-page";
+import RegistrationInvalidToken from "./pages/registration-check";
+import RegistrationExpiredToken from "./pages/registration-expired-token";
 
 function App() {
   return (
@@ -51,6 +53,12 @@ function App() {
           </Route>
           <Route path="/existing-profiles">
             <ExistingProfiles />
+          </Route>
+          <Route path="/registration-invalid-token">
+            <RegistrationInvalidToken/>
+          </Route>
+          <Route path="/registration-expired-token">
+            <RegistrationExpiredToken/>
           </Route>
           <Route path="/register-confirmation">
             <RegisterConfirm />
