@@ -7,12 +7,6 @@ import axios from "axios";
 function QuestionModal() {
   const [showModal, setShowModal] = useState(false);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setNewQuestion({ title: "", body: "", topics: [] });
-  };
-  const handleShowModal = () => setShowModal(true);
-
   const [newQuestion, setNewQuestion] = useState<{
     topics: string[];
     title: string;
@@ -23,6 +17,13 @@ function QuestionModal() {
     topics: []
   });
 
+  //functiile pe modala
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setNewQuestion({ title: "", body: "", topics: [] });
+  };
+  const handleShowModal = () => setShowModal(true);
+
   function handleChange(event: any) {
     const { name, value } = event.target;
     setNewQuestion({
@@ -31,10 +32,10 @@ function QuestionModal() {
     });
   }
 
+  //pentru topic-uri
   const handleCheckbox = (event: any) => {
     let topicValue = event.target.value;
     let array = newQuestion.topics;
-
     for (let i = 0; i < array.length; i++) {
       if (array[i] === topicValue) {
         array.splice(i, 1);
@@ -45,9 +46,11 @@ function QuestionModal() {
     array.push(topicValue);
     setNewQuestion({ ...newQuestion, topics: array });
   };
+
   function handleSubmit(event: any) {
     event.preventDefault();
   }
+
   function submit() {
     console.log(newQuestion);
     postQuestion();
@@ -86,6 +89,7 @@ function QuestionModal() {
         <Modal.Body>
           <Form className="modal-form" onSubmit={handleSubmit}>
             <Form.Label>Add a question title</Form.Label>
+
             <Form.Control
               type="text"
               name="title"
@@ -102,9 +106,10 @@ function QuestionModal() {
               value={newQuestion.body}
             ></textarea>
             <Form.Group
-            // id="topics"
-            // onChange={handleCheckbox}
+            id="topics"
+            onChange={handleCheckbox}
             >
+
               <div className="row">
                 <div className="column col-md-4">
                   <Form.Check
@@ -118,7 +123,6 @@ function QuestionModal() {
                     label="Springboot"
                     name="topics"
                     value="Springboot"
-                    // onChange={handleCheckbox}
                   />
                   <Form.Check
                     type="checkbox"
@@ -196,6 +200,7 @@ function QuestionModal() {
                   />
                 </div>
               </div>
+
             </Form.Group>
           </Form>
         </Modal.Body>
