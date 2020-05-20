@@ -49,7 +49,7 @@ function QuestionCard() {
           const object = response.data;
           
           setQuestions({ totalPosts:object[0], posts: object[1]});
-          setFilters({filterTopics:[]})
+          //setFilters({filterTopics:[]})
         },
         error => {
           console.log(error);
@@ -91,10 +91,11 @@ function QuestionCard() {
       if (array[i] === topicValue) {
         array.splice(i, 1);
         setFilters({ filterTopics: array });
+        console.log('this is if it already exists')
         console.log(array)
         return;
       }
-    }
+    }console.log('it didnt find the element' );
     array.push(topicValue);
     setFilters({ filterTopics: array });
     console.log(array)
