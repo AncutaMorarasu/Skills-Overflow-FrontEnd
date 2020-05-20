@@ -4,6 +4,7 @@ import QuestionModal from "./add-question";
 import FilterSort from "./filter-sort";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
+import { format } from "date-fns";
 
 function QuestionCard() {
   const history = useHistory();
@@ -52,7 +53,7 @@ function QuestionCard() {
     }
   }
 
-  useEffect(() => {
+  function getPosts() {
     localData();
     let actualPageNo = pageNo ? pageNo : 0;
     let children = location.state ? location.state.topics : filter.filterTopics;
@@ -74,6 +75,10 @@ function QuestionCard() {
           console.log(error);
         }
       );
+  }
+
+  useEffect(() => {
+    getPosts();
   }, [effects]);
 
   const renderPosts = questions.posts.map(
@@ -95,7 +100,11 @@ function QuestionCard() {
               </a>
             </Card.Title>
             <Card.Text>{body}</Card.Text>
-            <Card.Text> Created on {createDate} </Card.Text>
+
+            <Card.Text>
+              Created on: {createDate}
+            </Card.Text>
+
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
             <Card.Text> Topic: {topics}</Card.Text>
           </Card.Body>
@@ -111,13 +120,11 @@ function QuestionCard() {
       if (array[i] === topicValue) {
         array.splice(i, 1);
         setFilters({ filterTopics: array });
-        console.log(array);
         return;
       }
     }
     array.push(topicValue);
     setFilters({ filterTopics: array });
-    console.log(array);
   };
 
   return (

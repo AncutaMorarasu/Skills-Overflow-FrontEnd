@@ -4,8 +4,8 @@ import SidenavUser from "../components/side-nav-user";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import QuestionCard from "../components/question-cards";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
   const [showAdmin, setShowAdmin] = useState(false);
@@ -53,7 +53,7 @@ function Dashboard() {
                 type="button"
                 className="btn btn-link text-success"
               >
-                {/* <FontAwesomeIcon icon={faSearch} /> */}
+                <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>
           </div>

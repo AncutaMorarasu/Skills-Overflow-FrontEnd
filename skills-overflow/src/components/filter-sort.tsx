@@ -127,7 +127,7 @@ function FilterSort(props: any) {
         <select
           className="sort-select"
           title=""
-          onClick={(e: any) => {
+          onChange={(e: any) => {
             if (e.target.value != 0) handleRedirect(e);
           }}
         >
