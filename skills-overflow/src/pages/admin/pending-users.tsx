@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import ModalComponent from "../../components/modal";
+import { useHistory } from "react-router-dom";
+import cogoToast from "cogo-toast";
 
 export default function PendingUsers() {
 
@@ -12,6 +14,7 @@ export default function PendingUsers() {
   const [save, setSave] = useState(false);
   let token = localStorage.getItem("user");
   let tokenCheck: any;
+  const history = useHistory();
 
   function localData(){
     if (typeof token === "string") {
@@ -22,15 +25,15 @@ export default function PendingUsers() {
   //Get users from database for table
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
-      response => {
-        const setData = response.data;
-        setUserProfile(setData);
-      },
-      error => {
-        console.log(error);
+    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}})
+    .then(response => {
+          const setData = response.data;
+          setUserProfile(setData);
+    }).catch(function(error) {
+      if(error.request.status === 403){
+        history.push("/forbidden-page")
       }
-    );
+    })
   }, []);
 
   // Approve user
@@ -38,7 +41,10 @@ export default function PendingUsers() {
     localData();
     axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
-        getUsers()
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
         console.log(response);
       },
       error => {
@@ -51,7 +57,10 @@ export default function PendingUsers() {
     localData()
     axios.put(`http://localhost:8081/admin/declineRequest/${getUserId}`, {} ,{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
-        getUsers()
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
         console.log(response);
       },
       error => {
@@ -63,7 +72,8 @@ export default function PendingUsers() {
   // Display pending users
   function getUsers() {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(response => {
+    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+      response => {
       const setData = response.data;
       setUserProfile(setData);
     });
@@ -73,15 +83,12 @@ export default function PendingUsers() {
   function approveRequest() {
     toggle();
     updateUserRole();
-    console.log(save);
   }
 
   //Decline request function
   function declineRequest() {
     toggle();
-    updateUserRole();
     declineUser();
-    console.log(save);
   }
 
   //Show modal

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import ModalComponent from "../../components/modal";
+import cogoToast from "cogo-toast";
+import { useHistory } from "react-router-dom";
 
 export default function ExistingProfiles() {
   const [getUserId, setGetUserId] = useState<number>(0);
@@ -11,6 +13,8 @@ export default function ExistingProfiles() {
   const [save, setSave] = useState(false);
   let token = localStorage.getItem("user");
   let tokenCheck: any;
+  const history = useHistory();
+
   
   
   function localData(){
@@ -22,12 +26,15 @@ export default function ExistingProfiles() {
   // Get users from database
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
-      response => {
+    axios.get('http://localhost:8081/allApprovedUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}})
+    .then(response => {
         const setData = response.data;
         setUserProfile(setData);
+      }).catch(function(error) {
+      if(error.request.status === 403){
+        history.push("/forbidden-page")
       }
-    )
+    })
   }, []);
 
 //Post user to database
@@ -35,7 +42,10 @@ export default function ExistingProfiles() {
     localData();
     axios.put(`http://localhost:8081/promoteToAdmin/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
-        getUsers()
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
       console.log(response);
       },
       error => {
@@ -48,7 +58,10 @@ function updateBlockUser(){
   localData()
   axios.put(`http://localhost:8081/admin/blockUser/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
     response => {
-      getUsers()
+      if (response.status === 200) {
+        getUsers();
+        cogoToast.success("The changes have been made", { hideAfter: 5 })
+      }
     console.log(response);
     },
     error => {
@@ -57,9 +70,10 @@ function updateBlockUser(){
 );
 }
 
+// Display pending users
 function getUsers(){
-  localData()
-  axios.get('http://localhost:8081/allPendingUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+  localData();
+  axios.get('http://localhost:8081/allApprovedUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
     response => {
       const setData = response.data;
       setUserProfile(setData);

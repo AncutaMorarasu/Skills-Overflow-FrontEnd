@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import ModalComponent from "../../components/modal";
+import cogoToast from "cogo-toast";
+import { useHistory } from "react-router-dom";
 
 export default function DeclinedUsers() {
   const [getUserId, setUserId] = useState<number>(0);
@@ -11,6 +13,8 @@ export default function DeclinedUsers() {
   const [save, setSave] = useState(false);
   let token = localStorage.getItem("user");
   let tokenCheck: any;
+  const history = useHistory();
+
 
   function localData(){
     if (typeof token === "string") {
@@ -21,21 +25,29 @@ export default function DeclinedUsers() {
   //Get users from database
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allDeclinedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+    axios.get('http://localhost:8081/allDeclinedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}})
+    .then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
       }
-    )
-  }, [setUserProfile]);
+    ).catch(function(error) {
+      if(error.request.status === 403){
+        history.push("/forbidden-page")
+      }
+    })
+  }, []);
 
 
   //Approve user
   function updateUserRole(){
     localData();
-    axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
-      response => {
-        getUsers()
+    axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}})
+    .then(response => {
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
       },
       error => {
         console.log(error);
@@ -48,7 +60,10 @@ export default function DeclinedUsers() {
     localData();
     axios.delete(`http://localhost:8081/admin/remove/${getUserId}`, {headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
-      getUsers()
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
       console.log(response)
     },
     error => {
