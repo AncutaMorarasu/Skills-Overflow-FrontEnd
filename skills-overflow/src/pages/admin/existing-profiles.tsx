@@ -26,15 +26,13 @@ export default function ExistingProfiles() {
   // Get users from database
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}})
+    axios.get('http://localhost:8081/allApprovedUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}})
     .then(response => {
         const setData = response.data;
         setUserProfile(setData);
-      }
-    ).catch(function(error) {
+      }).catch(function(error) {
       if(error.request.status === 403){
         history.push("/forbidden-page")
-
       }
     })
   }, []);
@@ -72,9 +70,10 @@ function updateBlockUser(){
 );
 }
 
+// Display pending users
 function getUsers(){
-  localData()
-  axios.get('http://localhost:8081/allPendingUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+  localData();
+  axios.get('http://localhost:8081/allApprovedUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
     response => {
       const setData = response.data;
       setUserProfile(setData);

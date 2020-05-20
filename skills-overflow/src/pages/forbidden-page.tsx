@@ -13,7 +13,7 @@ function ForbiddenPage() {
   useEffect(() => {
     redirectUser();
     if(redirect){
-      history.push("/dashboard")
+      history.push("/")
 
     }
   })
@@ -23,7 +23,7 @@ function ForbiddenPage() {
   }
 
   function goBack(){
-    history.push("/dashboard")
+    history.push("/")
   }
 
     return (

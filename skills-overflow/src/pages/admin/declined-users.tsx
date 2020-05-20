@@ -32,7 +32,7 @@ export default function DeclinedUsers() {
         setUserProfile(setData);
       }
     ).catch(function(error) {
-      if(error.request === 403){
+      if(error.request.status === 403){
         history.push("/forbidden-page")
       }
     })

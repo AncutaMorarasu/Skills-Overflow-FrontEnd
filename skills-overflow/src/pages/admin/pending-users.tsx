@@ -72,7 +72,8 @@ export default function PendingUsers() {
   // Display pending users
   function getUsers() {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(response => {
+    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+      response => {
       const setData = response.data;
       setUserProfile(setData);
     });
@@ -82,15 +83,12 @@ export default function PendingUsers() {
   function approveRequest() {
     toggle();
     updateUserRole();
-    console.log(save);
   }
 
   //Decline request function
   function declineRequest() {
     toggle();
-    updateUserRole();
     declineUser();
-    console.log(save);
   }
 
   //Show modal
