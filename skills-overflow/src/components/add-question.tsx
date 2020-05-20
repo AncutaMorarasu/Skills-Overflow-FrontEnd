@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import cogoToast from "cogo-toast";
 
 function QuestionModal() {
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +44,7 @@ function QuestionModal() {
         return;
       }
     }
-    array.push(topicValue);
+    array.push(topicValue + " ");
     setNewQuestion({ ...newQuestion, topics: array });
   };
 
@@ -53,7 +54,18 @@ function QuestionModal() {
 
   function submit() {
     console.log(newQuestion);
-    postQuestion();
+    if (
+      newQuestion.title.length === 0 ||
+      newQuestion.body.length === 0 ||
+      newQuestion.topics.length === 0
+    ) {
+      cogoToast.error(
+        "Make sure you fill in the question title, body and choose at least one topic."
+      );
+      return;
+    } else {
+      postQuestion();
+    }
     handleCloseModal();
   }
   let token = localStorage.getItem("user");
@@ -70,8 +82,10 @@ function QuestionModal() {
       })
       .then(response => {
         console.log(response.data);
+        cogoToast.info("Your question has bee submitted for review.");
       });
   }
+
   return (
     <div className="d-flex justify-content-between quest-cont">
       <span className="all-questions">All Questions</span>
@@ -105,11 +119,7 @@ function QuestionModal() {
               onChange={handleChange}
               value={newQuestion.body}
             ></textarea>
-            <Form.Group
-            id="topics"
-            onChange={handleCheckbox}
-            >
-
+            <Form.Group id="topics" onChange={handleCheckbox}>
               <div className="row">
                 <div className="column col-md-4">
                   <Form.Check
@@ -200,7 +210,6 @@ function QuestionModal() {
                   />
                 </div>
               </div>
-
             </Form.Group>
           </Form>
         </Modal.Body>

@@ -307,7 +307,8 @@ textarea {
   margin: 0 1rem 1rem 0;
 }
 
-.sort-select {
+.sort-select,
+.filter-btn-down {
   color: #212529;
   background-color: #ffc107;
   border-color: #ffc107;
@@ -418,4 +419,17 @@ th {
 .btn-table-update {
   margin-right: 0.5rem;
 
+}
+
+.forbiden_container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forbiden__container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 10rem;
 }
