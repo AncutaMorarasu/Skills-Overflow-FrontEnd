@@ -307,7 +307,8 @@ textarea {
   margin: 0 1rem 1rem 0;
 }
 
-.sort-select {
+.sort-select,
+.filter-btn-down {
   color: #212529;
   background-color: #ffc107;
   border-color: #ffc107;
