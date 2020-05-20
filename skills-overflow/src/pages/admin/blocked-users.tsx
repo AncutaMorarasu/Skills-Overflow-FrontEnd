@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import ModalComponent from "../../components/modal";
+import cogoToast from "cogo-toast";
+import { useHistory } from "react-router-dom";
 
 export default function BlockedUsers() {
 
@@ -13,6 +15,9 @@ export default function BlockedUsers() {
   let token = localStorage.getItem("user");
   let tokenCheck: any;
 
+  const history = useHistory();
+
+
   function localData(){
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
@@ -22,21 +27,28 @@ export default function BlockedUsers() {
   //Get users from database
    useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
-      response => {
-        getUsers();
+    axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}})
+    .then(response => {
         const setData = response.data;
         setUserProfile(setData);
-      }
-    )
-  }, [setUserProfile]);
+      })
+      .catch(function(error) {
+        if(error.request.status === 403){
+          history.push("/forbidden-page")
+        }
+        console.log(error)
+      })
+  }, []);
 
   //Approve user
   function updateUserRole(){
     localData();
     axios.put(`http://localhost:8081/admin/unblockUser/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
       response => {
-        getUsers()
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
       },
       error => {
         console.log(error);
@@ -49,6 +61,10 @@ export default function BlockedUsers() {
     localData();
     axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
       response => {
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
       const setData = response.data;
       setUserProfile(setData);
       }
