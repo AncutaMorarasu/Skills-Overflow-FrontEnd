@@ -14,6 +14,7 @@ import ExistingProfiles from "./pages/admin/existing-profiles";
 import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
+import ForbiddenPage from "./pages/forbidden-page";
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path="/register-confirmation">
             <RegisterConfirm />
+          </Route>
+          <Route path="/forbidden-page">
+            <ForbiddenPage/>
           </Route>
           <Route path="">
             <NotFoundPage />

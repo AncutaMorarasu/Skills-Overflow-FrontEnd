@@ -419,3 +419,16 @@ th {
   margin-right: 0.5rem;
 
 }
+
+.forbiden_container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forbiden__container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 10rem;
+}
