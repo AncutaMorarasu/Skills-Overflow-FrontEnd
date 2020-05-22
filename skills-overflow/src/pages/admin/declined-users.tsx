@@ -133,9 +133,9 @@ export default function DeclinedUsers() {
                   <td>{email}</td>
                   <td>
                     <Button type="button" className="btn btn-success btn-table" onClick={() => 
-                      {toggle(); setUserId(userId);setModalMessage("Are you sure you want to accept this user's request?"); setSave(true)}}>Approve</Button>
+                      {toggle(); setUserId(userId);setModalMessage("Are you sure you want to accept this user's request?"); setSave(false)}}>Approve</Button>
                     <Button type="button" className="btn btn-danger btn-table" onClick={() => 
-                      {toggle(); setUserId(userId);setModalMessage("Are you sure you want to delete this user's request?"); setSave(false)}}>Delete</Button>
+                      {toggle(); setUserId(userId);setModalMessage("Are you sure you want to delete this user's request?"); setSave(true)}}>Delete</Button>
                   </td>
                 </tr>
               ))}

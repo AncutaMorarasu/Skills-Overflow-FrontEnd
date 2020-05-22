@@ -40,8 +40,9 @@ export default function RegisterPage() {
   }
 
   function submit() {
-    checkPassword();
-    checkAndRegister();
+    if(checkPassword()){
+      checkAndRegister();
+    }
   }
 
   function checkAndRegister() {
@@ -67,18 +68,21 @@ export default function RegisterPage() {
   function checkPassword(){
     if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0) {
       cogoToast.error("Please complete all required the fields.", { hideAfter: 5 });
-      return;
+      return false;
     } else if (values.userName.length < 2) {
       cogoToast.error("Your username must have at least 2 characters.", { hideAfter: 5 });
-      return;
+      return false;
     } else if (values.password.length < 5 || values.secPassword.length < 5 || values.password.length > 20 || values.secPassword.length > 20) {
       cogoToast.error("Your password should containt at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
+      return false;
     } else if (!values.password.localeCompare(values.secPassword) === false) {
       cogoToast.error("Passwords do not match.", { hideAfter: 5 });
-      return;
+      return false;
     } else if (checkForSpaces()) {
       cogoToast.error("Your password must not contain white spaces.", { hideAfter: 5 });
-      return;
+      return false
+    }else{
+      return true;
     }
   }
 
