@@ -31,7 +31,7 @@ const ModalComponent: React.SFC<ModalProps> = ({
         </Button>
         <Button
           variant="primary"
-          onClick={save ? approveRequest : declineRequest}
+          onClick={!save ? approveRequest : declineRequest}
         >
           Save Changes
         </Button>

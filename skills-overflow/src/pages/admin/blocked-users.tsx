@@ -78,7 +78,7 @@ export default function BlockedUsers() {
   }
 
   function declineRequest() {
-    return true;
+    return false;
   }
 
   //Show modal
@@ -117,7 +117,7 @@ export default function BlockedUsers() {
                     <td>{lastName}</td>
                     <td>{email}</td>
                     <td>
-                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to unblock this user?"); setSave(true); }}>Unblock</Button>
+                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to unblock this user?"); setSave(false); }}>Unblock</Button>
                     </td>
                   </tr>
                 ))}

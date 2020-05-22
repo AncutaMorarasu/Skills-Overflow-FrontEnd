@@ -56,18 +56,18 @@ export default function PendingUsers() {
 
   function declineUser() {
     localData()
-    axios.put(`http://localhost:8081/admin/declineRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
-      response => {
+    axios.put(`http://localhost:8081/admin/declineRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+      .then(response => {
         if (response.status === 200) {
           getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
         console.log(response);
       },
-      error => {
-        console.log(error);
-      }
-    );
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   // Display pending users
@@ -102,7 +102,7 @@ export default function PendingUsers() {
       <SidenavAdmin />
       <div className="tables">
         {/* Register requests table */}
-        <h1 className="request_header">Register requests</h1>
+        <h1 className="request_header">Account requests</h1>
       </div>
       <div className="table_container">
         <div className="table__container">
@@ -136,7 +136,7 @@ export default function PendingUsers() {
                           setModalMessage(
                             "Are you sure you want to accept this users request?"
                           );
-                          setSave(true);
+                          setSave(false);
                         }}
                       >
                         Approve
@@ -150,7 +150,7 @@ export default function PendingUsers() {
                           setModalMessage(
                             "Are you sure you want to decline this users request?"
                           );
-                          setSave(false);
+                          setSave(true);
                         }}
                       >
                         Decline

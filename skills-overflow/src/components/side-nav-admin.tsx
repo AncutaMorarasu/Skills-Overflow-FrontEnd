@@ -18,14 +18,14 @@ function SidenavAdmin() {
         </a>
         <div className="dropdown-menu dd-menu ">
           <Link
-            to="/existing-profiles"
+            to="/approved-profiles"
             className="dropdown-item dd-item border-bottom"
           >
-            user profiles
+            approved profiles
           </Link>
           <Link
             className="dropdown-item dd-item border-bottom "
-            to="/pending-users"
+            to="/account-requests"
           >
             account requests
           </Link>
