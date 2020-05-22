@@ -4,6 +4,7 @@ import axios from "axios";
 import ModalComponent from "../../components/modal";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
+import SidenavAdmin from '../../components/side-nav-admin'
 
 export default function BlockedUsers() {
 
@@ -18,22 +19,22 @@ export default function BlockedUsers() {
   const history = useHistory();
 
 
-  function localData(){
+  function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
     }
   }
 
   //Get users from database
-   useEffect(() => {
+  useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}})
-    .then(response => {
+    axios.get('http://localhost:8081/allBlockedUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+      .then(response => {
         const setData = response.data;
         setUserProfile(setData);
       })
-      .catch(function(error) {
-        if(error.request.status === 403){
+      .catch(function (error) {
+        if (error.request.status === 403) {
           history.push("/forbidden-page")
         }
         console.log(error)
@@ -41,9 +42,9 @@ export default function BlockedUsers() {
   }, []);
 
   //Approve user
-  function updateUserRole(){
+  function updateUserRole() {
     localData();
-    axios.put(`http://localhost:8081/admin/unblockUser/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
+    axios.put(`http://localhost:8081/admin/unblockUser/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } }).then(
       response => {
         if (response.status === 200) {
           getUsers();
@@ -54,18 +55,18 @@ export default function BlockedUsers() {
         console.log(error);
       }
     );
-    
+
   }
 
-  function getUsers(){
+  function getUsers() {
     localData();
-    axios.get('http://localhost:8081/allBlockedUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+    axios.get('http://localhost:8081/allBlockedUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
       response => {
         if (response.status === 200) {
           getUsers();
         }
-      const setData = response.data;
-      setUserProfile(setData);
+        const setData = response.data;
+        setUserProfile(setData);
       }
     )
   }
@@ -76,57 +77,57 @@ export default function BlockedUsers() {
     updateUserRole();
   }
 
-  function declineRequest(){
+  function declineRequest() {
     return false;
   }
 
   //Show modal
   function toggle() {
     setModal(!modal);
-}
+  }
 
   return (
     <div className="banned_users_page">
-        <div className="tables">
-      
-{/* Banned table */}
-            <h1 className="banned_header">
-            Blocked users
-            </h1>
-            <div className="table_container_banned_users">
-                <div className="table__container">
-                    <table className="table table-bordered">
-                        <thead className="table_head">
-                            <tr>
-                                <th scope="col">User name</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">User id</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {userProfile.map(({ userId, userName, firstName, lastName, email}) => (
-                            <tr>
-                                <td>{userId}</td>
-                                <td>{userName}</td>
-                                <td>{firstName}</td>
-                                <td>{lastName}</td>
-                                <td>{email}</td>
-                                <td>
-                                <Button type="button" className="btn btn-success btn-table" onClick={() => 
-                                   {toggle(); setUserId(userId);setModalMessage("Are you sure you want to unblock this user?"); setSave(false); }}>Unblock</Button>
-                                </td>
-                            </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+      <SidenavAdmin />
+      <div className="tables">
 
-            </div>
-      <ModalComponent modal={modal} toggle={toggle} modalM={modalMessage} approveRequest={unblockRequest} declineRequest={declineRequest} save={save}/>
-    </div>
+        {/* Banned table */}
+        <h1 className="banned_header">
+          Blocked users
+            </h1>
+        <div className="table_container_banned_users">
+          <div className="table__container">
+            <table className="table table-bordered">
+              <thead className="table_head">
+                <tr>
+                  <th scope="col">User name</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">User id</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userProfile.map(({ userId, userName, firstName, lastName, email }) => (
+                  <tr>
+                    <td>{userId}</td>
+                    <td>{userName}</td>
+                    <td>{firstName}</td>
+                    <td>{lastName}</td>
+                    <td>{email}</td>
+                    <td>
+                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to unblock this user?"); setSave(false); }}>Unblock</Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <ModalComponent modal={modal} toggle={toggle} modalM={modalMessage} approveRequest={unblockRequest} declineRequest={declineRequest} save={save} />
+      </div>
     </div>
   )
 }

@@ -4,18 +4,20 @@ import QuestionModal from "./add-question";
 import FilterSort from "./filter-sort";
 import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
+import DownPagination from "./pagination";
+import { cpus } from "os"; 
 
-
-function QuestionCard() {
+function QuestionCard(props:any) {
+  const {searchParam, changeFlag1, effects} = props;
   const history = useHistory();
   const location = useLocation<{ topics: string[] }>();
-  const { criteria, pageNo } = useParams();
-
+  let { criteria, pageNo } = useParams();
   //aici trebuie sa iei postarile
   const [questions, setQuestions] = useState({
     posts: [],
-    totalPosts: 0
+    totalPosts: 78
   });
+  //nu folosesc niciodata setTopics, sunt hard-coded
   const [topics, setTopics] = useState({
     topics: [
       "Java ",
@@ -35,18 +37,21 @@ function QuestionCard() {
       "JQuery ",
       "Other "
     ]
-  }); //nu folosesc niciodata setTopics, sunt hard-coded
+  }); 
   const [filter, setFilters] = useState<{ filterTopics: string[] }>({
     filterTopics: []
   });
-  const [effects, setEffects] = useState({ ef: true });
+  //const [effects, setEffects] = useState({ ef: true });
 
-  const changeFlag = () => {
-    if (effects.ef) setEffects({ ef: false });
-    else {
-      setEffects({ ef: true });
-    }
-  };
+  //const [pageNumberz, setPageNumber] = useState<number[]>([]);
+  let [actualPageNo, setActualPageNo] = useState(0);
+
+  // const changeFlag = () => {
+  //   if (effects.ef) setEffects({ ef: false });
+  //   else {
+  //     setEffects({ ef: true });
+  //   }
+  // };
 
   let token = localStorage.getItem("user");
   let tokenCheck: any;
@@ -58,21 +63,28 @@ function QuestionCard() {
 
   function getPosts() {
     localData();
-    let actualPageNo = pageNo ? pageNo : 0;
+    //0 in caz ca intra direct pe dashboard
+    let actualPageNo = pageNo ? pageNo - 1: 0;
+    setActualPageNo(actualPageNo);
     let children = location.state ? location.state.topics : filter.filterTopics;
 
+    let path = (searchParam != undefined && searchParam != "")  
+    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
+    : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
+
+    console.log("this is the object passed to the backend --> ", children)
+    console.log("and this is the path-->", path)
     axios
       .post(
-        `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`,
+        path,
         { topics: children },
         { headers: { Authorization: "Bearer " + tokenCheck.token } }
       )
       .then(
         response => {
           const object = response.data;
-
-          setQuestions({ totalPosts: object[0], posts: object[1] });
-          //  setFilters({ filterTopics: [] });
+          setQuestions({ totalPosts:object[0], posts: object[1]});
+          //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
         },
         error => {
           console.log(error);
@@ -82,6 +94,10 @@ function QuestionCard() {
 
   useEffect(() => {
     getPosts();
+    console.log("the search param is --> ", searchParam);
+
+    // let p = calculatePageNos();
+    // setPageNumber(p); acum nu mai e nevoie, se intampla totul in copil!!!
   }, [effects]);
 
   const renderPosts = questions.posts.map(
@@ -94,11 +110,9 @@ function QuestionCard() {
           <Card.Body>
             <Card.Title>
               <Link
-                to={`singlePost/${id}`}
-                key={index}
-              //onClick={() => history.push(`singlePost/${id}/0`)}
+                to={`/singlePost/${id}`}
+                key={index} replace={true}
               >
-                {" "}
                 {title}
               </Link>
             </Card.Title>
@@ -106,13 +120,11 @@ function QuestionCard() {
 
             <Card.Text>
               Created on: {createDate}
-              {console.log(Array.from(createDate))}
             </Card.Text>
-
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
             <Card.Text> Topic: {topics}</Card.Text>
           </Card.Body>
-        </Card>
+        </Card >
       );
     }
   );
@@ -131,18 +143,45 @@ function QuestionCard() {
     setFilters({ filterTopics: array });
   };
 
+  //logica specifica acestei clase
+  function handleSelect(e: any) {
+    const text = e.target.text;
+    if (criteria) {
+      history.push({
+      pathname:`/posts/${text}/${criteria}`,
+      state: { topics: filter.filterTopics }})
+      changeFlag1();
+      return; 
+      }
+    history.push({
+    pathname:`/posts/${text}`,
+    state: { topics: filter.filterTopics }})
+    changeFlag1(); 
+    } 
+
   return (
+    <div>
     <div className="questions">
       <QuestionModal />
-     {/*  <FilterSort
+      <FilterSort
         topics={topics.topics}
         filterTopics={filter.filterTopics}
         onClick={handleTopicClick}
-        handleFlag={changeFlag}
-      /> */}
+        handleFlag={changeFlag1}
+      />
       {renderPosts}
     </div>
+
+    <DownPagination 
+    pageNo= {actualPageNo} 
+    total= {questions.totalPosts} 
+    handleSelect = {handleSelect}
+    //pageNumberz={pageNumberz}
+    //handleFlag={changeFlag}
+    />
+    </div>  
   );
-}
+  }
 
 export default QuestionCard;
+  

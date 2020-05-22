@@ -4,6 +4,7 @@ import axios from "axios";
 import ModalComponent from "../../components/modal";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
+import SidenavAdmin from '../../components/side-nav-admin'
 
 export default function ExistingProfiles() {
   const [getUserId, setGetUserId] = useState<number>(0);
@@ -15,9 +16,9 @@ export default function ExistingProfiles() {
   let tokenCheck: any;
   const history = useHistory();
 
-  
-  
-  function localData(){
+
+
+  function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
     }
@@ -26,81 +27,82 @@ export default function ExistingProfiles() {
   // Get users from database
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allApprovedUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}})
-    .then(response => {
+    axios.get('http://localhost:8081/allApprovedUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+      .then(response => {
         const setData = response.data;
         setUserProfile(setData);
-      }).catch(function(error) {
-      if(error.request.status === 403){
-        history.push("/forbidden-page")
-      }
-    })
+      }).catch(function (error) {
+        if (error.request.status === 403) {
+          history.push("/forbidden-page")
+        }
+      })
   }, []);
 
-//Post user to database
-  function updateUserRole(){
+  //Post user to database
+  function updateUserRole() {
     localData();
-    axios.put(`http://localhost:8081/admin/promoteToAdmin/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
+    axios.put(`http://localhost:8081/admin/promoteToAdmin/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } }).then(
       response => {
         if (response.status === 200) {
           getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
-      console.log(response);
+        console.log(response);
       },
       error => {
         console.log(error);
-    }
-  );
-}
-
-function updateBlockUser(){
-  localData()
-  axios.put(`http://localhost:8081/admin/blockUser/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
-    response => {
-      if (response.status === 200) {
-        getUsers();
-        cogoToast.success("The changes have been made", { hideAfter: 5 })
       }
-    console.log(response);
-    },
-    error => {
-      console.log(error);
+    );
   }
-);
-}
 
-// Display pending users
-function getUsers(){
-  localData();
-  axios.get('http://localhost:8081/allApprovedUsers', {headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
-    response => {
-      const setData = response.data;
-      setUserProfile(setData);
-      console.log(save);
-    }
-  )
-}
+  function updateBlockUser() {
+    localData()
+    axios.put(`http://localhost:8081/admin/blockUser/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } }).then(
+      response => {
+        if (response.status === 200) {
+          getUsers();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  // Display pending users
+  function getUsers() {
+    localData();
+    axios.get('http://localhost:8081/allApprovedUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
+      response => {
+        const setData = response.data;
+        setUserProfile(setData);
+        console.log(save);
+      }
+    )
+  }
 
   //Upgrade user to admin
-  function upgradeUser(){
+  function upgradeUser() {
     toggle();
     updateUserRole();
   }
 
   //Ban existing user
-  function blockUser(){
+  function blockUser() {
     toggle();
     updateBlockUser();
-  }  
-
-    //Open modal
-    function toggle() {
-      setModal(!modal);
   }
-  
+
+  //Open modal
+  function toggle() {
+    setModal(!modal);
+  }
+
   return (
     <div className="requests_page">
+      <SidenavAdmin />
       <div className="tables">
         <h1 className="request_header">
           Approved profiles
@@ -122,7 +124,7 @@ function getUsers(){
             </thead>
             <tbody>
               {userProfile.map(({ userId, userName, firstName, lastName, email, role }) => (
-                <tr key= {userId}>
+                <tr key={userId}>
                   <td>{userId}</td>
                   <td>{userName}</td>
                   <td>{firstName}</td>
@@ -130,10 +132,8 @@ function getUsers(){
                   <td>{email}</td>
                   <td>{role}</td>
                   <td>
-                    <Button type="button" className="btn btn-success btn-table-update" onClick={() => 
-                      {toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to promote this user to admin?"); setSave(false)}}>Upgrade to admin</Button>
-                    <Button type="button" className="btn btn-danger btn-table-update"onClick={() => 
-                      {toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to block this user?"); setSave(true);}}>Block user</Button>
+                    <Button type="button" className="btn btn-success btn-table-update" onClick={() => { toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to promote this user to admin?"); setSave(false) }}>Upgrade to admin</Button>
+                    <Button type="button" className="btn btn-danger btn-table-update" onClick={() => { toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to block this user?"); setSave(true); }}>Block user</Button>
                   </td>
                 </tr>
               ))}
@@ -141,7 +141,7 @@ function getUsers(){
           </table>
         </div>
       </div>
-      <ModalComponent modal={modal} toggle={toggle} modalM={modalMessage} approveRequest={upgradeUser} declineRequest={blockUser} save={save}/>
-      </div>
+      <ModalComponent modal={modal} toggle={toggle} modalM={modalMessage} approveRequest={upgradeUser} declineRequest={blockUser} save={save} />
+    </div>
   )
 }

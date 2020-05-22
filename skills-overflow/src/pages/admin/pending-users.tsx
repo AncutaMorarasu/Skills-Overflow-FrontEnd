@@ -4,6 +4,7 @@ import axios from "axios";
 import ModalComponent from "../../components/modal";
 import { useHistory } from "react-router-dom";
 import cogoToast from "cogo-toast";
+import SidenavAdmin from '../../components/side-nav-admin'
 
 export default function PendingUsers() {
 
@@ -16,7 +17,7 @@ export default function PendingUsers() {
   let tokenCheck: any;
   const history = useHistory();
 
-  function localData(){
+  function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
     }
@@ -25,21 +26,21 @@ export default function PendingUsers() {
   //Get users from database for table
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}})
-    .then(response => {
-          const setData = response.data;
-          setUserProfile(setData);
-    }).catch(function(error) {
-      if(error.request.status === 403){
-        history.push("/forbidden-page")
-      }
-    })
+    axios.get('http://localhost:8081/allPendingUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+      .then(response => {
+        const setData = response.data;
+        setUserProfile(setData);
+      }).catch(function (error) {
+        if (error.request.status === 403) {
+          history.push("/forbidden-page")
+        }
+      })
   }, []);
 
   // Approve user
   function updateUserRole() {
     localData();
-    axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`,{},{headers: {Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json"}}).then(
+    axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } }).then(
       response => {
         if (response.status === 200) {
           getUsers();
@@ -55,28 +56,28 @@ export default function PendingUsers() {
 
   function declineUser() {
     localData()
-    axios.put(`http://localhost:8081/admin/declineRequest/${getUserId}`, {} ,{headers:{Authorization: 'Bearer ' + tokenCheck.token}})
-    .then(response => {
+    axios.put(`http://localhost:8081/admin/declineRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+      .then(response => {
         if (response.status === 200) {
           getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
         console.log(response);
       },
-      error => {
-        console.log(error);
-      }
-    );
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   // Display pending users
   function getUsers() {
     localData();
-    axios.get('http://localhost:8081/allPendingUsers',{headers:{Authorization: 'Bearer ' + tokenCheck.token}}).then(
+    axios.get('http://localhost:8081/allPendingUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
       response => {
-      const setData = response.data;
-      setUserProfile(setData);
-    });
+        const setData = response.data;
+        setUserProfile(setData);
+      });
   }
 
   //Approve request
@@ -98,6 +99,7 @@ export default function PendingUsers() {
 
   return (
     <div className="pending_requests_page">
+      <SidenavAdmin />
       <div className="tables">
         {/* Register requests table */}
         <h1 className="request_header">Account requests</h1>

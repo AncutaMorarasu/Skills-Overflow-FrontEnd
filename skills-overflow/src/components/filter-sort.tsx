@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 
 function FilterSort(props: any) {
@@ -12,7 +10,7 @@ function FilterSort(props: any) {
   const handleRedirect = (e: any) => {
     const criteria = e.target.value;
     history.push({
-      pathname: `/posts/0/${criteria}`,
+      pathname: `/posts/1/${criteria}`,
       state: { topics: props.filterTopics }
     });
     props.handleFlag();
@@ -20,7 +18,7 @@ function FilterSort(props: any) {
 
   const buttonSubmit = (event: any) => {
     history.push({
-      pathname: `/posts/0/`,
+      pathname: `/posts/1/`,
       state: { topics: props.filterTopics }
     });
     //pentru use effects, sa ruleze
@@ -75,13 +73,14 @@ function FilterSort(props: any) {
                     label={props.topics[6]}
                     value={props.topics[6]}
                   />
-                </div>
-                <div className="column col-md-6 ml-auto">
                   <Form.Check
                     type="checkbox"
                     label={props.topics[7]}
                     value={props.topics[7]}
                   />
+                </div>
+                <div className="column col-md-6 ml-auto">
+
                   <Form.Check
                     type="checkbox"
                     label={props.topics[8]}
@@ -111,6 +110,16 @@ function FilterSort(props: any) {
                     type="checkbox"
                     label={props.topics[13]}
                     value={props.topics[13]}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    label={props.topics[14]}
+                    value={props.topics[14]}
+                  />
+                  <Form.Check
+                    type="checkbox"
+                    label={props.topics[15]}
+                    value={props.topics[15]}
                   />
                 </div>
               </div>

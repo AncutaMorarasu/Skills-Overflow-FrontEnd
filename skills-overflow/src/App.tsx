@@ -14,8 +14,9 @@ import ApprovedProfiles from "./pages/admin/approved-profiles";
 import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
-import QuestionCard from "./components/question-cards";
+import IndividualPost from './pages/individual-post'
 import ForbiddenPage from "./pages/forbidden-page";
+import DownPagination from "./components/pagination";
 import RegistrationInvalidToken from "./pages/registration-check";
 import RegistrationExpiredToken from "./pages/registration-expired-token";
 
@@ -41,6 +42,9 @@ function App() {
           <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
           </Route>
+          <Route path="/singlePost/:id">
+            <IndividualPost />
+          </Route>
 
           <Route path="/account-requests">
             <PendingUsers />
@@ -55,16 +59,16 @@ function App() {
             <ApprovedProfiles />
           </Route>
           <Route path="/registration-invalid-token">
-            <RegistrationInvalidToken/>
+            <RegistrationInvalidToken />
           </Route>
           <Route path="/registration-expired-token">
-            <RegistrationExpiredToken/>
+            <RegistrationExpiredToken />
           </Route>
           <Route path="/register-confirmation">
             <RegisterConfirm />
           </Route>
           <Route path="/forbidden-page">
-            <ForbiddenPage/>
+            <ForbiddenPage />
           </Route>
           <Route path="">
             <NotFoundPage />
