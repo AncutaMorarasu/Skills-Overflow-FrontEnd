@@ -14,7 +14,7 @@ import ExistingProfiles from "./pages/admin/existing-profiles";
 import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
-import QuestionCard from "./components/question-cards";
+import IndividualPost from './pages/individual-post'
 import ForbiddenPage from "./pages/forbidden-page";
 
 function App() {
@@ -39,6 +39,9 @@ function App() {
           <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
           </Route>
+          <Route path="/singlePost/:id">
+            <IndividualPost />
+          </Route>
 
           <Route path="/pending-users">
             <PendingUsers />
@@ -56,7 +59,7 @@ function App() {
             <RegisterConfirm />
           </Route>
           <Route path="/forbidden-page">
-            <ForbiddenPage/>
+            <ForbiddenPage />
           </Route>
           <Route path="">
             <NotFoundPage />
