@@ -83,8 +83,13 @@ function QuestionCard(props:any) {
       .then(
         response => {
           const object = response.data;
+<<<<<<< HEAD
+          setQuestions({ totalPosts: object[0], posts: object[1] });
+          //  setFilters({ filterTopics: [] });
+=======
           setQuestions({ totalPosts:object[0], posts: object[1]});
           //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
+>>>>>>> af2ede9fa6f80c155d71c2e4c1641afd3939b5b2
         },
         error => {
           console.log(error);
@@ -110,11 +115,9 @@ function QuestionCard(props:any) {
           <Card.Body>
             <Card.Title>
               <Link
-                to={`singlePost/${id}`}
-                key={index}
-              //onClick={() => history.push(`singlePost/${id}/0`)}
+                to={`/singlePost/${id}`}
+                key={index} replace={true}
               >
-                {" "}
                 {title}
               </Link>
             </Card.Title>
@@ -122,13 +125,11 @@ function QuestionCard(props:any) {
 
             <Card.Text>
               Created on: {createDate}
-              {console.log(Array.from(createDate))}
             </Card.Text>
-
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
             <Card.Text> Topic: {topics}</Card.Text>
           </Card.Body>
-        </Card>
+        </Card >
       );
     }
   );
