@@ -18,7 +18,6 @@ import QuestionCard from "./components/question-cards";
 import ForbiddenPage from "./pages/forbidden-page";
 import RegistrationInvalidToken from "./pages/registration-check";
 import RegistrationExpiredToken from "./pages/registration-expired-token";
-import NotificationPage from "./pages/notification-page";
 
 function App() {
   return (
@@ -66,9 +65,6 @@ function App() {
           </Route>
           <Route path="/forbidden-page">
             <ForbiddenPage/>
-          </Route>
-          <Route path="/notification-page">
-            <NotificationPage/>
           </Route>
           <Route path="">
             <NotFoundPage />
