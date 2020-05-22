@@ -65,7 +65,7 @@ function Dashboard() {
         </form>
       </div>
       <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
-      {/* <QuestionCard /> */}
+      <QuestionCard />
     </div>
   );
 }
