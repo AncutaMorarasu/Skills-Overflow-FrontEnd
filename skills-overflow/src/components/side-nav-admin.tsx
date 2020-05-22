@@ -41,13 +41,19 @@ function SidenavAdmin() {
         </div>
       </ListGroup.Item>
       <ListGroup.Item variant="light" className="nav-item">
-        <a className="nav-link " href="#">
-          All questions
-        </a>
+        <Link className="nav-link " to="/dashboard">
+          questions dashboard
+        </Link>
       </ListGroup.Item>
       <ListGroup.Item variant="light" className="nav-item">
         <a className="nav-link " href="#">
           users
+        </a>
+
+      </ListGroup.Item>
+      <ListGroup.Item>
+        <a className="nav-link " href="#">
+          my profile
         </a>
       </ListGroup.Item>
     </ListGroup>

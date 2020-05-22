@@ -181,7 +181,7 @@ input::placeholder,
   margin-left: 1rem;
   position: fixed;
   z-index: 1;
-  top: 7rem;
+  top: 25%;
   overflow-x: hidden;
 }
 
@@ -191,21 +191,25 @@ input::placeholder,
   color: darkslategrey;
   font-weight: bold;
   font-size: 1rem;
+  padding: 0.2rem;
 }
 
 .dd-menu {
-  margin-left: 1.5rem !important;
-  margin-top: -0.9rem !important;
+  margin-left: 1.3rem !important;
+  margin-top: -0.5rem !important;
   position: relative !important;
-  transform: translate3d(-25px, 5px, 5px) !important;
+  transform: translate3d(-21px, 5px, 5px) !important;
   top: 0px !important;
   left: 0px !important;
   will-change: transform !important;
 }
 
 .dd-item {
-  height: 2.5rem;
+  height: 2rem;
+  font-size: 0.9rem;
+  padding-left: 0.5rem;
 }
+
 
 .dd-item:active {
   background-color: initial;
@@ -257,6 +261,7 @@ input::placeholder,
 .card,
 .quest-cont {
   margin-bottom: 1rem;
+  align-items: baseline;
 }
 
 .custom-dash {
@@ -264,7 +269,8 @@ input::placeholder,
 }
 
 .all-questions {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .modal-form {
@@ -283,6 +289,7 @@ input::placeholder,
 
 .add-quest-btn {
   font-weight: 600;
+  height: fit-content;
 }
 
 .footer {
@@ -325,10 +332,11 @@ textarea {
 .table_container {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 3%;
   width: 100%;
   text-align: center;
-
+  position: relative;
+  left: 7%;
 }
 
 .table-bordered {
@@ -338,8 +346,8 @@ textarea {
 }
 
 .table__container {
-  background-color: #cfd8dc;
-  width: 80rem;
+  background-color: #f4f4f4;
+  width: 80%;
 }
 
 .table_head {
@@ -349,29 +357,36 @@ textarea {
 
 .btn-table {
   width: 5rem;
-
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f4f4f4 ;
 }
 
 tr:hover {
-  background-color: #a7a1a1;
+  background-color: #ededed;
 }
 
 th {
-  background-color: #4CAF50;
+  background-color: #90a4ae;
   color: white;
+  font-size: 1.2rem;
 }
-
+.table{
+  margin-bottom: 0;
+}
 .tables {
-  margin-top: 5rem;
-  margin-left: 20rem;
+  /* margin-top: 5rem;
+  margin-left: 20rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 4%;
+    position: relative;
 }
 
 .tables_declined_users {
-  margin-top: 5rem;
+  margin-top: 1%;
 }
 
 .pending_requests_page {
@@ -389,8 +404,11 @@ th {
 .table_container_declined_users {
   display: flex;
   margin-top: 3rem;
-  width: 100%;
   text-align: center;
+  margin-top: 3%;
+    width: 70%;
+    flex-direction: column;
+    align-items: center;
 }
 
 .declined_requests_page {
@@ -400,8 +418,10 @@ th {
 .table_container_banned_users {
   display: flex;
   margin-top: 3rem;
-  width: 100%;
+  width: 70%;
   text-align: center;
+  align-items: center;
+    flex-direction: column;
 }
 
 .banned_users_page {
@@ -432,4 +452,20 @@ th {
   justify-content: space-between;
   flex-direction: column;
   margin-top: 10rem;
+}
+
+.comm-container{
+  position: relative;
+  left: 18%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.add-comm-btn{
+  border: none;
+  background-color: #eceff1;
+  text-decoration: underline ;
+}
+.add-comm-btn:focus {
+  outline: none;
 }

@@ -9,10 +9,13 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard() {
   const [showAdmin, setShowAdmin] = useState(false);
+  let history = useHistory();
+
   let userlogged = localStorage.getItem("user");
   let currentUser;
 
   useEffect(() => {
+
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       console.log(currentUser);
@@ -22,20 +25,22 @@ function Dashboard() {
         setShowAdmin(false);
       }
     }
-  }, [userlogged]);
+  }
+    // , [userlogged]
+  );
 
-  let history = useHistory();
+
   const signOut = () => {
     localStorage.clear();
     history.push("/");
   };
-  console.log(showAdmin);
+
 
   return (
     <div className="dashboard">
       <div className="d-flex justify-content-end">
         <Button onClick={signOut} variant="light" className="accountBtn">
-          My Profile
+          Log Out
         </Button>
       </div>
       <div className="d-flex justify-content-around custom-dash">

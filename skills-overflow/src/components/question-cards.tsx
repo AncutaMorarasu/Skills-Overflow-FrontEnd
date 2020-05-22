@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import QuestionModal from "./add-question";
 import FilterSort from "./filter-sort";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
-import { format } from "date-fns";
+
 
 function QuestionCard() {
   const history = useHistory();
   const location = useLocation<{ topics: string[] }>();
   const { criteria, pageNo } = useParams();
+
   //aici trebuie sa iei postarile
   const [questions, setQuestions] = useState({
     posts: [],
@@ -17,20 +18,22 @@ function QuestionCard() {
   });
   const [topics, setTopics] = useState({
     topics: [
-      "Java",
-      "Springboot",
-      "SQL",
-      "Tomcat",
-      "JPA",
-      "Google Cloud",
-      "Hibernate",
-      "HTML",
-      "CSS",
-      "Javascript",
-      "Bootstrap",
-      "React",
-      "Angular",
-      "JQuery"
+      "Java ",
+      "Springboot ",
+      "SQL ",
+      "Tomcat ",
+      "JPA ",
+      "Google Cloud ",
+      "Hibernate ",
+      "MongoDB ",
+      "HTML ",
+      "CSS ",
+      "Javascript ",
+      "Bootstrap ",
+      "React ",
+      "Angular ",
+      "JQuery ",
+      "Other "
     ]
   }); //nu folosesc niciodata setTopics, sunt hard-coded
   const [filter, setFilters] = useState<{ filterTopics: string[] }>({
@@ -90,19 +93,20 @@ function QuestionCard() {
         <Card className="cardText">
           <Card.Body>
             <Card.Title>
-              <a
-                href="#"
+              <Link
+                to={`singlePost/${id}`}
                 key={index}
-                onClick={() => history.push(`singlePost/${id}/0`)}
+              //onClick={() => history.push(`singlePost/${id}/0`)}
               >
                 {" "}
                 {title}
-              </a>
+              </Link>
             </Card.Title>
             <Card.Text>{body}</Card.Text>
 
             <Card.Text>
               Created on: {createDate}
+              {console.log(Array.from(createDate))}
             </Card.Text>
 
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
