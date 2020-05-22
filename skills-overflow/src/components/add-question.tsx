@@ -213,7 +213,7 @@ function QuestionModal() {
                     type="checkbox"
                     label="JQuery "
                     name="topics"
-                    value="Jquery "
+                    value="JQuery "
                   />
                   <Form.Check
                     type="checkbox"

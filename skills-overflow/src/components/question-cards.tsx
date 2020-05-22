@@ -70,7 +70,6 @@ function QuestionCard() {
       .then(
         response => {
           const object = response.data;
-
           setQuestions({ totalPosts: object[0], posts: object[1] });
           //  setFilters({ filterTopics: [] });
         },
@@ -94,11 +93,9 @@ function QuestionCard() {
           <Card.Body>
             <Card.Title>
               <Link
-                to={`singlePost/${id}`}
-                key={index}
-              //onClick={() => history.push(`singlePost/${id}/0`)}
+                to={`/singlePost/${id}`}
+                key={index} replace={true}
               >
-                {" "}
                 {title}
               </Link>
             </Card.Title>
@@ -106,13 +103,11 @@ function QuestionCard() {
 
             <Card.Text>
               Created on: {createDate}
-              {console.log(Array.from(createDate))}
             </Card.Text>
-
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
             <Card.Text> Topic: {topics}</Card.Text>
           </Card.Body>
-        </Card>
+        </Card >
       );
     }
   );
