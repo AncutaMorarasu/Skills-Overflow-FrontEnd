@@ -18,14 +18,14 @@ function SidenavAdmin() {
         </a>
         <div className="dropdown-menu dd-menu ">
           <Link
-            to="/existing-profiles"
+            to="/approved-profiles"
             className="dropdown-item dd-item border-bottom"
           >
-            user profiles
+            approved profiles
           </Link>
           <Link
             className="dropdown-item dd-item border-bottom "
-            to="/pending-users"
+            to="/account-requests"
           >
             account requests
           </Link>
@@ -41,13 +41,19 @@ function SidenavAdmin() {
         </div>
       </ListGroup.Item>
       <ListGroup.Item variant="light" className="nav-item">
-        <a className="nav-link " href="#">
-          All questions
-        </a>
+        <Link className="nav-link " to="/dashboard">
+          questions dashboard
+        </Link>
       </ListGroup.Item>
       <ListGroup.Item variant="light" className="nav-item">
         <a className="nav-link " href="#">
           users
+        </a>
+
+      </ListGroup.Item>
+      <ListGroup.Item>
+        <a className="nav-link " href="#">
+          my profile
         </a>
       </ListGroup.Item>
     </ListGroup>

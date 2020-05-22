@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import QuestionModal from "./add-question";
 import FilterSort from "./filter-sort";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import DownPagination from "./pagination";
-import { cpus } from "os";
+import { cpus } from "os"; 
 
 function QuestionCard(props:any) {
   const {searchParam, changeFlag1, effects} = props;
@@ -20,20 +20,22 @@ function QuestionCard(props:any) {
   //nu folosesc niciodata setTopics, sunt hard-coded
   const [topics, setTopics] = useState({
     topics: [
-      "Java",
-      "Springboot",
-      "SQL",
-      "Tomcat",
-      "JPA",
-      "Google Cloud",
-      "Hibernate",
-      "HTML",
-      "CSS",
-      "Javascript",
-      "Bootstrap",
-      "React",
-      "Angular",
-      "JQuery"
+      "Java ",
+      "Springboot ",
+      "SQL ",
+      "Tomcat ",
+      "JPA ",
+      "Google Cloud ",
+      "Hibernate ",
+      "MongoDB ",
+      "HTML ",
+      "CSS ",
+      "Javascript ",
+      "Bootstrap ",
+      "React ",
+      "Angular ",
+      "JQuery ",
+      "Other "
     ]
   }); 
   const [filter, setFilters] = useState<{ filterTopics: string[] }>({
@@ -107,19 +109,20 @@ function QuestionCard(props:any) {
         <Card className="cardText">
           <Card.Body>
             <Card.Title>
-              <a
-                href="#"
+              <Link
+                to={`singlePost/${id}`}
                 key={index}
-                onClick={() => history.push(`singlePost/${id}/0`)}
+              //onClick={() => history.push(`singlePost/${id}/0`)}
               >
                 {" "}
                 {title}
-              </a>
+              </Link>
             </Card.Title>
             <Card.Text>{body}</Card.Text>
 
             <Card.Text>
               Created on: {createDate}
+              {console.log(Array.from(createDate))}
             </Card.Text>
 
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>

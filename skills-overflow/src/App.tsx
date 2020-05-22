@@ -10,13 +10,19 @@ import Footer from "./components/footer";
 import Dashboard from "./pages/dashboard-page";
 import ChangePasswordPage from "./pages/change-password-page";
 import RegisterConfirm from "./pages/register-confirmation";
-import ExistingProfiles from "./pages/admin/existing-profiles";
+import ApprovedProfiles from "./pages/admin/approved-profiles";
 import DeclinedUsers from "./pages/admin/declined-users";
 import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
-import QuestionCard from "./components/question-cards";
+import IndividualPost from './pages/individual-post'
 import ForbiddenPage from "./pages/forbidden-page";
+<<<<<<< HEAD
 import DownPagination from "./components/pagination";
+=======
+import RegistrationInvalidToken from "./pages/registration-check";
+import RegistrationExpiredToken from "./pages/registration-expired-token";
+import NotificationPage from "./pages/notification-page";
+>>>>>>> development
 
 function App() {
   return (
@@ -40,8 +46,11 @@ function App() {
           <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
           </Route>
+          <Route path="/singlePost/:id">
+            <IndividualPost />
+          </Route>
 
-          <Route path="/pending-users">
+          <Route path="/account-requests">
             <PendingUsers />
           </Route>
           <Route path="/declined-users">
@@ -50,14 +59,23 @@ function App() {
           <Route path="/blocked-users">
             <BlockedUsers />
           </Route>
-          <Route path="/existing-profiles">
-            <ExistingProfiles />
+          <Route path="/approved-profiles">
+            <ApprovedProfiles />
+          </Route>
+          <Route path="/registration-invalid-token">
+            <RegistrationInvalidToken />
+          </Route>
+          <Route path="/registration-expired-token">
+            <RegistrationExpiredToken />
           </Route>
           <Route path="/register-confirmation">
             <RegisterConfirm />
           </Route>
           <Route path="/forbidden-page">
-            <ForbiddenPage/>
+            <ForbiddenPage />
+          </Route>
+          <Route path="/notification-page">
+            <NotificationPage />
           </Route>
           <Route path="">
             <NotFoundPage />

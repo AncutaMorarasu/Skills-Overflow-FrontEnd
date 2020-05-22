@@ -12,10 +12,13 @@ function Dashboard() {
   const [searchParam, setParam] = useState("");
   const [toChild, setToChild] = useState("");
   const [effects, setEffects] = useState(true);
+  let history = useHistory();
+
   let userlogged = localStorage.getItem("user");
   let currentUser;
 
   useEffect(() => {
+
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       console.log(currentUser);
@@ -25,15 +28,16 @@ function Dashboard() {
         setShowAdmin(false);
       }
     }
+  }
+    // , [userlogged]
+  );
 
-  }, [userlogged]);
 
-  let history = useHistory();
   const signOut = () => {
     localStorage.clear();
     history.push("/");
   };
-  console.log(showAdmin);
+
 
   const changeParams = (event:any)=>{
     const param = event.target.value;
@@ -60,7 +64,7 @@ function Dashboard() {
     <div className="dashboard">
       <div className="d-flex justify-content-end">
         <Button onClick={signOut} variant="light" className="accountBtn">
-          My Profile
+          Log Out
         </Button>
       </div>
       <div className="d-flex justify-content-around custom-dash">
