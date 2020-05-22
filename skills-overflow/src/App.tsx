@@ -16,6 +16,7 @@ import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
 import QuestionCard from "./components/question-cards";
 import ForbiddenPage from "./pages/forbidden-page";
+import DownPagination from "./components/pagination";
 
 function App() {
   return (

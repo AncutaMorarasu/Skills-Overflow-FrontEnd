@@ -12,7 +12,7 @@ function FilterSort(props: any) {
   const handleRedirect = (e: any) => {
     const criteria = e.target.value;
     history.push({
-      pathname: `/posts/0/${criteria}`,
+      pathname: `/posts/1/${criteria}`,
       state: { topics: props.filterTopics }
     });
     props.handleFlag();
@@ -20,7 +20,7 @@ function FilterSort(props: any) {
 
   const buttonSubmit = (event: any) => {
     history.push({
-      pathname: `/posts/0/`,
+      pathname: `/posts/1/`,
       state: { topics: props.filterTopics }
     });
     //pentru use effects, sa ruleze
