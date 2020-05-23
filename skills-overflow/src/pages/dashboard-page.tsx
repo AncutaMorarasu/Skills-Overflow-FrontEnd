@@ -35,7 +35,11 @@ function Dashboard() {
     }
     
   }
+<<<<<<< HEAD
   //  , [userlogged]
+=======
+    , [userlogged] 
+>>>>>>> forump2
   );
 
 
@@ -56,6 +60,7 @@ function Dashboard() {
     //console.log("this is what the child is getting, just on the second click... --> ", toChild);
 
     setParam("");
+    history.push({pathname: "/dashboard"});
     changeFlag();
   }
 

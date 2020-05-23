@@ -16,9 +16,17 @@ import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
 import IndividualPost from './pages/individual-post'
 import ForbiddenPage from "./pages/forbidden-page";
+<<<<<<< HEAD
 import DownPagination from "./components/pagination";
 import RegistrationInvalidToken from "./pages/registration-check";
 import RegistrationExpiredToken from "./pages/registration-expired-token";
+=======
+import RegistrationInvalidToken from "./pages/registration-check";
+import RegistrationExpiredToken from "./pages/registration-expired-token";
+import NotificationPage from "./pages/notification-page";
+import NoPosts from "./pages/no-posts-page";
+import NoSearchResult from "./pages/no-search-result-page";
+>>>>>>> forump2
 
 function App() {
   return (
@@ -44,6 +52,12 @@ function App() {
           </Route>
           <Route path="/singlePost/:id">
             <IndividualPost />
+          </Route>
+          <Route path="/no-posts">
+            <NoPosts/>
+          </Route>
+          <Route path="/no-search-result">
+            <NoSearchResult/>
           </Route>
 
           <Route path="/account-requests">

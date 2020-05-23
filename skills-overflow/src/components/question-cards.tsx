@@ -15,7 +15,7 @@ function QuestionCard(props:any) {
   //aici trebuie sa iei postarile
   const [questions, setQuestions] = useState({
     posts: [],
-    totalPosts: 78
+    totalPosts: -1
   });
   //nu folosesc niciodata setTopics, sunt hard-coded
   const [topics, setTopics] = useState({
@@ -66,14 +66,17 @@ function QuestionCard(props:any) {
     //0 in caz ca intra direct pe dashboard
     let actualPageNo = pageNo ? pageNo - 1: 0;
     setActualPageNo(actualPageNo);
+    console.log("the actual page no passed to the child is -->" + actualPageNo) 
     let children = location.state ? location.state.topics : filter.filterTopics;
 
     let path = (searchParam != undefined && searchParam != "")  
-    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
+    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}/${criteria}`
     : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
 
+    console.log("Is the param still available on a second page???")
+
     console.log("this is the object passed to the backend --> ", children)
-    console.log("and this is the path-->", path)
+    console.log("and this is the path--> ", path)
     axios
       .post(
         path,
@@ -84,7 +87,15 @@ function QuestionCard(props:any) {
         response => {
           const object = response.data;
           setQuestions({ totalPosts:object[0], posts: object[1]});
+          console.log(response.data)
+          if (object[2] != null) history.push({
+            pathname :"/no-search-result", 
+            state: { par : object[2]}});
+          else {if (object[0] == 0)
+          {history.push({
+              pathname: '/no-posts'})}
           //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
+          };
         },
         error => {
           console.log(error);
@@ -145,16 +156,16 @@ function QuestionCard(props:any) {
 
   //logica specifica acestei clase
   function handleSelect(e: any) {
-    const text = e.target.text;
+    const key = e.target.getAttribute('data-input-name'); 
     if (criteria) {
       history.push({
-      pathname:`/posts/${text}/${criteria}`,
-      state: { topics: filter.filterTopics }})
+      pathname:`/posts/${key}/${criteria}`,
+      state: { topics: filter.filterTopics }}) //aici eu de fapt schimb starea parintelui, din copil
       changeFlag1();
       return; 
       }
     history.push({
-    pathname:`/posts/${text}`,
+    pathname:`/posts/${key}`,
     state: { topics: filter.filterTopics }})
     changeFlag1(); 
     } 
@@ -171,7 +182,6 @@ function QuestionCard(props:any) {
       />
       {renderPosts}
     </div>
-
     <DownPagination 
     pageNo= {actualPageNo} 
     total= {questions.totalPosts} 
