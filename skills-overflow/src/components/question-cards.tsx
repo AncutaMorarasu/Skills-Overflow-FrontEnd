@@ -70,8 +70,10 @@ function QuestionCard(props:any) {
     let children = location.state ? location.state.topics : filter.filterTopics;
 
     let path = (searchParam != undefined && searchParam != "")  
-    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
+    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}/${criteria}`
     : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
+
+    console.log("Is the param still available on a second page???")
 
     console.log("this is the object passed to the backend --> ", children)
     console.log("and this is the path--> ", path)
@@ -85,7 +87,15 @@ function QuestionCard(props:any) {
         response => {
           const object = response.data;
           setQuestions({ totalPosts:object[0], posts: object[1]});
+          console.log(response.data)
+          if (object[2] != null) history.push({
+            pathname :"/no-search-result", 
+            state: { par : object[2]}});
+          else {if (object[0] == 0)
+          {history.push({
+              pathname: '/no-posts'})}
           //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
+          };
         },
         error => {
           console.log(error);
@@ -150,7 +160,7 @@ function QuestionCard(props:any) {
     if (criteria) {
       history.push({
       pathname:`/posts/${key}/${criteria}`,
-      state: { topics: filter.filterTopics }}) //aici eu de fapt schimb starea parintelui din copil
+      state: { topics: filter.filterTopics }}) //aici eu de fapt schimb starea parintelui, din copil
       changeFlag1();
       return; 
       }

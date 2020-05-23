@@ -20,6 +20,7 @@ import RegistrationInvalidToken from "./pages/registration-check";
 import RegistrationExpiredToken from "./pages/registration-expired-token";
 import NotificationPage from "./pages/notification-page";
 import NoPosts from "./pages/no-posts-page";
+import NoSearchResult from "./pages/no-search-result-page";
 
 function App() {
   return (
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route path="/no-posts">
             <NoPosts/>
+          </Route>
+          <Route path="/no-search-result">
+            <NoSearchResult/>
           </Route>
 
           <Route path="/account-requests">

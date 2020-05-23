@@ -22,19 +22,19 @@ function DownPagination(props:any){
 
     const calculatePageNos = () =>{
     let pageNumbers:number[]=[];
-    let maxPage =  Math.ceil(total / 10);
-
+    let maxPage =  Math.ceil(total/ 10);
+    
     let parsedNo = parseInt(pageNo);
 
     //initial e -1, ca vreau ca atunci cand e 0 sa se redirecteze fix unde vreau eu
-    if (total == -1) return pageNumbers;
-    if (total == 0)
-    {
-      history.replace({
-        pathname: '/no-posts'
-      })
-      return pageNumbers; // nu a gasit pagina; aici il pot retrimite pe o pagina de postari
-    }
+    if (total <0) return pageNumbers;
+    // if (total == 0)
+    // {
+    //   history.replace({
+    //     pathname: '/no-posts'
+    //   })
+    //   return pageNumbers; // nu a gasit pagina; aici il pot retrimite pe o pagina de postari
+    // } 
     if (total < 10) {pageNumbers.push(0); return pageNumbers;}
 
     if (maxPage > 4){
