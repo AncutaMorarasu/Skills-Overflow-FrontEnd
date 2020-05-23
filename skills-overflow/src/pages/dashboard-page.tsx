@@ -6,8 +6,12 @@ import Button from "react-bootstrap/Button";
 import QuestionCard from "../components/question-cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import Modal from "react-bootstrap/Modal";
+
 
 function Dashboard() {
+  const [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
   const [toChild, setToChild] = useState("");
@@ -15,12 +19,13 @@ function Dashboard() {
   let history = useHistory();
 
   let userlogged = localStorage.getItem("user");
-  let currentUser;
+  let currentUser: any;
 
   useEffect(() => {
 
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
+      setUserToken(currentUser.token)
       console.log(currentUser);
       if (currentUser.role === "[admin]") {
         setShowAdmin(true);
@@ -28,8 +33,17 @@ function Dashboard() {
         setShowAdmin(false);
       }
     }
+    
   }
+<<<<<<< HEAD
     //, [userlogged]
+=======
+<<<<<<< HEAD
+  //  , [userlogged]
+=======
+    , [userlogged] 
+>>>>>>> forump2
+>>>>>>> a957c042aa839564df729554491136f15b720495
   );
 
 
@@ -50,6 +64,7 @@ function Dashboard() {
     //console.log("this is what the child is getting, just on the second click... --> ", toChild);
 
     setParam("");
+    history.push({pathname: "/dashboard"});
     changeFlag();
   }
 
@@ -63,9 +78,13 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <div className="d-flex justify-content-end">
+        <Button onClick={() => { }} variant="light" className="accountBtn">
+          Notification
+        </Button>
         <Button onClick={signOut} variant="light" className="accountBtn">
           Log Out
         </Button>
+        
       </div>
       <div className="d-flex justify-content-around custom-dash">
         <form action="" className="searchForm" >
