@@ -26,7 +26,6 @@ export default function IndividualPost() {
         }
     }, [userlogged]);
 
-
     return (
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
