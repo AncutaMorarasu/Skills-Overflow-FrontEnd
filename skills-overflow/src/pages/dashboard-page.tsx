@@ -33,13 +33,8 @@ function Dashboard() {
         setShowAdmin(false);
       }
     }
-    
   }
-<<<<<<< HEAD
-  //  , [userlogged]
-=======
     , [userlogged] 
->>>>>>> forump2
   );
 
 
