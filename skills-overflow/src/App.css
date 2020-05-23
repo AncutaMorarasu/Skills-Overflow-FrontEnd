@@ -517,3 +517,10 @@ th {
   color: #fff;
 }
 
+/* individual post */
+.question-container {
+width: 70%;
+}
+.post-btn{
+  width: 5rem;
+}

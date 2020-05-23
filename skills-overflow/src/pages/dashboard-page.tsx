@@ -29,7 +29,7 @@ function Dashboard() {
       }
     }
   }
-    // , [userlogged]
+    //, [userlogged]
   );
 
 
@@ -39,13 +39,13 @@ function Dashboard() {
   };
 
 
-  const changeParams = (event:any)=>{
+  const changeParams = (event: any) => {
     const param = event.target.value;
     setParam(param);
-    
+
   }
 
-  const sendToChild = ()=>{
+  const sendToChild = () => {
     setToChild(searchParam);
     //console.log("this is what the child is getting, just on the second click... --> ", toChild);
 
@@ -75,16 +75,16 @@ function Dashboard() {
               placeholder="What are you searching for?"
               aria-describedby="button-addon3"
               className="form-control bg-none border-0 searchInput"
-              value = {searchParam}
-              onChange = {changeParams}
+              value={searchParam}
+              onChange={changeParams}
             />
             <div className="input-group-append border-0">
               <button
                 id="button-addon3"
                 type="button"
                 className="btn btn-link text-success"
-              > 
-                <FontAwesomeIcon icon={faSearch} onClick = {sendToChild}/>
+              >
+                <FontAwesomeIcon icon={faSearch} onClick={sendToChild} />
               </button>
             </div>
           </div>
@@ -93,8 +93,8 @@ function Dashboard() {
       <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
       <QuestionCard
         searchParam={toChild}
-        changeFlag1 = {changeFlag}
-        effects = {effects}
+        changeFlag1={changeFlag}
+        effects={effects}
       />
     </div>
   );

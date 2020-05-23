@@ -5,17 +5,17 @@ import FilterSort from "./filter-sort";
 import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import DownPagination from "./pagination";
-import { cpus } from "os"; 
 
-function QuestionCard(props:any) {
-  const {searchParam, changeFlag1, effects} = props;
+
+function QuestionCard(props: any) {
+  const { searchParam, changeFlag1, effects } = props;
   const history = useHistory();
   const location = useLocation<{ topics: string[] }>();
   let { criteria, pageNo } = useParams();
   //aici trebuie sa iei postarile
   const [questions, setQuestions] = useState({
     posts: [],
-    totalPosts: 78
+    totalPosts: 0
   });
   //nu folosesc niciodata setTopics, sunt hard-coded
   const [topics, setTopics] = useState({
@@ -37,7 +37,7 @@ function QuestionCard(props:any) {
       "JQuery ",
       "Other "
     ]
-  }); 
+  });
   const [filter, setFilters] = useState<{ filterTopics: string[] }>({
     filterTopics: []
   });
@@ -64,13 +64,13 @@ function QuestionCard(props:any) {
   function getPosts() {
     localData();
     //0 in caz ca intra direct pe dashboard
-    let actualPageNo = pageNo ? pageNo - 1: 0;
+    let actualPageNo = pageNo ? pageNo - 1 : 0;
     setActualPageNo(actualPageNo);
     let children = location.state ? location.state.topics : filter.filterTopics;
 
-    let path = (searchParam != undefined && searchParam != "")  
-    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
-    : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
+    let path = (searchParam != undefined && searchParam != "")
+      ? `http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
+      : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
 
     console.log("this is the object passed to the backend --> ", children)
     console.log("and this is the path-->", path)
@@ -83,13 +83,8 @@ function QuestionCard(props:any) {
       .then(
         response => {
           const object = response.data;
-<<<<<<< HEAD
           setQuestions({ totalPosts: object[0], posts: object[1] });
           //  setFilters({ filterTopics: [] });
-=======
-          setQuestions({ totalPosts:object[0], posts: object[1]});
-          //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
->>>>>>> af2ede9fa6f80c155d71c2e4c1641afd3939b5b2
         },
         error => {
           console.log(error);
@@ -153,40 +148,42 @@ function QuestionCard(props:any) {
     const text = e.target.text;
     if (criteria) {
       history.push({
-      pathname:`/posts/${text}/${criteria}`,
-      state: { topics: filter.filterTopics }})
+        pathname: `/posts/${text}/${criteria}`,
+        state: { topics: filter.filterTopics }
+      })
       changeFlag1();
-      return; 
-      }
+      return;
+    }
     history.push({
-    pathname:`/posts/${text}`,
-    state: { topics: filter.filterTopics }})
-    changeFlag1(); 
-    } 
+      pathname: `/posts/${text}`,
+      state: { topics: filter.filterTopics }
+    })
+    changeFlag1();
+  }
 
   return (
     <div>
-    <div className="questions">
-      <QuestionModal />
-      <FilterSort
-        topics={topics.topics}
-        filterTopics={filter.filterTopics}
-        onClick={handleTopicClick}
-        handleFlag={changeFlag1}
-      />
-      {renderPosts}
-    </div>
+      <div className="questions">
+        <QuestionModal />
+        <FilterSort
+          topics={topics.topics}
+          filterTopics={filter.filterTopics}
+          onClick={handleTopicClick}
+          handleFlag={changeFlag1}
+        />
+        {renderPosts}
+      </div>
 
-    <DownPagination 
-    pageNo= {actualPageNo} 
-    total= {questions.totalPosts} 
-    handleSelect = {handleSelect}
-    //pageNumberz={pageNumberz}
-    //handleFlag={changeFlag}
-    />
-    </div>  
+      <DownPagination
+        pageNo={actualPageNo}
+        total={questions.totalPosts}
+        handleSelect={handleSelect}
+      //pageNumberz={pageNumberz}
+      //handleFlag={changeFlag}
+      />
+    </div>
   );
-  }
+}
 
 export default QuestionCard;
-  
+
