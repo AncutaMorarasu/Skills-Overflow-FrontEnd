@@ -15,11 +15,7 @@ function QuestionCard(props: any) {
   //aici trebuie sa iei postarile
   const [questions, setQuestions] = useState({
     posts: [],
-<<<<<<< HEAD
-    totalPosts: 0
-=======
     totalPosts: -1
->>>>>>> a957c042aa839564df729554491136f15b720495
   });
   //nu folosesc niciodata setTopics, sunt hard-coded
   const [topics, setTopics] = useState({
@@ -45,18 +41,8 @@ function QuestionCard(props: any) {
   const [filter, setFilters] = useState<{ filterTopics: string[] }>({
     filterTopics: []
   });
-  //const [effects, setEffects] = useState({ ef: true });
 
-  //const [pageNumberz, setPageNumber] = useState<number[]>([]);
   let [actualPageNo, setActualPageNo] = useState(0);
-
-  // const changeFlag = () => {
-  //   if (effects.ef) setEffects({ ef: false });
-  //   else {
-  //     setEffects({ ef: true });
-  //   }
-  // };
-
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   function localData() {
@@ -70,18 +56,12 @@ function QuestionCard(props: any) {
     //0 in caz ca intra direct pe dashboard
     let actualPageNo = pageNo ? pageNo - 1 : 0;
     setActualPageNo(actualPageNo);
-    console.log("the actual page no passed to the child is -->" + actualPageNo) 
+    console.log("the actual page no passed to the child is -->" + actualPageNo)
     let children = location.state ? location.state.topics : filter.filterTopics;
 
-<<<<<<< HEAD
     let path = (searchParam != undefined && searchParam != "")
-      ? `http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
+      ? `http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}/${criteria}`
       : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
-=======
-    let path = (searchParam != undefined && searchParam != "")  
-    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}/${criteria}`
-    : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
->>>>>>> a957c042aa839564df729554491136f15b720495
 
     console.log("Is the param still available on a second page???")
 
@@ -96,21 +76,20 @@ function QuestionCard(props: any) {
       .then(
         response => {
           const object = response.data;
-<<<<<<< HEAD
           setQuestions({ totalPosts: object[0], posts: object[1] });
-          //  setFilters({ filterTopics: [] });
-=======
-          setQuestions({ totalPosts:object[0], posts: object[1]});
           console.log(response.data)
           if (object[2] != null) history.push({
-            pathname :"/no-search-result", 
-            state: { par : object[2]}});
-          else {if (object[0] == 0)
-          {history.push({
-              pathname: '/no-posts'})}
-          //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
+            pathname: "/no-search-result",
+            state: { par: object[2] }
+          });
+          else {
+            if (object[0] == 0) {
+              history.push({
+                pathname: '/no-posts'
+              })
+            }
+            //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
           };
->>>>>>> a957c042aa839564df729554491136f15b720495
         },
         error => {
           console.log(error);
@@ -171,33 +150,21 @@ function QuestionCard(props: any) {
 
   //logica specifica acestei clase
   function handleSelect(e: any) {
-    const key = e.target.getAttribute('data-input-name'); 
+    const key = e.target.getAttribute('data-input-name');
     if (criteria) {
       history.push({
-<<<<<<< HEAD
-        pathname: `/posts/${text}/${criteria}`,
+        pathname: `/posts/${key}/${criteria}`,
         state: { topics: filter.filterTopics }
-      })
-=======
-      pathname:`/posts/${key}/${criteria}`,
-      state: { topics: filter.filterTopics }}) //aici eu de fapt schimb starea parintelui, din copil
->>>>>>> a957c042aa839564df729554491136f15b720495
+      }) //aici eu de fapt schimb starea parintelui, din copil
       changeFlag1();
       return;
     }
     history.push({
-<<<<<<< HEAD
-      pathname: `/posts/${text}`,
+      pathname: `/posts/${key}`,
       state: { topics: filter.filterTopics }
     })
     changeFlag1();
   }
-=======
-    pathname:`/posts/${key}`,
-    state: { topics: filter.filterTopics }})
-    changeFlag1(); 
-    } 
->>>>>>> a957c042aa839564df729554491136f15b720495
 
   return (
     <div>
@@ -220,17 +187,6 @@ function QuestionCard(props: any) {
       //handleFlag={changeFlag}
       />
     </div>
-<<<<<<< HEAD
-=======
-    <DownPagination 
-    pageNo= {actualPageNo} 
-    total= {questions.totalPosts} 
-    handleSelect = {handleSelect}
-    //pageNumberz={pageNumberz}
-    //handleFlag={changeFlag}
-    />
-    </div>  
->>>>>>> a957c042aa839564df729554491136f15b720495
   );
 }
 

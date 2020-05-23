@@ -16,23 +16,12 @@ import PendingUsers from "./pages/admin/pending-users";
 import BlockedUsers from "./pages/admin/blocked-users";
 import IndividualPost from './pages/individual-post'
 import ForbiddenPage from "./pages/forbidden-page";
-<<<<<<< HEAD
+
 import RegistrationInvalidToken from "./pages/registration-check";
 import RegistrationExpiredToken from "./pages/registration-expired-token";
-import NotificationPage from "./pages/notification-page";
-=======
-<<<<<<< HEAD
-import DownPagination from "./components/pagination";
-import RegistrationInvalidToken from "./pages/registration-check";
-import RegistrationExpiredToken from "./pages/registration-expired-token";
-=======
-import RegistrationInvalidToken from "./pages/registration-check";
-import RegistrationExpiredToken from "./pages/registration-expired-token";
-import NotificationPage from "./pages/notification-page";
+//import NotificationPage from "./pages/notification-page";
 import NoPosts from "./pages/no-posts-page";
 import NoSearchResult from "./pages/no-search-result-page";
->>>>>>> forump2
->>>>>>> a957c042aa839564df729554491136f15b720495
 
 function App() {
   return (
@@ -59,16 +48,13 @@ function App() {
           <Route path="/singlePost/:id">
             <IndividualPost />
           </Route>
-<<<<<<< HEAD
-=======
           <Route path="/no-posts">
-            <NoPosts/>
+            <NoPosts />
           </Route>
           <Route path="/no-search-result">
-            <NoSearchResult/>
+            <NoSearchResult />
           </Route>
 
->>>>>>> a957c042aa839564df729554491136f15b720495
           <Route path="/account-requests">
             <PendingUsers />
           </Route>

@@ -33,17 +33,9 @@ function Dashboard() {
         setShowAdmin(false);
       }
     }
-    
+
   }
-<<<<<<< HEAD
-    //, [userlogged]
-=======
-<<<<<<< HEAD
-  //  , [userlogged]
-=======
-    , [userlogged] 
->>>>>>> forump2
->>>>>>> a957c042aa839564df729554491136f15b720495
+    , [userlogged]
   );
 
 
@@ -64,7 +56,7 @@ function Dashboard() {
     //console.log("this is what the child is getting, just on the second click... --> ", toChild);
 
     setParam("");
-    history.push({pathname: "/dashboard"});
+    history.push({ pathname: "/dashboard" });
     changeFlag();
   }
 
@@ -84,7 +76,7 @@ function Dashboard() {
         <Button onClick={signOut} variant="light" className="accountBtn">
           Log Out
         </Button>
-        
+
       </div>
       <div className="d-flex justify-content-around custom-dash">
         <form action="" className="searchForm" >

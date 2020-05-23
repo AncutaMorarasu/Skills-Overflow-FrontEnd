@@ -32,7 +32,7 @@ export default function IndividualPost() {
         axios.get(`http://localhost:8081/singlePost/${id}`)
             .then(response => {
                 const postInd = response.data;
-                console.log(postInd)
+                console.log(response.data)
                 setPost(postInd)
 
             })
