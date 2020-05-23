@@ -51,11 +51,7 @@ export default function IndividualPost() {
             }
         }
         getPostData();
-
-    }
-        , [userlogged]
-    );
-
+    }, [userlogged]);
     return (
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
