@@ -26,21 +26,29 @@ export default function IndividualPost() {
     });
     const [voteText, setVoteText] = useState(true);
 
+    let token = localStorage.getItem("user");
+    let tokenCheck: any;
+    function localData() {
+        if (typeof token === "string") {
+          tokenCheck = JSON.parse(token);
+        }
+      }
+    
+
     let userlogged = localStorage.getItem("user");
     let currentUser;
     function getPostData() {
-        axios.get(`http://localhost:8081/singlePost/${id}`)
+        axios.get(`http://localhost:8081/singlePost/${id}`,  { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
             .then(response => {
                 const postInd = response.data;
-                console.log(response.data)
-                setPost(postInd)
-
+                console.log(response.data);
+                setPost(postInd);
             })
 
     }
 
     useEffect(() => {
-
+        localData();
         if (typeof userlogged === "string") {
             currentUser = JSON.parse(userlogged);
             console.log(currentUser);
