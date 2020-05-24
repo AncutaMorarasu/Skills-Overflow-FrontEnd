@@ -141,7 +141,7 @@ function FilterSort(props: any) {
           }}
         >
           <option value="0">Sort Questions:</option>
-          <option value="date">Most recent</option>
+          <option value="date">Most recent (default)</option>
           <option value="comms">Number of comments</option>
         </select>
       </div>

@@ -28,8 +28,7 @@ function Dashboard() {
   let tokenCheck: any;
 
 
-  
-/*   useEffect(() => {
+   useEffect(() => {
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       setUserToken(currentUser.token)
@@ -41,8 +40,8 @@ function Dashboard() {
       }
     }
   }
-    //  , [userlogged]
-  ); */
+    , [userlogged]
+  );
 
 
 
@@ -99,6 +98,7 @@ function Dashboard() {
     //console.log("this is what the child is getting, just on the second click... --> ", toChild);
 
     setParam("");
+    history.push({ pathname: "/dashboard" });
     changeFlag();
   }
 

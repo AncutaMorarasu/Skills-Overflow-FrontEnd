@@ -5,17 +5,17 @@ import FilterSort from "./filter-sort";
 import { useHistory, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import DownPagination from "./pagination";
-import { cpus } from "os"; 
 
-function QuestionCard(props:any) {
-  const {searchParam, changeFlag1, effects} = props;
+
+function QuestionCard(props: any) {
+  const { searchParam, changeFlag1, effects } = props;
   const history = useHistory();
   const location = useLocation<{ topics: string[] }>();
   let { criteria, pageNo } = useParams();
   //aici trebuie sa iei postarile
   const [questions, setQuestions] = useState({
     posts: [],
-    totalPosts: 78
+    totalPosts: -1
   });
   //nu folosesc niciodata setTopics, sunt hard-coded
   const [topics, setTopics] = useState({
@@ -37,22 +37,12 @@ function QuestionCard(props:any) {
       "JQuery ",
       "Other "
     ]
-  }); 
+  });
   const [filter, setFilters] = useState<{ filterTopics: string[] }>({
     filterTopics: []
   });
-  //const [effects, setEffects] = useState({ ef: true });
 
-  //const [pageNumberz, setPageNumber] = useState<number[]>([]);
   let [actualPageNo, setActualPageNo] = useState(0);
-
-  // const changeFlag = () => {
-  //   if (effects.ef) setEffects({ ef: false });
-  //   else {
-  //     setEffects({ ef: true });
-  //   }
-  // };
-
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   function localData() {
@@ -64,16 +54,19 @@ function QuestionCard(props:any) {
   function getPosts() {
     localData();
     //0 in caz ca intra direct pe dashboard
-    let actualPageNo = pageNo ? pageNo - 1: 0;
+    let actualPageNo = pageNo ? pageNo - 1 : 0;
     setActualPageNo(actualPageNo);
+    console.log("the actual page no passed to the child is -->" + actualPageNo)
     let children = location.state ? location.state.topics : filter.filterTopics;
 
-    let path = (searchParam != undefined && searchParam != "")  
-    ?`http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}`
-    : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
+    let path = (searchParam != undefined && searchParam != "")
+      ? `http://localhost:8081/allSearchedPosts/${actualPageNo}/${searchParam}/${criteria}`
+      : `http://localhost:8081/allPosts/${actualPageNo}/${criteria}`;
+
+    console.log("Is the param still available on a second page???")
 
     console.log("this is the object passed to the backend --> ", children)
-    console.log("and this is the path-->", path)
+    console.log("and this is the path--> ", path)
     axios
       .post(
         path,
@@ -83,8 +76,20 @@ function QuestionCard(props:any) {
       .then(
         response => {
           const object = response.data;
-          setQuestions({ totalPosts:object[0], posts: object[1]});
-          //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
+          setQuestions({ totalPosts: object[0], posts: object[1] });
+          console.log(response.data)
+          if (object[2] != null) history.push({
+            pathname: "/no-search-result",
+            state: { par: object[2] }
+          });
+          else {
+            if (object[0] == 0) {
+              history.push({
+                pathname: '/no-posts'
+              })
+            }
+            //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
+          };
         },
         error => {
           console.log(error);
@@ -145,43 +150,45 @@ function QuestionCard(props:any) {
 
   //logica specifica acestei clase
   function handleSelect(e: any) {
-    const text = e.target.text;
+    const key = e.target.getAttribute('data-input-name');
     if (criteria) {
       history.push({
-      pathname:`/posts/${text}/${criteria}`,
-      state: { topics: filter.filterTopics }})
+        pathname: `/posts/${key}/${criteria}`,
+        state: { topics: filter.filterTopics }
+      }) //aici eu de fapt schimb starea parintelui, din copil
       changeFlag1();
-      return; 
-      }
+      return;
+    }
     history.push({
-    pathname:`/posts/${text}`,
-    state: { topics: filter.filterTopics }})
-    changeFlag1(); 
-    } 
+      pathname: `/posts/${key}`,
+      state: { topics: filter.filterTopics }
+    })
+    changeFlag1();
+  }
 
   return (
     <div>
-    <div className="questions">
-      <QuestionModal />
-      <FilterSort
-        topics={topics.topics}
-        filterTopics={filter.filterTopics}
-        onClick={handleTopicClick}
-        handleFlag={changeFlag1}
-      />
-      {renderPosts}
-    </div>
+      <div className="questions">
+        <QuestionModal />
+        <FilterSort
+          topics={topics.topics}
+          filterTopics={filter.filterTopics}
+          onClick={handleTopicClick}
+          handleFlag={changeFlag1}
+        />
+        {renderPosts}
+      </div>
 
-    <DownPagination 
-    pageNo= {actualPageNo} 
-    total= {questions.totalPosts} 
-    handleSelect = {handleSelect}
-    //pageNumberz={pageNumberz}
-    //handleFlag={changeFlag}
-    />
-    </div>  
+      <DownPagination
+        pageNo={actualPageNo}
+        total={questions.totalPosts}
+        handleSelect={handleSelect}
+      //pageNumberz={pageNumberz}
+      //handleFlag={changeFlag}
+      />
+    </div>
   );
-  }
+}
 
 export default QuestionCard;
-  
+

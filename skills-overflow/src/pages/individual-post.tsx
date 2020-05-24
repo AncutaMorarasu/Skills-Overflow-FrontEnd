@@ -1,20 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import SidenavAdmin from "../components/side-nav-admin";
 import SidenavUser from "../components/side-nav-user";
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
 
 export default function IndividualPost() {
     const [showAdmin, setShowAdmin] = useState(false);
-    let history = useHistory();
     const [showComm, setShowComm] = useState(false);
-    const openComment = () => setShowComm(true);
+    let { id } = useParams();
+    const [post, setPost] = useState<{
+        id: string;
+        topics: string[];
+        title: string;
+        body: string;
+        numberOfComments: string;
+        createDate: []
+    }>({
+        id: "",
+        topics: [],
+        title: "",
+        body: "",
+        numberOfComments: "",
+        createDate: []
+    });
+    const [voteText, setVoteText] = useState(true);
+
+    let token = localStorage.getItem("user");
+    let tokenCheck: any;
+    function localData() {
+        if (typeof token === "string") {
+          tokenCheck = JSON.parse(token);
+        }
+      }
+    
 
     let userlogged = localStorage.getItem("user");
     let currentUser;
+    function getPostData() {
+        axios.get(`http://localhost:8081/singlePost/${id}`,  { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+            .then(response => {
+                const postInd = response.data;
+                console.log(response.data);
+                setPost(postInd);
+            })
+
+    }
 
     useEffect(() => {
-
+        localData();
         if (typeof userlogged === "string") {
             currentUser = JSON.parse(userlogged);
             console.log(currentUser);
@@ -24,21 +58,32 @@ export default function IndividualPost() {
                 setShowAdmin(false);
             }
         }
+        getPostData();
     }, [userlogged]);
-
-
     return (
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
             <div className='comm-container'>
-                <button className='add-comm-btn' onClick={() => setShowComm(!showComm)}>Add an answer</button>
-                {showComm && <div className='d-flex flex-column'>
-                    <textarea name="" id="" cols={50} rows={5}></textarea>
-                    <div className='d-flex flex-row'>
-                        <Button variant='secondary' onClick={() => setShowComm(!showComm)}> Cancel</Button>
-                        <Button variant='success'>Post</Button>
-                    </div>
-                </div>}
+                <div className='question-container d-flex flex-column align-items-start border-bottom'>
+                    <h1>{post.title}</h1>
+                    <p className=''>{post.body}</p>
+                    <span>Number of comments: {post.numberOfComments}</span>
+                    <span> Create date: {post.createDate}</span>
+                    <span>Question topics: {post.topics}</span>
+                </div>
+                <Button variant='warning' onClick={() => setVoteText(!voteText)}>
+                    {voteText ? 'Vote Answer' : 'Unvote Answer'} </Button>
+
+                <div className='d-flex flex-column  align-items-start'>
+                    <button className='add-comm-btn' onClick={() => setShowComm(!showComm)}>Add an answer</button>
+                    {showComm && <div >
+                        <textarea name="" id="" cols={50} rows={5}></textarea>
+                        <div className='d-flex flex-row'>
+                            <Button variant='secondary' className="post-btn" onClick={() => { setShowComm(!showComm); console.log(showComm) }}> Cancel</Button>
+                            <Button variant='success' className="post-btn">Post</Button>
+                        </div>
+                    </div>}
+                </div>
             </div>
         </div>
     )
