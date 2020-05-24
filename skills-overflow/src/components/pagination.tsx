@@ -54,7 +54,7 @@ function DownPagination(props: any) {
   //am schimbat de la pageNumberz, pe care o primea de la parinte
   const renderPageNumberss = pageNumbers.map((number: number) => {
     return (
-      <Pagination.Item key={number} onClick={handleSelect} active={number === pageNo}>
+      <Pagination.Item key={number} onClick={handleSelect} data-input-name={number + 1}  active={number === pageNo}>
         {/* div div div div div div div div div div div div   */}
         {number + 1}
       </Pagination.Item>

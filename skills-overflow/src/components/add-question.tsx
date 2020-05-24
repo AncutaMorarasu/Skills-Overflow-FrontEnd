@@ -82,7 +82,8 @@ function QuestionModal() {
         headers: { Authorization: "Bearer " + tokenCkecked.token }
       })
       .then(() => {
-        cogoToast.info("Your question has bee submitted for review.");;
+        console.log(newQuestion)
+        cogoToast.info("Your question has been submitted for review.");;
 
       });
   }

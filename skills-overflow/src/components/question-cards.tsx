@@ -88,7 +88,6 @@ function QuestionCard(props: any) {
                 pathname: '/no-posts'
               })
             }
-            //setFilters({filterTopics:[]}) -- comentata, deci userul trebuie sa deselecteze
           };
         },
         error => {
@@ -101,13 +100,11 @@ function QuestionCard(props: any) {
     getPosts();
     console.log("the search param is --> ", searchParam);
 
-    // let p = calculatePageNos();
-    // setPageNumber(p); acum nu mai e nevoie, se intampla totul in copil!!!
   }, [effects]);
 
   const renderPosts = questions.posts.map(
     (
-      { id, topics, title, body, numberOfComments, createDate, comments },
+      { id, topics, title, body, numberOfComments, createDate, userName },
       index
     ) => {
       return (
@@ -128,6 +125,7 @@ function QuestionCard(props: any) {
             </Card.Text>
             <Card.Text> Number of comments: {numberOfComments}</Card.Text>
             <Card.Text> Topic: {topics}</Card.Text>
+            <Card.Text> Posted by: {userName}</Card.Text>
           </Card.Body>
         </Card >
       );
@@ -167,7 +165,7 @@ function QuestionCard(props: any) {
   }
 
   return (
-    <div>
+    <div className="d-flex flex-column align-items-start">
       <div className="questions">
         <QuestionModal />
         <FilterSort
@@ -179,12 +177,10 @@ function QuestionCard(props: any) {
         {renderPosts}
       </div>
 
-      <DownPagination
+      <DownPagination className="pagination"
         pageNo={actualPageNo}
         total={questions.totalPosts}
         handleSelect={handleSelect}
-      //pageNumberz={pageNumberz}
-      //handleFlag={changeFlag}
       />
     </div>
   );
