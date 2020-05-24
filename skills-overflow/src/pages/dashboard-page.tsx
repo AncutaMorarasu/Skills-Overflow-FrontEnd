@@ -27,24 +27,6 @@ function Dashboard() {
   let token = localStorage.getItem("user");
   let tokenCheck: any;
 
-
-   useEffect(() => {
-    if (typeof userlogged === "string") {
-      currentUser = JSON.parse(userlogged);
-      setUserToken(currentUser.token)
-      console.log(currentUser);
-      if (currentUser.role === "[admin]") {
-        setShowAdmin(true);
-      } else {
-        setShowAdmin(false);
-      }
-    }
-  }
-    , [userlogged]
-  );
-
-
-
   function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
