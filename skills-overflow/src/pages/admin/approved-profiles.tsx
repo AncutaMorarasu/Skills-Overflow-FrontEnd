@@ -5,6 +5,7 @@ import ModalComponent from "../../components/modal";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 import SidenavAdmin from '../../components/side-nav-admin'
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 export default function ExistingProfiles() {
   const [getUserId, setGetUserId] = useState<number>(0);
@@ -15,9 +16,7 @@ export default function ExistingProfiles() {
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   const history = useHistory();
-
-
-
+ 
   function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
@@ -118,7 +117,6 @@ export default function ExistingProfiles() {
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Roles</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -130,7 +128,6 @@ export default function ExistingProfiles() {
                   <td>{firstName}</td>
                   <td>{lastName}</td>
                   <td>{email}</td>
-                  <td>{role}</td>
                   <td>
                     <Button type="button" className="btn btn-success btn-table-update" onClick={() => { toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to promote this user to admin?"); setSave(false) }}>Upgrade to admin</Button>
                     <Button type="button" className="btn btn-danger btn-table-update" onClick={() => { toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to block this user?"); setSave(true); }}>Block user</Button>
