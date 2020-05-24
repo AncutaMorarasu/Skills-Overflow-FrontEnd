@@ -45,7 +45,7 @@ function App() {
           <Route path="/singlePost/:id">
             <IndividualPost />
           </Route>
-
+          
           <Route path="/account-requests">
             <PendingUsers />
           </Route>
