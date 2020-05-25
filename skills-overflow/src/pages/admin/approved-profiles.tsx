@@ -16,7 +16,14 @@ export default function ExistingProfiles() {
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   const history = useHistory();
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  
  
+  function handleChange(event: any){
+    setSearchTerm(event.target.value);
+  }
+
   function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
@@ -30,6 +37,8 @@ export default function ExistingProfiles() {
       .then(response => {
         const setData = response.data;
         setUserProfile(setData);
+       /*  setSearchResults(userProfile.filter(user => 
+          user.toLowerCase().includes(searchTerm.trim()))) */
       }).catch(function (error) {
         if (error.request.status === 403) {
           history.push("/forbidden-page")
@@ -106,6 +115,11 @@ export default function ExistingProfiles() {
         <h1 className="request_header">
           Approved profiles
       </h1>
+      {/* <input 
+      type="text"
+      placeholder="Search"
+      value={searchTerm}
+      onChange={handleChange}/> */}
       </div>
       <div className="table_container">
         <div className="table__container">
@@ -121,7 +135,7 @@ export default function ExistingProfiles() {
               </tr>
             </thead>
             <tbody>
-              {userProfile.map(({ userId, userName, firstName, lastName, email, role }) => (
+              {userProfile.map(({ userId, userName, firstName, lastName, email}) => (
                 <tr key={userId}>
                   <td>{userId}</td>
                   <td>{userName}</td>

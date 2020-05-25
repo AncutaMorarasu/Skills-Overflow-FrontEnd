@@ -14,24 +14,14 @@ import ModalFooter from "react-bootstrap/ModalFooter";
 function Dashboard() {
   const [modal, setModal] = useState(false);
   const [notification, setNotification] = useState([]);
-  const [userToken, setUserToken] = useState<number>(0);
+  let [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
   const [toChild, setToChild] = useState("");
   const [effects, setEffects] = useState(true);
   let history = useHistory();
-
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
-
-  let token = localStorage.getItem("user");
-  let tokenCheck: any;
-
-  function localData() {
-    if (typeof token === "string") {
-      tokenCheck = JSON.parse(token);
-    }
-  }
 
   function userVsAdmin(){
     if (typeof userlogged === "string") {
@@ -48,9 +38,8 @@ function Dashboard() {
 
   //Get users from database
   useEffect(() => {
-    localData();
     userVsAdmin(); 
-    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
       .then(
         response => {
           const setData = response.data;
@@ -91,20 +80,6 @@ function Dashboard() {
     }
   };
 
-  function getNotification() {
-    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
-      .then(response => {
-        const setData = response.data;
-        setNotification(setData);
-        console.log(notification)
-      },
-      error => {
-        console.log(error);
-        }
-      )
-
-  }
-
   function toggle() {
     setModal(!modal);
   }
@@ -142,15 +117,16 @@ function Dashboard() {
             </div>
           </div>
         </form>
-      </div>
+      </div> *
       <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
+
       <QuestionCard
         searchParam={toChild}
         changeFlag1={changeFlag}
         effects={effects}
       />
-
-      <Modal show={modal} className="modal">
+  
+      <Modal show={modal} className="modal notif-modal">
         <Modal.Header closeButton onClick={toggle}>
           <Modal.Title>Notifications</Modal.Title>
         </Modal.Header>
@@ -158,13 +134,13 @@ function Dashboard() {
           <div className="modal-body">
             <table className="table table-hover">
               <tbody>
-                {notification.map(({ notificationString, postName, postUrl, postDate }) => (
+                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType }) => (
                   <tr>
                     <th scope="row"></th>
-                    <td>{notificationString}</td>
-                    <td>{postName}</td>
-                    <td>{postUrl}</td>
-                    <td>{postDate}</td>
+                    <td className="not-rows">{notificationString}</td>
+                    <td className="not-rows">{postName}</td>
+                    <td className="not-rows">{postUrl}</td>
+                    <td className="not-rows">{postDate}</td>
                   </tr>
                 ))}
               </tbody>

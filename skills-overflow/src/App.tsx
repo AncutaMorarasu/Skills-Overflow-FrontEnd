@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import NotFoundPage from "./pages/not-found-page";
 import LoginPage from "./pages/login-page";
 import PasswordRecPage from "./pages/password-rec-page";
@@ -18,11 +18,13 @@ import IndividualPost from './pages/individual-post'
 import ForbiddenPage from "./pages/forbidden-page";
 import RegistrationInvalidToken from "./pages/registration-check";
 import RegistrationExpiredToken from "./pages/registration-expired-token";
-//import NotificationPage from "./pages/notification-page"; 
 import NoPosts from "./pages/no-posts-page";
 import NoSearchResult from "./pages/no-search-result-page";
+import PendingQuestions from "./pages/admin/question-confirmation";
+import PendingAnswers from "./pages/admin/answers-confirmation";
 
 function App() {
+
   return (
     <div>
       <Router>
@@ -40,7 +42,6 @@ function App() {
           <Route path="/changePassword/:token">
             <ChangePasswordPage />
           </Route>
-
           <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
           </Route>
@@ -53,7 +54,6 @@ function App() {
           <Route path="/no-search-result">
             <NoSearchResult />
           </Route>
-
           <Route path="/account-requests">
             <PendingUsers />
           </Route>
@@ -65,6 +65,12 @@ function App() {
           </Route>
           <Route path="/approved-profiles">
             <ApprovedProfiles />
+          </Route>
+          <Route path="/pending-questions">
+            <PendingQuestions />
+          </Route>
+          <Route path="/pending-answers">
+            <PendingAnswers />
           </Route>
           <Route path="/registration-invalid-token">
             <RegistrationInvalidToken />
