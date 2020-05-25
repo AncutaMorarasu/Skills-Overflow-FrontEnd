@@ -35,8 +35,14 @@ function SidenavAdmin() {
           >
             blocked users
           </Link>
-          <Link className="dropdown-item dd-item" to="/declined-users">
+          <Link className="dropdown-item dd-item border-bottom" to="/declined-users">
             declined requests
+          </Link>
+          <Link className="dropdown-item dd-item border-bottom" to="/pending-questions">
+            questions requests
+          </Link>
+          <Link className="dropdown-item dd-item" to="/pending-answers">
+            answers requests
           </Link>
         </div>
       </ListGroup.Item>

@@ -11,18 +11,18 @@ import Modal from "react-bootstrap/Modal";
 
 
 function Dashboard() {
-  const [userToken, setUserToken] = useState<number>(0);
+  const [modal, setModal] = useState(false);
+  const [notification, setNotification] = useState([]);
+  let [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
   const [toChild, setToChild] = useState("");
   const [effects, setEffects] = useState(true);
   let history = useHistory();
-
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
 
-  useEffect(() => {
-
+  function userVsAdmin(){
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       setUserToken(currentUser.token)
@@ -37,6 +37,21 @@ function Dashboard() {
     , [userlogged]
   );
 
+  //Get users from database
+  useEffect(() => {
+    userVsAdmin(); 
+    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
+      .then(
+        response => {
+          const setData = response.data;
+          setNotification(setData);
+        }
+      ).catch(function (error) {
+        if (error.request.status === 403) {
+          history.push("/forbidden-page")
+        }
+      })
+  }, []);
 
   const signOut = () => {
     localStorage.clear();
@@ -65,6 +80,10 @@ function Dashboard() {
       setEffects(true);
     }
   };
+
+  function toggle() {
+    setModal(!modal);
+  }
 
   return (
     <div className="dashboard">
@@ -99,13 +118,40 @@ function Dashboard() {
             </div>
           </div>
         </form>
-      </div>
+      </div> *
       <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
+
       <QuestionCard
         searchParam={toChild}
         changeFlag1={changeFlag}
         effects={effects}
       />
+  
+      <Modal show={modal} className="modal notif-modal">
+        <Modal.Header closeButton onClick={toggle}>
+          <Modal.Title>Notifications</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="modal-body">
+            <table className="table table-hover">
+              <tbody>
+                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType }) => (
+                  <tr>
+                    <th scope="row"></th>
+                    <td className="not-rows">{notificationString}</td>
+                    <td className="not-rows">{postName}</td>
+                    <td className="not-rows">{postUrl}</td>
+                    <td className="not-rows">{postDate}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Modal.Body>
+        <ModalFooter>
+        </ModalFooter>
+      </Modal>
+
     </div>
   );
 }
