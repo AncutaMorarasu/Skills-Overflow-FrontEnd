@@ -175,13 +175,14 @@ function QuestionCard(props: any) {
           handleFlag={changeFlag1}
         />
         {renderPosts}
+        <DownPagination className="pagination"
+          pageNo={actualPageNo}
+          total={questions.totalPosts}
+          handleSelect={handleSelect}
+        />
       </div>
 
-      <DownPagination className="pagination"
-        pageNo={actualPageNo}
-        total={questions.totalPosts}
-        handleSelect={handleSelect}
-      />
+
     </div>
   );
 }
