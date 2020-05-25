@@ -23,6 +23,7 @@ function Dashboard() {
   let currentUser: any;
 
   function userVsAdmin(){
+    
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       setUserToken(currentUser.token)
@@ -34,8 +35,8 @@ function Dashboard() {
       }
     }
   }
-    , [userlogged]
-  );
+    
+
 
   //Get users from database
   useEffect(() => {
@@ -135,7 +136,7 @@ function Dashboard() {
           <div className="modal-body">
             <table className="table table-hover">
               <tbody>
-                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType }) => (
+                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType}) => (
                   <tr>
                     <th scope="row"></th>
                     <td className="not-rows">{notificationString}</td>
@@ -148,8 +149,6 @@ function Dashboard() {
             </table>
           </div>
         </Modal.Body>
-        <ModalFooter>
-        </ModalFooter>
       </Modal>
 
     </div>
