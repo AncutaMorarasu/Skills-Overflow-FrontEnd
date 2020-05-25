@@ -11,27 +11,46 @@ export default function IndividualPost() {
     const [showComm, setShowComm] = useState(false);
     let { id } = useParams();
     const [post, setPost] = useState<{
-        id: string;
-        topics: string[];
-        title: string;
-        body: string;
-        numberOfComments: string;
-        createDate: [];
-        userName: string
+        postDTO: {
+            id: string;
+            topics: string[];
+            title: string;
+            body: string;
+            numberOfComments: number;
+            createDate: [];
+            userName: string
+        },
+        commentDTOList: [{
+            body: string;
+            commentId: string;
+            createDate: string;
+            userName: string;
+            isMostRelevant: boolean;
+        }],
+        principalOwnerOfPost: boolean;
     }>({
-        id: "",
-        topics: [],
-        title: "",
-        body: "",
-        numberOfComments: "",
-        createDate: [],
-        userName: ""
-    });
+        postDTO: {
+            id: "",
+            topics: [],
+            title: "",
+            body: "",
+            numberOfComments: 0,
+            createDate: [],
+            userName: "",
+        }, commentDTOList: [{
+            body: "",
+            commentId: "",
+            createDate: "",
+            userName: "",
+            isMostRelevant: false
+        }],
+        principalOwnerOfPost: false
+
+    }
+    );
     const [newAnswer, setNewAnswer] = useState({
         body: ""
     });
-    const [comments, setComments] = useState([]);
-    const [userIsAuthor, setUserIsAutor] = useState();
     let token = localStorage.getItem("user");
     let tokenCheck: any;
     function localData() {
@@ -45,13 +64,9 @@ export default function IndividualPost() {
     function getPostData() {
         axios.get(`http://localhost:8081/singlePost/${id}`, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
             .then(response => {
-                const postInd = response.data[0];
-                console.log(postInd)
-                const postComments = response.data[1];
-                const author = response.data[2];
+                const postInd = response.data;
+                console.log(response.data)
                 setPost(postInd);
-                setComments(postComments);
-                setUserIsAutor(author);
             })
     }
 
@@ -89,8 +104,8 @@ export default function IndividualPost() {
         setNewAnswer({ body: "" })
     }
 
-    const renderComments = comments.map((
-        { body, createDate, commentId, isMostRelevantComment, userName }
+    const renderComments = post.commentDTOList.map((
+        { body, createDate, commentId, isMostRelevant, userName }
     ) => {
         function toggleVoteComment() {
             localData()
@@ -112,26 +127,29 @@ export default function IndividualPost() {
                     </span>
                 </div>
                 <div className='vote-btn d-flex flex-column'>
-                    {userIsAuthor && <Button variant='warning' onClick={() => { toggleVoteComment() }} >
-                        {isMostRelevantComment ? ' Unvote Answer' : 'Vote Answer '}
+                    {post.principalOwnerOfPost && <Button variant='warning' onClick={() => { toggleVoteComment() }} >
+                        {isMostRelevant ? ' Unvote Answer' : 'Vote Answer '}
                     </Button>}
                 </div>
             </div>
         );
     })
+
+
     return (
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
             <div className='comm-container'>
                 <div className='question-container d-flex flex-column align-items-start border-bottom '>
-                    <h1>{post.title}</h1>
-                    <p className=''>{post.body}</p>
-                    <span>Number of comments: {post.numberOfComments}</span>
-                    <span> Create date: {post.createDate}</span>
-                    <span>Question topics: {post.topics}</span>
-                    <span>Posted by: {post.userName}</span>
+                    <h1>{post.postDTO.title}</h1>
+                    <p className=''>{post.postDTO.body}</p>
+                    <span>Number of comments: {post.postDTO.numberOfComments}</span>
+                    <span> Create date: {post.postDTO.createDate}</span>
+                    <span>Question topics: {post.postDTO.topics}</span>
+                    <span>Posted by: {post.postDTO.userName}</span>
                 </div>
-                {comments.length === 0 ? <h2 className="answers-count">No answers yet.</h2> : <h2 className="answers-count">{comments.length} Answer(s):</h2>}
+                {post.postDTO.numberOfComments === 0 ? <h2 className="answers-count">No answers yet.</h2>
+                    : <h2 className="answers-count">{post.postDTO.numberOfComments} Answer(s):</h2>}
                 {renderComments}
                 <div className='d-flex flex-column  align-items-start add-comm-container answer-container border-top'>
                     <button className='add-comm-btn' onClick={() => setShowComm(!showComm)}>Add an answer</button>

@@ -376,8 +376,6 @@ th {
   margin-bottom: 0;
 }
 .tables {
-  /* margin-top: 5rem;
-  margin-left: 20rem; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -484,8 +482,6 @@ th {
   font-size: 1.5rem;
 } 
 
-
-
 /* alerts */
 
 .alert {
@@ -496,7 +492,6 @@ th {
   color: #fff;
   width: 60%;
 }
-
 
 .alert.alert-info {
   background-color: transparent;
@@ -526,14 +521,18 @@ width: 100%;
 .post-btn{
   width: 5rem;
 }
-
+.add-comm-container{
+  margin-bottom: 4rem;
+}
 .not-rows{
   padding-left: 2rem;
 
 }
 
 .modal-content{
-  width: 50rem;
+  width: fit-content;
 }
 
-
+.pagination{
+  margin-bottom: 4rem;
+}
