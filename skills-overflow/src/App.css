@@ -526,22 +526,15 @@ width: 100%;
 .post-btn{
   width: 5rem;
 }
-.add-comm-container{
-  margin-bottom: 5rem;
 
-}
-.vote-btn{
-  width: 15%;
+.not-rows{
+  padding-left: 2rem;
 }
 
-.answers-count{
-  margin-top: 1rem;
+.modal-content{
+  width: 50rem;
 }
 
-/* no posts search */
-.no-posts{
-  margin-top: 0;
-}
-.alert-no-posts{
-width: fit-content;
+.notif-modal{
+  
 }
