@@ -77,13 +77,14 @@ export default function IndividualPost() {
     function postAnswer() {
         localData();
         if (newAnswer.body.length === 0) {
+            setShowComm(showComm);
             cogoToast.error("Please fill in your answer.")
-
         } else {
             axios.post(`http://localhost:8081/addComment/${id}`, newAnswer, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
                 .then(() => {
                     cogoToast.info("Your comment has been submitted for review.")
                 })
+            setShowComm(!showComm)
         }
         setNewAnswer({ body: "" })
     }
@@ -138,7 +139,7 @@ export default function IndividualPost() {
                         <textarea name="" id="" cols={70} rows={5} onChange={onAnswerChangeHandler}></textarea>
                         <div className='d-flex flex-row'>
                             <Button variant='secondary' className="post-btn" onClick={() => { setShowComm(!showComm) }}> Cancel</Button>
-                            <Button variant='success' className="post-btn" onClick={() => { postAnswer(); setShowComm(!showComm) }}>Post</Button>
+                            <Button variant='success' className="post-btn" onClick={postAnswer}>Post</Button>
                         </div>
                     </div>}
                 </div>

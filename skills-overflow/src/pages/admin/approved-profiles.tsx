@@ -5,7 +5,7 @@ import ModalComponent from "../../components/modal";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 import SidenavAdmin from '../../components/side-nav-admin'
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+//import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 export default function ExistingProfiles() {
   const [getUserId, setGetUserId] = useState<number>(0);
@@ -16,7 +16,7 @@ export default function ExistingProfiles() {
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   const history = useHistory();
- 
+
   function localData() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);

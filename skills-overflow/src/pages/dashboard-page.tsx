@@ -8,12 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
-import ModalFooter from "react-bootstrap/ModalFooter";
 
 
 function Dashboard() {
-  const [modal, setModal] = useState(false);
-  const [notification, setNotification] = useState([]);
   const [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
@@ -24,16 +21,8 @@ function Dashboard() {
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
 
-  let token = localStorage.getItem("user");
-  let tokenCheck: any;
+  useEffect(() => {
 
-  function localData() {
-    if (typeof token === "string") {
-      tokenCheck = JSON.parse(token);
-    }
-  }
-
-  function userVsAdmin(){
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       setUserToken(currentUser.token)
@@ -45,23 +34,9 @@ function Dashboard() {
       }
     }
   }
+    , [userlogged]
+  );
 
-  //Get users from database
-  useEffect(() => {
-    localData();
-    userVsAdmin(); 
-    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
-      .then(
-        response => {
-          const setData = response.data;
-          setNotification(setData);
-        }
-      ).catch(function (error) {
-        if (error.request.status === 403) {
-          history.push("/forbidden-page")
-        }
-      })
-  }, []);
 
   const signOut = () => {
     localStorage.clear();
@@ -91,28 +66,10 @@ function Dashboard() {
     }
   };
 
-  function getNotification() {
-    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
-      .then(response => {
-        const setData = response.data;
-        setNotification(setData);
-        console.log(notification)
-      },
-      error => {
-        console.log(error);
-        }
-      )
-
-  }
-
-  function toggle() {
-    setModal(!modal);
-  }
-
   return (
     <div className="dashboard">
       <div className="d-flex justify-content-end">
-        <Button onClick={() => {toggle(); }} variant="light" className="accountBtn">
+        <Button onClick={() => { }} variant="light" className="accountBtn">
           Notification
         </Button>
         <Button onClick={signOut} variant="light" className="accountBtn">
@@ -149,37 +106,7 @@ function Dashboard() {
         changeFlag1={changeFlag}
         effects={effects}
       />
-
-      <Modal show={modal} className="modal">
-        <Modal.Header closeButton onClick={toggle}>
-          <Modal.Title>Notifications</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="modal-body">
-            <table className="table table-hover">
-              <tbody>
-                {notification.map(({ notificationString, postName, postUrl, postDate }) => (
-                  <tr>
-                    <th scope="row"></th>
-                    <td>{notificationString}</td>
-                    <td>{postName}</td>
-                    <td>{postUrl}</td>
-                    <td>{postDate}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Modal.Body>
-        <ModalFooter>
-        </ModalFooter>
-      </Modal>
-
     </div>
-
-
-
-
   );
 }
 
