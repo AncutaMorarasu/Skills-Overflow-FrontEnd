@@ -19,13 +19,13 @@ function NoSearchResult() {
 
 
   return (
-    <Container>
-      <Alert className="text-center" variant="warning">
+    <Container className="no-posts d-flex flex-column  align-items-center">
+      <Alert className=" text-center alert-no-posts" variant="warning">
         Couldn't find what you're looking for... Perhaps you meant
-            <Link to="/dashboard" style={{ color: 'black' }}> {par} </Link>?
+            <Link to="/dashboard" > {par} </Link>?
           </Alert>
     </Container>
   );
-}
+};
 
 export default NoSearchResult;

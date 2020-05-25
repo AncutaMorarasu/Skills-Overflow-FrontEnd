@@ -252,9 +252,9 @@ input::placeholder,
 }
 
 .questions {
-  width: 60rem;
-  height: 8rem;
-  margin-left: 17rem;
+  width: 65%;
+  /* height: 97%; */
+  margin-left: 20%;
   margin-top: -0.4rem;
 }
 
@@ -536,4 +536,12 @@ width: 100%;
 
 .answers-count{
   margin-top: 1rem;
+}
+
+/* no posts search */
+.no-posts{
+  margin-top: 0;
+}
+.alert-no-posts{
+width: fit-content;
 }
