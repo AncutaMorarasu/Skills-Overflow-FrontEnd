@@ -26,6 +26,6 @@ function NoSearchResult() {
           </Alert>
     </Container>
   );
-}
+};
 
 export default NoSearchResult;

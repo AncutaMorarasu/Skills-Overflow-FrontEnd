@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 
 function NotFoundPage() {
   return (
-    <Container>
+    <Container >
       <Alert className="text-center" variant="warning">
         Woops, there's nothing here!
       </Alert>
