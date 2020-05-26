@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NotFoundPage from "./pages/not-found-page";
 import LoginPage from "./pages/login-page";
 import PasswordRecPage from "./pages/password-rec-page";
@@ -22,6 +22,7 @@ import NoPosts from "./pages/no-posts-page";
 import NoSearchResult from "./pages/no-search-result-page";
 import PendingQuestions from "./pages/admin/question-confirmation";
 import PendingAnswers from "./pages/admin/answers-confirmation";
+import ProfilePage from "./pages/profile"
 
 function App() {
 
@@ -83,6 +84,9 @@ function App() {
           </Route>
           <Route path="/forbidden-page">
             <ForbiddenPage />
+          </Route>
+          <Route path="/profile">
+            <ProfilePage />
           </Route>
           <Route path="">
             <NotFoundPage />

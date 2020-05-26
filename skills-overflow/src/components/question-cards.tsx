@@ -21,7 +21,7 @@ function QuestionCard(props: any) {
   const [topics, setTopics] = useState({
     topics: [
       "Java ",
-      "Springboot ",
+      "Spring Boot ",
       "SQL ",
       "Tomcat ",
       "JPA ",

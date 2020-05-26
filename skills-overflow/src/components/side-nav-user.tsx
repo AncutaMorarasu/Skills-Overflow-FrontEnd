@@ -10,16 +10,11 @@ function SidenavUser() {
           questions dashboard
         </Link>
       </ListGroup.Item>
-      <ListGroup.Item variant="light" className="nav-item">
-        <a className="nav-link " href="#">
-          users
-        </a>
 
-      </ListGroup.Item>
       <ListGroup.Item >
-        <a className="nav-link " href="#">
+        <Link className="nav-link " to="/profile">
           my profile
-        </a>
+        </Link>
       </ListGroup.Item>
     </ListGroup>
   );

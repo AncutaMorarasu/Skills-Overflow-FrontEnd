@@ -511,6 +511,7 @@ th {
   border: none;
   background-color: #eceff1;
   text-decoration: underline ;
+  padding: 0.7rem 0 ;
 }
 .add-comm-btn:focus {
   outline: none;
@@ -534,4 +535,25 @@ width: 100%;
 
 .pagination{
   margin-bottom: 4rem;
+}
+
+/* profile page */
+.profile{
+  margin-left: 20%;
+  width: 65%;
+}
+.account-settings{
+  margin-top: 2rem;
+}
+.account-form{
+  padding: 0;
+}
+.account-input{
+  width: 100%;
+}
+.account-input::placeholder{
+  font-size: 1rem;
+}
+.show-modal-btn{
+  margin-bottom: 3rem;
 }
