@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SidenavAdmin from "../components/side-nav-admin";
 import SidenavUser from "../components/side-nav-user";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import QuestionCard from "../components/question-cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,6 +46,7 @@ function Dashboard() {
         response => {
           const setData = response.data;
           setNotification(setData);
+          console.log(setData);
         }
       ).catch(function (error) {
         if (error.request.status === 403) {
@@ -89,7 +90,7 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <div className="d-flex justify-content-end">
-        <Button onClick={() => { }} variant="light" className="accountBtn">
+        <Button onClick={toggle} variant="light" className="accountBtn">
           Notification
         </Button>
         <Button onClick={signOut} variant="light" className="accountBtn">
@@ -128,7 +129,7 @@ function Dashboard() {
         effects={effects}
       />
   
-      <Modal show={modal} className="modal notif-modal">
+      <Modal show={modal} className="modal notif-modal" size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton onClick={toggle}>
           <Modal.Title>Notifications</Modal.Title>
         </Modal.Header>
@@ -136,15 +137,14 @@ function Dashboard() {
           <div className="modal-body">
             <table className="table table-hover">
               <tbody>
-                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType}) => (
-                  <tr>
+                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType, notificationId}) => (
+                  <tr key={notificationId}>
                     <th scope="row"></th>
                     <td className="not-rows">{notificationString}</td>
-                    <td className="not-rows">{postName}</td>
-                    <td className="not-rows">{postUrl}</td>
+                    <td className="not-rows"><Link to={"/singlePost/4"} style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
                     <td className="not-rows">{postDate}</td>
                   </tr>
-                ))}
+))}
               </tbody>
             </table>
           </div>
