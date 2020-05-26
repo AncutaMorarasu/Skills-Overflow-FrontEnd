@@ -127,101 +127,101 @@ function QuestionModal() {
                 <div className="column col-md-4">
                   <Form.Check
                     type="checkbox"
-                    label="Java"
+                    label="Java "
                     name="topics"
-                    value="Java"
+                    value="Java "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Spring Boot"
+                    label="Spring Boot "
                     name="topics"
-                    value="Spring Boot"
+                    value="Spring Boot "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="SQL"
+                    label="SQL "
                     name="topics"
-                    value="SQL"
+                    value="SQL "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Tomcat"
+                    label="Tomcat "
                     name="topics"
-                    value="Tomcat"
+                    value="Tomcat "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="JPA"
+                    label="JPA "
                     name="topics"
-                    value="JPA"
+                    value="JPA "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Google Cloud"
+                    label="Google Cloud "
                     name="topics"
-                    value="Google Cloud"
+                    value="Google Cloud "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Hibernate"
+                    label="Hibernate "
                     name="topics"
-                    value="Hibernate"
+                    value="Hibernate "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="MongoDB"
+                    label="MongoDB "
                     name="topics"
-                    value="MongoDB"
+                    value="MongoDB "
                   />
                 </div>
                 <div className="column col-md-4 ml-auto">
                   <Form.Check
                     type="checkbox"
-                    label="HTML"
+                    label="HTML "
                     name="topics"
-                    value="HTML"
+                    value="HTML "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="CSS"
+                    label="CSS "
                     name="topics"
-                    value="CSS"
+                    value="CSS "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="JavaScript"
+                    label="JavaScript "
                     name="topics"
-                    value="JavaScript"
+                    value="JavaScript "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Bootstrap"
+                    label="Bootstrap "
                     name="topics"
-                    value="Bootstrap"
+                    value="Bootstrap "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="React"
+                    label="React "
                     name="topics"
-                    value="React"
+                    value="React "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Angular"
+                    label="Angular "
                     name="topics"
-                    value="Angular"
+                    value="Angular "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="JQuery"
+                    label="JQuery "
                     name="topics"
-                    value="JQuery"
+                    value="JQuery "
                   />
                   <Form.Check
                     type="checkbox"
-                    label="Other"
+                    label="Other "
                     name="topics"
-                    value="Other"
+                    value="Other "
                   />
                 </div>
               </div>

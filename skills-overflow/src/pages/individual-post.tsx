@@ -61,6 +61,7 @@ export default function IndividualPost() {
 
     let userlogged = localStorage.getItem("user");
     let currentUser;
+
     function getPostData() {
         axios.get(`http://localhost:8081/singlePost/${id}`, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
             .then(response => {
