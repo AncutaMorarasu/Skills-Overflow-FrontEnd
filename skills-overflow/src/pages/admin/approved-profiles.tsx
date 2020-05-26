@@ -16,8 +16,7 @@ export default function ExistingProfiles() {
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   const history = useHistory();
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   
  
   function handleChange(event: any){
@@ -37,14 +36,12 @@ export default function ExistingProfiles() {
       .then(response => {
         const setData = response.data;
         setUserProfile(setData);
-       /*  setSearchResults(userProfile.filter(user => 
-          user.toLowerCase().includes(searchTerm.trim()))) */
       }).catch(function (error) {
         if (error.request.status === 403) {
           history.push("/forbidden-page")
         }
       })
-  }, []);
+  }, [searchTerm]);
 
   //Post user to database
   function updateUserRole() {
@@ -108,6 +105,11 @@ export default function ExistingProfiles() {
     setModal(!modal);
   }
 
+  //Filter input
+  const filteredUsers = userProfile.filter((user: any) => {
+    return user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  })
+
   return (
     <div className="requests_page">
       <SidenavAdmin />
@@ -115,11 +117,7 @@ export default function ExistingProfiles() {
         <h1 className="request_header">
           Approved profiles
       </h1>
-      {/* <input 
-      type="text"
-      placeholder="Search"
-      value={searchTerm}
-      onChange={handleChange}/> */}
+      <input type="text" className="form-control table-search" placeholder="Search by email"  value={searchTerm} onChange={handleChange}/>
       </div>
       <div className="table_container">
         <div className="table__container">
@@ -135,16 +133,16 @@ export default function ExistingProfiles() {
               </tr>
             </thead>
             <tbody>
-              {userProfile.map(({ userId, userName, firstName, lastName, email}) => (
+              {filteredUsers.map(({userId, userName, firstName, lastName, email}) => (
                 <tr key={userId}>
                   <td>{userId}</td>
                   <td>{userName}</td>
                   <td>{firstName}</td>
                   <td>{lastName}</td>
-                  <td>{email}</td>
+                  <td>{email}</td> 
                   <td>
-                    <Button type="button" className="btn btn-success btn-table-update" onClick={() => { toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to promote this user to admin?"); setSave(false) }}>Upgrade to admin</Button>
-                    <Button type="button" className="btn btn-danger btn-table-update" onClick={() => { toggle(); setGetUserId(userId); setModalMessage("Are you sure you want to block this user?"); setSave(true); }}>Block user</Button>
+                    <Button type="button" className="btn btn-success btn-table-update" onClick={() => { toggle();  setGetUserId(userId) ; setModalMessage("Are you sure you want to promote this user to admin?"); setSave(false) }}>Upgrade to admin</Button>
+                    <Button type="button" className="btn btn-danger btn-table-update" onClick={() => { toggle();  setGetUserId(userId); setModalMessage("Are you sure you want to block this user?"); setSave(true); }}>Block user</Button>
                   </td>
                 </tr>
               ))}

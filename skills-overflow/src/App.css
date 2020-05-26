@@ -404,9 +404,9 @@ th {
   margin-top: 3rem;
   text-align: center;
   margin-top: 3%;
-    width: 70%;
-    flex-direction: column;
-    align-items: center;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .declined_requests_page {
@@ -535,4 +535,40 @@ width: 100%;
 
 .pagination{
   margin-bottom: 4rem;
+}
+
+.scrol-table{
+  width: fit-content;
+  overflow-y: scroll;
+}
+
+.scrol-table-answer{
+  width: fit-content;
+  overflow-y: scroll;
+}
+
+.question-update{
+  width: 18rem;
+  height: 3.5rem;
+  padding: 0rem !important;
+  
+}
+
+.table-q-request{
+  text-align: center;
+}
+
+.answer-update{
+  width: 18rem;
+  height: 3.5rem;
+  padding: 0rem !important;
+}
+
+.table-search{
+  width: 15rem;
+  margin-top: 1.5rem;
+}
+
+.table td, th, tr, thead{
+  vertical-align: middle !important;
 }

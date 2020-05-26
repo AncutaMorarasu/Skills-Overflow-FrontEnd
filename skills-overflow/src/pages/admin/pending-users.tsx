@@ -13,6 +13,7 @@ export default function PendingUsers() {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [save, setSave] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   const history = useHistory();
@@ -21,6 +22,10 @@ export default function PendingUsers() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
     }
+  }
+
+  function handleChange(event: any){
+    setSearchTerm(event.target.value);
   }
 
   //Get users from database for table
@@ -97,12 +102,18 @@ export default function PendingUsers() {
     setModal(!modal);
   }
 
+  //Filter input
+  const filteredUsers = userProfile.filter((user: any) => {
+    return user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  })
+
   return (
     <div className="pending_requests_page">
       <SidenavAdmin />
       <div className="tables">
         {/* Register requests table */}
         <h1 className="request_header">Account requests</h1>
+        <input type="text" className="form-control table-search" placeholder="Search by email"  value={searchTerm} onChange={handleChange}/>
       </div>
       <div className="table_container">
         <div className="table__container">
@@ -118,7 +129,7 @@ export default function PendingUsers() {
               </tr>
             </thead>
             <tbody>
-              {userProfile.map(
+              {filteredUsers.map(
                 ({ userId, userName, firstName, lastName, email }) => (
                   <tr key={userId}>
                     <td>{userId}</td>

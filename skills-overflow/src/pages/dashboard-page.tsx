@@ -21,6 +21,8 @@ function Dashboard() {
   let history = useHistory();
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
+  const[url, setUrl] = useState('');
+
 
   function userVsAdmin(){
     
@@ -137,11 +139,11 @@ function Dashboard() {
           <div className="modal-body">
             <table className="table table-hover">
               <tbody>
-                {notification.map(({ notificationString, postName, postUrl, postDate, notificationType, notificationId}) => (
+                {notification.map(({ notificationString, postName, postURL, postDate, notificationType, notificationId}) => (
                   <tr key={notificationId}>
                     <th scope="row"></th>
                     <td className="not-rows">{notificationString}</td>
-                    <td className="not-rows"><Link to={"/singlePost/4"} style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
+                    <td className="not-rows"><Link to={postURL}  style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
                     <td className="not-rows">{postDate}</td>
                   </tr>
 ))}

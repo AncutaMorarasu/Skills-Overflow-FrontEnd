@@ -13,6 +13,7 @@ export default function BlockedUsers() {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [save, setSave] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   let token = localStorage.getItem("user");
   let tokenCheck: any;
 
@@ -23,6 +24,10 @@ export default function BlockedUsers() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
     }
+  }
+
+  function handleChange(event: any){
+    setSearchTerm(event.target.value);
   }
 
   //Get users from database
@@ -86,6 +91,11 @@ export default function BlockedUsers() {
     setModal(!modal);
   }
 
+   //Filter input
+   const filteredUsers = userProfile.filter((user: any) => {
+    return user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  })
+
   return (
     <div className="banned_users_page">
       <SidenavAdmin />
@@ -95,6 +105,7 @@ export default function BlockedUsers() {
         <h1 className="banned_header">
           Blocked users
             </h1>
+        <input type="text" className="form-control table-search" placeholder="Search by email"  value={searchTerm} onChange={handleChange}/>
         <div className="table_container_banned_users">
           <div className="table__container">
             <table className="table table-bordered">
@@ -109,7 +120,7 @@ export default function BlockedUsers() {
                 </tr>
               </thead>
               <tbody>
-                {userProfile.map(({ userId, userName, firstName, lastName, email }) => (
+                {filteredUsers.map(({ userId, userName, firstName, lastName, email }) => (
                   <tr>
                     <td>{userId}</td>
                     <td>{userName}</td>
@@ -117,7 +128,7 @@ export default function BlockedUsers() {
                     <td>{lastName}</td>
                     <td>{email}</td>
                     <td>
-                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to unblock this user?"); setSave(false); }}>Unblock</Button>
+                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); console.log(userId); setUserId(userId); setModalMessage("Are you sure you want to unblock this user?"); setSave(false); }}>Unblock</Button>
                     </td>
                   </tr>
                 ))}
