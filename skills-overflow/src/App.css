@@ -576,3 +576,7 @@ width: 100%;
 .table, thead, tr, th, td {
   vertical-align: middle !important;
 }
+
+.close{
+  margin-left: 0.7rem;
+}

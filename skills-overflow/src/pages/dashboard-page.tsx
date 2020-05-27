@@ -8,11 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
+import cogoToast from "cogo-toast";
 
 
 function Dashboard() {
   const [modal, setModal] = useState(false);
   const [notification, setNotification] = useState([]);
+  const [notificationId, setNotificationId] = useState();
   let [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
@@ -37,24 +39,11 @@ function Dashboard() {
       }
     }
   }
-    
-
-
+      
   //Get users from database
   useEffect(() => {
     userVsAdmin(); 
-    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
-      .then(
-        response => {
-          const setData = response.data;
-          setNotification(setData);
-          console.log(setData);
-        }
-      ).catch(function (error) {
-        if (error.request.status === 403) {
-          history.push("/forbidden-page")
-        }
-      })
+    getNotification();
   }, []);
 
   const signOut = () => {
@@ -87,6 +76,37 @@ function Dashboard() {
 
   function toggle() {
     setModal(!modal);
+  }
+
+  function deleteNotification() {
+    userVsAdmin();
+    axios.delete(`http://localhost:8081/admin/deleteComment/${notificationId}`, { headers: { Authorization: 'Bearer ' + currentUser.token, "Content-type": "application/json" } }).then(
+      response => {
+        if (response.status === 200) {
+          getNotification();
+          cogoToast.success("The changes have been made", { hideAfter: 5 })
+        }
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  
+  function getNotification(){
+    axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
+      .then(
+        response => {
+          const setData = response.data;
+          setNotification(setData);
+          console.log(setData);
+        }
+      ).catch(function (error) {
+        if (error.request.status === 403) {
+          history.push("/forbidden-page")
+        }
+      })
   }
 
   return (
@@ -145,6 +165,11 @@ function Dashboard() {
                     <td className="not-rows">{notificationString}</td>
                     <td className="not-rows"><Link to={postURL}  style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
                     <td className="not-rows">{postDate}</td>
+                    <td>
+                    <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {setNotificationId(notificationId); deleteNotification()}}>
+                      <span aria-hidden="true">&times;</span>
+                    </Button>
+                    </td>
                   </tr>
 ))}
               </tbody>

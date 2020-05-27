@@ -131,12 +131,12 @@ export default function PendingQuestions(){
               </tr>
             </thead>
             <tbody>
-              {filteredQuestions.map(({id, title, body, userName, technology, createDate}) => (
+              {filteredQuestions.map(({id, title, body, userName, topics, createDate}) => (
                 <tr >
                   <td >{title}</td>
                   <td className="scrol-table">{body}</td>
                   <td>{userName}</td>
-                  <td>{technology}</td>
+                  <td>{topics}</td>
                   <td>{createDate}</td>
                   <td className="question-update">
                     <Button type="button" className="btn btn-success btn-table-update" onClick={() => {toggle(); setPostId(id); setModalMessage("Are you sure you want to accept this post?"); setSave(false); }}>Post question</Button>
