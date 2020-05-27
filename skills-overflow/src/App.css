@@ -580,3 +580,6 @@ width: 100%;
 .close{
   margin-left: 0.7rem;
 }
+.star-icon {
+  color: green;
+}

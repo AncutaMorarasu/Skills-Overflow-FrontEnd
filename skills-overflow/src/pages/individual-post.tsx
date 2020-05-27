@@ -5,6 +5,8 @@ import SidenavUser from "../components/side-nav-user";
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import cogoToast from "cogo-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export default function IndividualPost() {
     const [showAdmin, setShowAdmin] = useState(false);
@@ -119,6 +121,7 @@ export default function IndividualPost() {
         return (
             <div className='d-flex flex-column align-items-start border-top answer-container'>
                 <div className=" d-flex flex-column align-items-start ">
+                    {isMostRelevant && <span className="star-icon"><FontAwesomeIcon icon={faStar} /> Voted as most relevant</span>}
                     <p key={id}>{body}</p>
                     <span>
                         Answered on: {createDate}
