@@ -39,9 +39,7 @@ export default function NameChange() {
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        console.log(nameDetails);
         setNameDetails({ firstName: "", lastName: "" });
-
     }
     function submit() {
         localData();
@@ -56,7 +54,6 @@ export default function NameChange() {
                     handleCloseModalName();
                 },
                     error => {
-                        console.log(nameDetails);
                         cogoToast.error("Something went wrong, please try again.")
                     });
         }

@@ -57,7 +57,10 @@ export default function PasswordChange() {
                         cogoToast.success("You have successfully changed your password.", { hideAfter: 5 })
                         handleCloseModalPassword();
                     }
-                })
+                },
+                    error => {
+                        cogoToast.error("Something went wrong, please try again.")
+                    });
         }
         setChangedPassword({ oldPassword: "", newPassword: "", confPassword: "" });
     }

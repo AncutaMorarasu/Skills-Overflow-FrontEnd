@@ -124,7 +124,6 @@ function FilterSort(props: any) {
                 </div>
               </div>
             </Form.Group>
-            {/* <Button type="submit"> Filter </Button> */}
             <Dropdown.Item onClick={buttonSubmit} className="filter-btn-down">
               {" "}
               Filter{" "}

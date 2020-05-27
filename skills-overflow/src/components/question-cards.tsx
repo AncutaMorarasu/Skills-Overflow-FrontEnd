@@ -120,12 +120,12 @@ function QuestionCard(props: any) {
             </Card.Title>
             <Card.Text>{body}</Card.Text>
 
-            <Card.Text> <span className="font-weight-bold">Created on:</span>
+            <Card.Text> <span className="font-weight-bold">Created on: </span>
               {createDate}
             </Card.Text>
-            <Card.Text> <span className="font-weight-bold">Number of comments:</span>  {numberOfComments}</Card.Text>
-            <Card.Text> <span className="font-weight-bold">Topic(s):</span> {topics}</Card.Text>
-            <Card.Text> <span className="font-weight-bold">Posted by:</span> {userName}</Card.Text>
+            <Card.Text> <span className="font-weight-bold">Number of comments: </span>  {numberOfComments}</Card.Text>
+            <Card.Text> <span className="font-weight-bold">Topic(s): </span> {topics}</Card.Text>
+            <Card.Text> <span className="font-weight-bold">Posted by: </span> {userName}</Card.Text>
           </Card.Body>
         </Card >
       );

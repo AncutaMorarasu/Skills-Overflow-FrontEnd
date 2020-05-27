@@ -17,7 +17,14 @@ function ProfilePage() {
         lastName: "",
         role: ""
     })
-
+    const [userPosts, setUserPosts] = useState([{
+        postId: "",
+        title: ""
+    }]);
+    const [userAnswers, setUserAnswers] = useState([{
+        postId: "",
+        title: ""
+    }])
     let userlogged = localStorage.getItem("user");
     let currentUser;
     let token = localStorage.getItem("user");
@@ -40,8 +47,18 @@ function ProfilePage() {
         localData();
         axios.get("http://localhost:8081/userProfile/getUserBySessionToken", { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
             .then(response => {
-                console.log(response.data)
+
                 setUserProfile(response.data)
+            })
+        axios.get("http://localhost:8081/userProfile/getUserPosts", { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+            .then(response => {
+                setUserPosts(response.data);
+                console.log(response.data)
+            })
+        axios.get("http://localhost:8081/userProfile/getPostsWhereUserPostedComment", { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+            .then(response => {
+                setUserAnswers(response.data);
+                console.log(response.data)
             })
     }, []
     );
@@ -61,13 +78,17 @@ function ProfilePage() {
                 </div>
                 <div className="d-flex flex-column align-items-start border-bottom">
                     <h2>Questions</h2>
-                    <Link to="/singlePost/1">Question 1 title </Link>
-                    <Link to="/singlePost/1">Question 2 title </Link>
+                    {userPosts.map(({ postId, title }) => {
+                        return (<Link to={`/singlePost/${postId}`} >{title} </Link>
+                        )
+                    })}
                 </div>
                 <div className="d-flex flex-column align-items-start border-bottom">
                     <h2>Answers</h2>
-                    <Link to="/singlePost/1"> Question 3 title</Link>
-                    <Link to="/singlePost/1"> Question 4 title</Link>
+                    {userAnswers.map(({ postId, title }) => {
+                        return (<Link to={`/singlePost/${postId}`} >{title} </Link>
+                        )
+                    })}
                 </div>
                 <div className="account-settings">
                     <h2>Account settings</h2>

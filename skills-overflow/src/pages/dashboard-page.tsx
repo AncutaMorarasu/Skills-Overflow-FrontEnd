@@ -23,11 +23,11 @@ function Dashboard() {
   let history = useHistory();
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
-  const[url, setUrl] = useState('');
+  const [url, setUrl] = useState('');
 
 
-  function userVsAdmin(){
-    
+  function userVsAdmin() {
+
     if (typeof userlogged === "string") {
       currentUser = JSON.parse(userlogged);
       setUserToken(currentUser.token)
@@ -39,10 +39,10 @@ function Dashboard() {
       }
     }
   }
-      
+
   //Get users from database
   useEffect(() => {
-    userVsAdmin(); 
+    userVsAdmin();
     getNotification();
   }, []);
 
@@ -93,14 +93,13 @@ function Dashboard() {
       }
     );
   }
-  
-  function getNotification(){
+
+  function getNotification() {
     axios.get('http://localhost:8081/notifications', { headers: { Authorization: 'Bearer ' + currentUser.token } })
       .then(
         response => {
           const setData = response.data;
           setNotification(setData);
-          console.log(setData);
         }
       ).catch(function (error) {
         if (error.request.status === 403) {
@@ -113,12 +112,11 @@ function Dashboard() {
     <div className="dashboard">
       <div className="d-flex justify-content-end">
         <Button onClick={toggle} variant="light" className="accountBtn">
-          Notification
+          Notifications
         </Button>
         <Button onClick={signOut} variant="light" className="accountBtn">
           Log Out
         </Button>
-
       </div>
       <div className="d-flex justify-content-around custom-dash">
         <form action="" className="searchForm" >
@@ -150,7 +148,7 @@ function Dashboard() {
         changeFlag1={changeFlag}
         effects={effects}
       />
-  
+
       <Modal show={modal} className="modal notif-modal" size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton onClick={toggle}>
           <Modal.Title>Notifications</Modal.Title>
@@ -159,19 +157,19 @@ function Dashboard() {
           <div className="modal-body">
             <table className="table table-hover">
               <tbody>
-                {notification.map(({ notificationString, postName, postURL, postDate, notificationType, notificationId}) => (
+                {notification.map(({ notificationString, postName, postURL, postDate, notificationType, notificationId }) => (
                   <tr key={notificationId}>
                     <th scope="row"></th>
                     <td className="not-rows">{notificationString}</td>
-                    <td className="not-rows"><Link to={postURL}  style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
+                    <td className="not-rows"><Link to={postURL} style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
                     <td className="not-rows">{postDate}</td>
                     <td>
-                    <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {setNotificationId(notificationId); deleteNotification()}}>
-                      <span aria-hidden="true">&times;</span>
-                    </Button>
+                      <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => { setNotificationId(notificationId); deleteNotification() }}>
+                        <span aria-hidden="true">&times;</span>
+                      </Button>
                     </td>
                   </tr>
-))}
+                ))}
               </tbody>
             </table>
           </div>
