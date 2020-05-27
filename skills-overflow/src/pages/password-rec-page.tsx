@@ -6,7 +6,7 @@ import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 
 export default function PasswordRecPage() {
-  const [values, setValues] = useState({ email: "", backEndValue: "No email found"});
+  const [values, setValues] = useState({ email: "", backEndValue: "No email found" });
 
   function handleChange(event: any) {
     const { name, value } = event.target;
@@ -19,41 +19,42 @@ export default function PasswordRecPage() {
   function handleSubmit(event: any) {
     event.preventDefault();
     console.log(values);
-    setValues({ email: "", backEndValue: "No email found"});
+    setValues({ email: "", backEndValue: "No email found" });
 
   }
   const history = useHistory();
-  
+
   function submit() {
     if (values.email.length === 0) {
-      cogoToast.error("Please complete the required the field.", { hideAfter: 5 });
+      cogoToast.error("Please complete the required field.", { hideAfter: 5 });
       return;
-    }else{
+    } else {
       axios
-      .post(`http://localhost:8081/resetPassword?email=${values.email}`, values)
-      .then(
-        response => {
-          if (
-            JSON.stringify(values.backEndValue) ===
-            JSON.stringify(response.data)
-          ) {
-            cogoToast.error("This email is not in our database.");
-            console.log(response);
-            setValues({ email: "", backEndValue: "No email found"});
+        .post(`http://localhost:8081/resetPassword?email=${values.email}`, values)
+        .then(
+          response => {
+            if (
+              JSON.stringify(values.backEndValue) ===
+              JSON.stringify(response.data)
+            ) {
+              cogoToast.error("This email is not in our database.");
+              console.log(response);
+              setValues({ email: "", backEndValue: "No email found" });
 
-            
-          }else{
-            cogoToast.success(
-              "Check your inbox, instructions are on their way.",
-              { hideAfter: 5 }
-            );
-            history.push("/");
-          }},
+
+            } else {
+              cogoToast.success(
+                "Check your inbox, instructions are on their way.",
+                { hideAfter: 5 }
+              );
+              history.push("/");
+            }
+          },
           error => {
             console.log(error);
           }
-      );
-    }    
+        );
+    }
   }
 
   return (
