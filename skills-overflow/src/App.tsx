@@ -21,7 +21,7 @@ import RegistrationExpiredToken from "./pages/registration-expired-token";
 import NoPosts from "./pages/no-posts-page";
 import NoSearchResult from "./pages/no-search-result-page";
 import PendingQuestions from "./pages/admin/question-confirmation";
-import PendingAnswers from "./pages/admin/answers-confirmation";
+import PendingAnswers from "./pages/admin/answer-confirmation";
 import ProfilePage from "./pages/profile"
 
 function App() {

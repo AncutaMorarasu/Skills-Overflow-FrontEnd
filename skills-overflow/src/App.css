@@ -404,9 +404,9 @@ th {
   margin-top: 3rem;
   text-align: center;
   margin-top: 3%;
-    width: 70%;
-    flex-direction: column;
-    align-items: center;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .declined_requests_page {
@@ -557,4 +557,26 @@ width: 100%;
 }
 .show-modal-btn{
   margin-bottom: 3rem;
+}
+
+.table-search{
+  width: 17rem;
+  margin-top: 1rem;
+  margin-bottom: -1.2rem;
+}
+
+.question-update{
+  width: 19rem;
+}
+
+.answer-update{
+  width: 19rem;
+}
+
+.table, thead, tr, th, td {
+  vertical-align: middle !important;
+}
+
+.close{
+  margin-left: 0.7rem;
 }

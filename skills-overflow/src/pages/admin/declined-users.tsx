@@ -12,6 +12,7 @@ export default function DeclinedUsers() {
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [save, setSave] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   let token = localStorage.getItem("user");
   let tokenCheck: any;
   const history = useHistory();
@@ -21,6 +22,10 @@ export default function DeclinedUsers() {
     if (typeof token === "string") {
       tokenCheck = JSON.parse(token);
     }
+  }
+  
+  function handleChange(event: any){
+    setSearchTerm(event.target.value);
   }
 
   //Get users from database
@@ -101,6 +106,11 @@ export default function DeclinedUsers() {
     setModal(!modal);
   }
 
+  //Filter input
+  const filteredUsers = userProfile.filter((user: any) => {
+    return user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  })
+
   return (
     <div className="declined_requests_page">
       <SidenavAdmin />
@@ -110,7 +120,8 @@ export default function DeclinedUsers() {
         <div className="tables_declined_users">
           <h1 className="declined_header">
             Declined requests
-      </h1>
+          </h1>
+          <input type="text" className="form-control table-search" placeholder="Search by email"  value={searchTerm} onChange={handleChange}/>
         </div>
         <div className="table_container_declined_users">
           <div className="table__container">
@@ -126,7 +137,7 @@ export default function DeclinedUsers() {
                 </tr>
               </thead>
               <tbody>
-                {userProfile.map(({ userId, userName, firstName, lastName, email }) => (
+                {filteredUsers.map(({ userId, userName, firstName, lastName, email }) => (
                   <tr>
                     <td>{userId}</td>
                     <td>{userName}</td>
