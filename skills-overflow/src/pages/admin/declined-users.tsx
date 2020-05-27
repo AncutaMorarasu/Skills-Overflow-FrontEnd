@@ -51,11 +51,12 @@ export default function DeclinedUsers() {
     axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } })
       .then(response => {
         if (response.status === 200) {
-          getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
       },
         error => {
+          console.log(save);
+
           console.log(error);
         }
       );
@@ -66,6 +67,8 @@ export default function DeclinedUsers() {
     localData();
     axios.delete(`http://localhost:8081/admin/remove/${getUserId}`, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } }).then(
       response => {
+        console.log(save);
+
         if (response.status === 200) {
           getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
@@ -73,6 +76,7 @@ export default function DeclinedUsers() {
         console.log(response)
       },
       error => {
+        console.log(save);
         console.log(error);
       }
     );
@@ -145,8 +149,8 @@ export default function DeclinedUsers() {
                     <td>{lastName}</td>
                     <td>{email}</td>
                     <td>
-                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to accept this user's request?"); setSave(true) }}>Approve</Button>
-                      <Button type="button" className="btn btn-danger btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to delete this user's request?"); setSave(false) }}>Delete</Button>
+                      <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to accept this user's request?"); setSave(false) }}>Approve</Button>
+                      <Button type="button" className="btn btn-danger btn-table" onClick={() => { toggle(); setUserId(userId); setModalMessage("Are you sure you want to delete this user's request?"); setSave(true) }}>Delete</Button>
                     </td>
                   </tr>
                 ))}
