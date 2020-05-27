@@ -347,7 +347,7 @@ textarea {
 
 .table__container {
   background-color: #f4f4f4;
-  width: 80%;
+  width: fit-content;
 }
 
 .table_head {

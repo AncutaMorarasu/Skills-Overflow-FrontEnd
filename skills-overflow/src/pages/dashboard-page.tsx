@@ -11,7 +11,7 @@ import Modal from "react-bootstrap/Modal";
 import cogoToast from "cogo-toast";
 
 
-function Dashboard() {
+function Dashboard(props: any) {
   const [modal, setModal] = useState(false);
   const [notification, setNotification] = useState([]);
   const [notificationId, setNotificationId] = useState<number>(0);
@@ -24,7 +24,7 @@ function Dashboard() {
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
   const [url, setUrl] = useState('');
-
+  const { isAuthenticated, setUserHasAuthenticated } = props;
 
   function userVsAdmin() {
 
@@ -48,9 +48,9 @@ function Dashboard() {
 
   const signOut = () => {
     localStorage.clear();
+    setUserHasAuthenticated(false);
     history.push("/");
   };
-
 
   const changeParams = (event: any) => {
     const param = event.target.value;
