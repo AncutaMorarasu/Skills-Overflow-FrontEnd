@@ -62,6 +62,7 @@ function ProfilePage() {
             })
     }, []
     );
+    //  const renderPostsList= 
     return (
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
@@ -78,6 +79,7 @@ function ProfilePage() {
                 </div>
                 <div className="d-flex flex-column align-items-start border-bottom">
                     <h2>Questions</h2>
+                    {userPosts.length === 0 ? <h4>No questions yet</h4> : ""}
                     {userPosts.map(({ postId, title }) => {
                         return (<Link to={`/singlePost/${postId}`} >{title} </Link>
                         )
@@ -85,6 +87,7 @@ function ProfilePage() {
                 </div>
                 <div className="d-flex flex-column align-items-start border-bottom">
                     <h2>Answers</h2>
+                    {userAnswers.length === 0 ? <h4>No answers yet</h4> : ""}
                     {userAnswers.map(({ postId, title }) => {
                         return (<Link to={`/singlePost/${postId}`} >{title} </Link>
                         )
