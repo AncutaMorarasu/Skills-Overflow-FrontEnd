@@ -28,7 +28,6 @@ export default function RegisterPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    console.log(values);
     setValues({
       email: "",
       userName: "",
@@ -48,7 +47,6 @@ export default function RegisterPage() {
   function checkAndRegister() {
     axios.post("http://localhost:8081/signUp", values).then(
       response => {
-        console.log(response.data);
         if (JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
           cogoToast.error("This email is already taken.", { hideAfter: 5 });
           return;
@@ -73,7 +71,7 @@ export default function RegisterPage() {
       cogoToast.error("Your username must have at least 2 characters.", { hideAfter: 5 });
       return false;
     } else if (values.password.length < 5 || values.secPassword.length < 5 || values.password.length > 20 || values.secPassword.length > 20) {
-      cogoToast.error("Your password should containt at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
+      cogoToast.error("Your password should contain at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
       return false;
     } else if (!values.password.localeCompare(values.secPassword) === false) {
       cogoToast.error("Passwords do not match.", { hideAfter: 5 });

@@ -28,13 +28,7 @@ function DownPagination(props: any) {
 
     //initial e -1, ca vreau ca atunci cand e 0 sa se redirecteze fix unde vreau eu
     if (total < 0) return pageNumbers;
-    // if (total == 0)
-    // {
-    //   history.replace({
-    //     pathname: '/no-posts'
-    //   })
-    //   return pageNumbers; // nu a gasit pagina; aici il pot retrimite pe o pagina de postari
-    // } 
+
     if (total < 10) { pageNumbers.push(0); return pageNumbers; }
 
     if (maxPage > 4) {
@@ -55,20 +49,20 @@ function DownPagination(props: any) {
   const renderPageNumberss = pageNumbers.map((number: number) => {
     return (
       <Pagination.Item key={number} onClick={handleSelect} data-input-name={number + 1}  active={number === pageNo}>
-        {/* div div div div div div div div div div div div   */}
-        {number + 1}
-      </Pagination.Item>
+        {/* div div div div div div div div div div div div   */}  
+        { number + 1 }
+      </Pagination.Item >
     );
-  }
+}
   );
 
-  return (
-    <div>
-      <Pagination>
-        {renderPageNumberss}
-      </Pagination>
-    </div>
-  )
+return (
+  <div>
+    <Pagination>
+      {renderPageNumberss}
+    </Pagination>
+  </div>
+)
 }
 
 export default DownPagination;

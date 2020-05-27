@@ -144,10 +144,11 @@ export default function IndividualPost() {
                 <div className='question-container d-flex flex-column align-items-start border-bottom '>
                     <h1>{post.postDTO.title}</h1>
                     <p className=''>{post.postDTO.body}</p>
-                    <span>Number of comments: {post.postDTO.numberOfComments}</span>
-                    <span> Create date: {post.postDTO.createDate}</span>
-                    <span>Question topics: {post.postDTO.topics}</span>
-                    <span>Posted by: {post.postDTO.userName}</span>
+                    <p>  <span className="font-weight-bold">Number of comments:</span> {post.postDTO.numberOfComments} </p>
+                    <p>  <span className="font-weight-bold">Create date: </span> {post.postDTO.createDate}</p>
+                    <p> <span className="font-weight-bold">Question topics: </span>{post.postDTO.topics}</p>
+                    <p> <span className="font-weight-bold">Posted by: </span>  {post.postDTO.userName}</p>
+
                 </div>
                 {post.postDTO.numberOfComments === 0 ? <h2 className="answers-count">No answers yet.</h2>
                     : <h2 className="answers-count">{post.postDTO.numberOfComments} Answer(s):</h2>}

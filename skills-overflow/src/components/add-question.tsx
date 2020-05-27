@@ -84,9 +84,9 @@ function QuestionModal() {
       })
       .then(() => {
         console.log(newQuestion)
-        cogoToast.info("Your question has been submitted for review.");;
+        cogoToast.info("Your question has been submitted for review.");
 
-      });
+      }, error => { cogoToast.error("Something went wrong, please try again.") });
   }
 
   return (
