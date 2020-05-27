@@ -558,3 +558,21 @@ width: 100%;
 .show-modal-btn{
   margin-bottom: 3rem;
 }
+
+.table-search{
+  width: 17rem;
+  margin-top: 1rem;
+  margin-bottom: -1.2rem;
+}
+
+.question-update{
+  width: 19rem;
+}
+
+.answer-update{
+  width: 19rem;
+}
+
+.table, thead, tr, th, td {
+  vertical-align: middle !important;
+}
