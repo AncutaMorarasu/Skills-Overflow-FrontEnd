@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -15,8 +15,11 @@ import axios from "axios";
 import Dashboard from "./dashboard-page";
 import cogoToast from "cogo-toast";
 
-function LoginPage() {
+function LoginPage(props: any) {
   const [values, setValues] = useState({ email: "", password: "" });
+  const [redirect, setRedirect] = useState(false);
+  const history = useHistory();
+  const { isAuthenticated, setUserHasAuthenticated } = props.appProps;
   function handleChange(event: any) {
     const { name, value } = event.target;
     setValues({
@@ -24,8 +27,10 @@ function LoginPage() {
       [name]: value
     });
   }
+  useEffect(() => {
+    setRedirect(isAuthenticated)
+  }, [isAuthenticated])
 
-  const history = useHistory();
   function handleSubmit(event: any) {
     event.preventDefault();
     setValues({ email: "", password: "" });
@@ -64,11 +69,13 @@ function LoginPage() {
   function validateRole(role: any) {
     switch (role) {
       case "[admin]":
-        history.push("/dashboard");
+        setUserHasAuthenticated(true);
+        //history.push("/dashboard");
         cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
         break;
       case "[approved user]":
-        history.push("/dashboard");
+        setUserHasAuthenticated(true);
+        //history.push("/dashboard");
         cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
         break;
       case "[pending user]":
@@ -85,6 +92,12 @@ function LoginPage() {
         cogoToast.error("Something is off, please try again.");
     }
   }
+  if (redirect) {
+    console.log("heei redirecti" + redirect)
+    history.push("/dashboard")
+    //return <Redirect to='/dashboard' />  
+  }
+
   return (
     <div className="container">
       <h1>Welcome to Skills Overflow</h1>
