@@ -14,7 +14,7 @@ import cogoToast from "cogo-toast";
 function Dashboard() {
   const [modal, setModal] = useState(false);
   const [notification, setNotification] = useState([]);
-  const [notificationId, setNotificationId] = useState();
+  const [notificationId, setNotificationId] = useState<number>(0);
   let [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
@@ -78,11 +78,12 @@ function Dashboard() {
     setModal(!modal);
   }
 
-  function deleteNotification() {
+  function deleteNotification(notificationId: any) {
     userVsAdmin();
-    axios.delete(`http://localhost:8081/admin/deleteComment/${notificationId}`, { headers: { Authorization: 'Bearer ' + currentUser.token, "Content-type": "application/json" } }).then(
+    axios.put(`http://localhost:8081/deleteNotif/${notificationId}`,{}, { headers: { Authorization: 'Bearer ' + currentUser.token, "Content-type": "application/json" } }).then(
       response => {
         if (response.status === 200) {
+          console.log(notificationId)
           getNotification();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
@@ -166,7 +167,7 @@ function Dashboard() {
                     <td className="not-rows"><Link to={postURL}  style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
                     <td className="not-rows">{postDate}</td>
                     <td>
-                    <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {setNotificationId(notificationId); deleteNotification()}}>
+                    <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {console.log(notificationId); deleteNotification(notificationId);setNotificationId(notificationId);console.log(notificationId);}}>
                       <span aria-hidden="true">&times;</span>
                     </Button>
                     </td>
