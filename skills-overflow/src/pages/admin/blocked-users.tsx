@@ -68,7 +68,6 @@ export default function BlockedUsers() {
     axios.get('http://localhost:8081/allBlockedUsers', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
       response => {
         if (response.status === 200) {
-          getUsers();
         }
         const setData = response.data;
         setUserProfile(setData);
@@ -93,7 +92,7 @@ export default function BlockedUsers() {
 
    //Filter input
    const filteredUsers = userProfile.filter((user: any) => {
-    return user.email.toLowerCase().includes(searchTerm.toLowerCase())
+   return user.email.toLowerCase().includes(searchTerm.toLowerCase())
   })
 
   return (
