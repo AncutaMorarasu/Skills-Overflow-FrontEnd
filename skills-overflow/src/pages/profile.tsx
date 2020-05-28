@@ -34,17 +34,7 @@ function ProfilePage() {
             tokenCheck = JSON.parse(token);
         }
     }
-    useEffect(() => {
-        if (typeof userlogged === "string") {
-            currentUser = JSON.parse(userlogged);
-            console.log(currentUser);
-            if (currentUser.role === "[admin]") {
-                setShowAdmin(true);
-            } else {
-                setShowAdmin(false);
-            }
-        }
-        localData();
+    function getUserDetails() {
         axios.get("http://localhost:8081/userProfile/getUserBySessionToken", { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
             .then(response => {
 
@@ -60,6 +50,19 @@ function ProfilePage() {
                 setUserAnswers(response.data);
                 console.log(response.data)
             })
+    }
+    useEffect(() => {
+        if (typeof userlogged === "string") {
+            currentUser = JSON.parse(userlogged);
+            console.log(currentUser);
+            if (currentUser.role === "[admin]") {
+                setShowAdmin(true);
+            } else {
+                setShowAdmin(false);
+            }
+        }
+        localData();
+        getUserDetails();
     }, []
     );
     //  const renderPostsList= 
@@ -98,6 +101,7 @@ function ProfilePage() {
                     <UsernameChange />
                     <NameChange />
                     < PasswordChange />
+
                 </div>
             </div>
 

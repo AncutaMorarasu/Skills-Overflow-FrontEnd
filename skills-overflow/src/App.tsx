@@ -51,7 +51,7 @@ function App() {
           <PrivateRoute
             path={["/posts/:pageNo/:criteria?", "/dashboard"]}
             component={Dashboard}
-            appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
+            appProps={{ isAuthenticated, setUserHasAuthenticated }}
           />
           {/* <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
             <Dashboard />
@@ -59,7 +59,7 @@ function App() {
           <PrivateRoute
             path="/singlePost/:id"
             component={IndividualPost}
-            appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
+            appProps={{ isAuthenticated, setUserHasAuthenticated }}
           />
           {/* <Route path="/singlePost/:id">
             <IndividualPost />
