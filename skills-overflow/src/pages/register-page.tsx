@@ -30,16 +30,9 @@ export default function RegisterPage() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    setValues({
-      email: "",
-      userName: "",
-      password: "",
-      secPassword: "",
-      firstName: "",
-      lastName:"",
-      backValueEmail: "email already taken",
-      backValueUser: "username already taken"
-    });
+    values.backValueEmail= "email already taken";
+    values.backValueUser= "username already taken";
+  
   }
 
   function submit() {
@@ -51,6 +44,7 @@ export default function RegisterPage() {
   function checkAndRegister() {
     axios.post("http://localhost:8081/signUp", values).then(
       response => {
+        console.log(response)
         if (JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
           cogoToast.error("This email is already taken.", { hideAfter: 5 });
           return;
