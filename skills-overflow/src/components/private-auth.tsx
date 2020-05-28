@@ -18,7 +18,7 @@ function PrivateRoute(props: any) {
                     return <Component {...pr} {...appProps} />
                 }
                 else {
-                    cogoToast.warn("This is route is protected, log in to continue")
+                    cogoToast.warn("This is route is protected, please log in to continue.")
                     return <Redirect to="/" />
                 }
             }

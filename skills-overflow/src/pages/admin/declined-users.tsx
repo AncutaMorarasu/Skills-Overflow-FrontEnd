@@ -23,8 +23,8 @@ export default function DeclinedUsers() {
       tokenCheck = JSON.parse(token);
     }
   }
-  
-  function handleChange(event: any){
+
+  function handleChange(event: any) {
     setSearchTerm(event.target.value);
   }
 
@@ -51,6 +51,7 @@ export default function DeclinedUsers() {
     axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } })
       .then(response => {
         if (response.status === 200) {
+          getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
       },
@@ -125,7 +126,7 @@ export default function DeclinedUsers() {
           <h1 className="declined_header">
             Declined requests
           </h1>
-          <input type="text" className="form-control table-search" placeholder="Search by email"  value={searchTerm} onChange={handleChange}/>
+          <input type="text" className="form-control table-search" placeholder="Search by email" value={searchTerm} onChange={handleChange} />
         </div>
         <div className="table_container_declined_users">
           <div className="table__container">

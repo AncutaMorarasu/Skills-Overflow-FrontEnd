@@ -68,10 +68,10 @@ export default function UsernameChange() {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModalUser}>
                         Close
-                                     </Button>
+                    </Button>
                     <Button variant="primary" type="submit" onClick={submit}>
                         Save Changes
-                                    </Button>
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>
