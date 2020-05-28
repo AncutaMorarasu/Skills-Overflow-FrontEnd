@@ -132,7 +132,7 @@ export default function RegisterPage() {
           <Form.Group controlId="validationCustomUsername">
             <Form.Control
               type="firstName"
-              placeholder="Enter your user first name"
+              placeholder="Enter your first name"
               name="firstName"
               value={values.firstName}
               onChange={handleChange}

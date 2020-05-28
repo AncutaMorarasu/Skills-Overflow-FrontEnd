@@ -61,7 +61,7 @@ export default function UsernameChange() {
                 <Modal.Body>
                     <Form className="account-form" onSubmit={handleSubmit}>
                         <Form.Group controlId="username">
-                            <Form.Control onChange={handleChange} type="text" placeholder="Enter your new username" className='account-input' />
+                            <Form.Control onChange={handleChange} type="userName" name="userName" placeholder="Enter your new username" className='account-input' />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
