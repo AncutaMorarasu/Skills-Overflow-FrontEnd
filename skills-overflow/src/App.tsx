@@ -53,81 +53,61 @@ function App() {
             component={Dashboard}
             appProps={{ isAuthenticated, setUserHasAuthenticated }}
           />
-          {/* <Route path={["/posts/:pageNo/:criteria?", "/dashboard"]}>
-            <Dashboard />
-          </Route> */}
+          
           <PrivateRoute
             path="/singlePost/:id"
             component={IndividualPost}
             appProps={{ isAuthenticated, setUserHasAuthenticated }}
           />
-          {/* <Route path="/singlePost/:id">
-            <IndividualPost />
-          </Route> */}
+          
           <PrivateRoute
             path="/no-posts"
             component={NoPosts}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/no-posts">
-            <NoPosts />
-          </Route> */}
+          
           <PrivateRoute
             path="/no-search-result"
             component={NoSearchResult}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/no-search-result">
-            <NoSearchResult />
-          </Route> */}
+          
           <PrivateRoute
             path="/account-requests"
             component={PendingUsers}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/account-requests">
-            <PendingUsers />
-          </Route> */}
+          
           <PrivateRoute
             path="/declined-users"
             component={DeclinedUsers}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/declined-users">
-            <DeclinedUsers />
-          </Route> */}
+          
           <PrivateRoute
             path="/blocked-users"
             component={BlockedUsers}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/blocked-users">
-            <BlockedUsers />
-          </Route> */}
+          
           <PrivateRoute
             path="/approved-profiles"
             component={ApprovedProfiles}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/approved-profiles">
-            <ApprovedProfiles />
-          </Route> */}
+          
           <PrivateRoute
             path="/pending-questions"
             component={PendingQuestions}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/pending-questions">
-            <PendingQuestions />
-          </Route> */}
+          
           <PrivateRoute
             path="/pending-answers"
             component={PendingAnswers}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} // or whatever method you use for checking auth
           />
-          {/* <Route path="/pending-answers">
-            <PendingAnswers />
-          </Route> */}
+          
           <Route path="/registration-invalid-token">
             <RegistrationInvalidToken />
           </Route>

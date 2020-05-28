@@ -583,3 +583,9 @@ width: 100%;
 .star-icon {
   color: green;
 }
+
+.no-posts{
+  margin: 0 auto;
+  line-height: 2rem;
+  background-color: #ffa41b;
+}
