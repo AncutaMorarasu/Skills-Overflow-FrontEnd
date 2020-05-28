@@ -140,7 +140,6 @@ export default function IndividualPost() {
         );
     })
 
-
     return (
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
