@@ -333,10 +333,10 @@ textarea {
   display: flex;
   justify-content: center;
   margin-top: 3%;
-  width: 100%;
+  width: 75%;
   text-align: center;
   position: relative;
-  left: 7%;
+  left: 19%;
 }
 
 .table-bordered {
@@ -347,7 +347,7 @@ textarea {
 
 .table__container {
   background-color: #f4f4f4;
-  width: fit-content;
+  width: 100%;
 }
 
 .table_head {
