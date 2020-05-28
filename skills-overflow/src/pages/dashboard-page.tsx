@@ -15,6 +15,7 @@ function Dashboard() {
   const [modal, setModal] = useState(false);
   const [notification, setNotification] = useState([]);
   const [notificationId, setNotificationId] = useState<number>(0);
+  const [notificationString, setNotificationString] = useState('');
   let [userToken, setUserToken] = useState<number>(0);
   const [showAdmin, setShowAdmin] = useState(false);
   const [searchParam, setParam] = useState("");
@@ -85,7 +86,7 @@ function Dashboard() {
         if (response.status === 200) {
           console.log(notificationId)
           getNotification();
-          cogoToast.success("The changes have been made", { hideAfter: 5 })
+          cogoToast.success("Notification was cleared.", { hideAfter: 5 })
         }
         console.log(response);
       },
@@ -101,7 +102,6 @@ function Dashboard() {
         response => {
           const setData = response.data;
           setNotification(setData);
-          console.log(setData);
         }
       ).catch(function (error) {
         if (error.request.status === 403) {
@@ -109,6 +109,33 @@ function Dashboard() {
         }
       })
   }
+
+  function showNotifications(){
+    
+    if(notification.length === 0){
+        
+      return(<h3>There is no notification at this moment</h3>);
+
+      }else{
+        return(
+          notification.map(({ notificationString, postName, postURL, postDate, notificationType, notificationId}) => (
+            <tr key={notificationId}>
+              <th scope="row"></th>
+              <td className="not-rows">{notificationString}</td>
+              <td className="not-rows"><Link to={postURL}  style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
+              <td className="not-rows">{postDate}</td>
+              <td>
+              <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {deleteNotification(notificationId);setNotificationId(notificationId);}}>
+                <span aria-hidden="true">&times;</span>
+              </Button>
+              </td>
+            </tr>
+          ))
+        )
+      }
+}
+  
+
 
   return (
     <div className="dashboard">
@@ -143,7 +170,7 @@ function Dashboard() {
             </div>
           </div>
         </form>
-      </div> *
+      </div> 
       <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
 
       <QuestionCard
@@ -160,19 +187,7 @@ function Dashboard() {
           <div className="modal-body">
             <table className="table table-hover">
               <tbody>
-                {notification.map(({ notificationString, postName, postURL, postDate, notificationType, notificationId}) => (
-                  <tr key={notificationId}>
-                    <th scope="row"></th>
-                    <td className="not-rows">{notificationString}</td>
-                    <td className="not-rows"><Link to={postURL}  style={{ textDecoration: 'none', color: 'inherit' }}  >{postName}</Link></td>
-                    <td className="not-rows">{postDate}</td>
-                    <td>
-                    <Button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => {console.log(notificationId); deleteNotification(notificationId);setNotificationId(notificationId);console.log(notificationId);}}>
-                      <span aria-hidden="true">&times;</span>
-                    </Button>
-                    </td>
-                  </tr>
-))}
+                {showNotifications()}
               </tbody>
             </table>
           </div>
