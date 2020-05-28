@@ -123,8 +123,8 @@ input::placeholder,
 }
 
 .formRegisterContainer {
-  width: 370px;
-  height: 450px;
+  width: fit-content;
+  height: fit-content;
   border-radius: 5px;
   background: white;
   color: #393e46;

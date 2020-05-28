@@ -12,6 +12,8 @@ export default function RegisterPage() {
     userName: "",
     password: "",
     secPassword: "",
+    firstName: "",
+    lastName:"",
     backValueEmail: "email already taken",
     backValueUser: "username already taken"
   });
@@ -33,6 +35,8 @@ export default function RegisterPage() {
       userName: "",
       password: "",
       secPassword: "",
+      firstName: "",
+      lastName:"",
       backValueEmail: "email already taken",
       backValueUser: "username already taken"
     });
@@ -64,7 +68,7 @@ export default function RegisterPage() {
   };
 
   function checkPassword() {
-    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0) {
+    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0 || values.lastName.length === 0 || values.firstName.length === 0 ) {
       cogoToast.error("Please fill in all the required fields.", { hideAfter: 5 });
       return false;
     } else if (values.userName.length < 2) {
@@ -122,6 +126,24 @@ export default function RegisterPage() {
               placeholder="Enter your email address"
               name="email"
               value={values.email}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="validationCustomUsername">
+            <Form.Control
+              type="firstName"
+              placeholder="Enter your user first name"
+              name="firstName"
+              value={values.firstName}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="validationCustomUsername">
+            <Form.Control
+              type="lastName"
+              placeholder="Enter your last name"
+              name="lastName"
+              value={values.lastName}
               onChange={handleChange}
             />
           </Form.Group>

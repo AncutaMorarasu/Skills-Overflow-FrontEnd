@@ -29,16 +29,7 @@ export default function ChangePasswordPage() {
       headers: { "Content-Type": "application/json" }
     };
 
-    if (!password.password.localeCompare(password.secPassword) === false) {
-      cogoToast.error("Passwords do not match.", { hideAfter: 5 });
-      return;
-    } else if (
-      password.password.length === 0 ||
-      password.secPassword.length === 0
-    ) {
-      cogoToast.error("Please insert a valid password.", { hideAfter: 5 });
-      return;
-    } else {
+    if (checkPassword()) {
       axios
         .put(
           `http://localhost:8081/savePassword?token=${token.token}`,
@@ -47,6 +38,8 @@ export default function ChangePasswordPage() {
         )
         .then(
           response => {
+            cogoToast.success(" Your password was reset.", { hideAfter: 5 });
+            history.push("/");
             console.log(response);
           },
           error => {
@@ -54,8 +47,34 @@ export default function ChangePasswordPage() {
           }
         );
     }
-    cogoToast.success(" Your password was reset.", { hideAfter: 5 });
-    history.push("/");
+    
+  }
+
+
+  function checkPassword() {
+    if (password.password.length === 0 || password.secPassword.length === 0 ) {
+      cogoToast.error("Please insert a valid password.", { hideAfter: 5 });
+      return false;
+    }  else if (password.password.length < 5 || password.secPassword.length < 5 || password.password.length > 20 || password.secPassword.length > 20) {
+      cogoToast.error("Your password should containt at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
+      return false;
+    } else if (!password.password.localeCompare(password.secPassword) === false) {
+      cogoToast.error("Passwords do not match.", { hideAfter: 5 });
+      return false;
+    } else if (checkForSpaces()) {
+      cogoToast.error("Your password must not contain white spaces.", { hideAfter: 5 });
+      return false
+    } else {
+      return true;
+    }
+  }
+
+  function checkForSpaces() {
+    if (/\s/g.test(password.password) && /\s/g.test(password.secPassword)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   return (
@@ -80,7 +99,7 @@ export default function ChangePasswordPage() {
               name="secPassword"
               value={password.secPassword}
               onChange={handleChange}
-              required
+              
             />
           </Form.Group>
           <Button
