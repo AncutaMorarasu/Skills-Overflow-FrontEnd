@@ -51,6 +51,7 @@ export default function DeclinedUsers() {
     axios.put(`http://localhost:8081/admin/approveRequest/${getUserId}`, {}, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } })
       .then(response => {
         if (response.status === 200) {
+          getUsers();
           cogoToast.success("The changes have been made", { hideAfter: 5 })
         }
       },
