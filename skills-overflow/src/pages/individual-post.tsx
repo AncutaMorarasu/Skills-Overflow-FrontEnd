@@ -7,6 +7,7 @@ import axios from "axios";
 import cogoToast from "cogo-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Card from "react-bootstrap/Card";
 
 export default function IndividualPost() {
     const [showAdmin, setShowAdmin] = useState(false);
@@ -144,13 +145,21 @@ export default function IndividualPost() {
         <div>
             <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
             <div className='comm-container'>
-                <div className='question-container d-flex flex-column align-items-start border-bottom '>
-                    <h1>{post.postDTO.title}</h1>
-                    <p className=''>{post.postDTO.body}</p>
-                    <p>  <span className="font-weight-bold">Number of comments:</span> {post.postDTO.numberOfComments} </p>
-                    <p>  <span className="font-weight-bold">Create date: </span> {post.postDTO.createDate}</p>
-                    <p> <span className="font-weight-bold">Question topics: </span>{post.postDTO.topics}</p>
-                    <p> <span className="font-weight-bold">Posted by: </span>  {post.postDTO.userName}</p>
+                <div className='question-container d-flex flex-column align-items-start '>
+                    <Card className="cardText">
+                        <Card.Body>
+                            <Card.Title>
+                                <h3>{post.postDTO.title}</h3>
+                            </Card.Title>
+                            <Card.Text>
+                                <p className=''>{post.postDTO.body}</p>
+                                <p>  <span className="font-weight-bold">Number of comments:</span> {post.postDTO.numberOfComments} </p>
+                                <p>  <span className="font-weight-bold">Create date: </span> {post.postDTO.createDate}</p>
+                                <p> <span className="font-weight-bold">Question topics: </span>{post.postDTO.topics}</p>
+                                <p> <span className="font-weight-bold">Posted by: </span>  {post.postDTO.userName}</p>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
 
                 </div>
                 {post.postDTO.numberOfComments === 0 ? <h2 className="answers-count">No answers yet.</h2>
