@@ -27,13 +27,13 @@ const ModalComponent: React.SFC<ModalProps> = ({
       <Modal.Body>{modalM}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={toggle}>
-          Close
+          No
         </Button>
         <Button
           variant="primary"
           onClick={!save ? approveRequest : declineRequest}
         >
-          Save Changes
+          Yes
         </Button>
       </Modal.Footer>
     </Modal>

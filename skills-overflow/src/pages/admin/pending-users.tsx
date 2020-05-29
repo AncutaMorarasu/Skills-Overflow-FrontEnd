@@ -145,7 +145,7 @@ export default function PendingUsers() {
                           toggle();
                           setGetUserId(userId);
                           setModalMessage(
-                            "Are you sure you want to accept this users request?"
+                            "Are you sure you want to accept this user's request?"
                           );
                           setSave(false);
                         }}
@@ -159,7 +159,7 @@ export default function PendingUsers() {
                           toggle();
                           setGetUserId(userId);
                           setModalMessage(
-                            "Are you sure you want to decline this users request?"
+                            "Are you sure you want to decline this user's request?"
                           );
                           setSave(true);
                         }}
