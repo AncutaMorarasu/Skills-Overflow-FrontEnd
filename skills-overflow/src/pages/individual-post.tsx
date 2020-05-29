@@ -152,8 +152,8 @@ export default function IndividualPost() {
                             </Card.Title>
                             <Card.Text>
                                 <p className=''>{post.postDTO.body}</p>
-                                <p>  <span className="font-weight-bold">Number of comments:</span> {post.postDTO.numberOfComments} </p>
-                                <p>  <span className="font-weight-bold">Create date: </span> {post.postDTO.createDate}</p>
+{/*                                 <p>  <span className="font-weight-bold">Number of comments:</span> {post.postDTO.numberOfComments} </p>
+ */}                                <p>  <span className="font-weight-bold">Create date: </span> {post.postDTO.createDate}</p>
                                 <p> <span className="font-weight-bold">Question topics: </span>{post.postDTO.topics}</p>
                                 <p> <span className="font-weight-bold">Posted by: </span>  {post.postDTO.userName}</p>
                             </Card.Text>
