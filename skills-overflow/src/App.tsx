@@ -125,9 +125,6 @@ function App() {
             component={ProfilePage}
             appProps={{ isAuthenticated, setUserHasAuthenticated }} 
           />
-          {/* <Route path="/profile">
-            <ProfilePage />
-          </Route> */}
           <Route path="">
             <NotFoundPage />
           </Route>
