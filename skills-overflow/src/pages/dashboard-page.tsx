@@ -17,7 +17,7 @@ function Dashboard(props: any) {
   const [notificationId, setNotificationId] = useState<number>(0);
   const [notificationString, setNotificationString] = useState('');
   let [userToken, setUserToken] = useState<number>(0);
-  const [showAdmin, setShowAdmin] = useState(false);
+  const [role, setRole] = useState("STUDENT");
   const [searchParam, setParam] = useState("");
   const [toChild, setToChild] = useState("");
   const [effects, setEffects] = useState(true);
@@ -34,10 +34,12 @@ function Dashboard(props: any) {
       setUserToken(currentUser.token)
       console.log(currentUser);
       if (currentUser.role === "[admin]") {
-        setShowAdmin(true);
-      } else {
-        setShowAdmin(false);
-      }
+        setRole("ADMIN");
+      } else if(currentUser.role === "[company]") {
+        setRole("COMPANY");
+      } else if(currentUser.role === "[student]") {
+        setRole("STUDENT");
+      } 
     }
   }
 
@@ -115,7 +117,7 @@ function Dashboard(props: any) {
           </div>
         </form>
       </div>
-      <div>{showAdmin ? <SidenavAdmin /> : <SidenavStudent />}</div>
+      <div>{role === "ADMIN" ? <SidenavAdmin /> : (role === "STUDENT" ? <SidenavStudent /> : null)}</div>
 
       <JobCard
       effects={effects}></JobCard>

@@ -98,6 +98,10 @@ export default function ExistingProfiles(props: any) {
   //Open modal
   function toggle() {
     setModal(!modal);
+    console.log("Imi e somn " + modal);
+    if(modal) {
+      //window.location.reload();
+    }
   }
 
   //Filter input

@@ -102,7 +102,7 @@ function QuestionModal() {
               className="d-block rounded-2"
               rows={5}
               cols={55}
-              name="body"
+              name="description"
               onChange={handleChange}
               
               

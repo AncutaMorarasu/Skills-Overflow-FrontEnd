@@ -32,6 +32,8 @@ import NewsAdmin from "./pages/admin/news"
 import News from "./pages/news"
 import StudentProfile from "./pages/profile-student"
 
+import IndividualInfo from "./pages/individual-info-news"
+
 function App() {
   const bol = useAuth();
   const [isAuthenticated, setUserHasAuthenticated] = useState<boolean>(bol);
@@ -77,6 +79,12 @@ function App() {
           <PrivateRoute
             path="/singlePost/:id"
             component={IndividualPost}
+            appProps={{ isAuthenticated, setUserHasAuthenticated }}
+          />
+
+          <PrivateRoute
+            path="/info/:id"
+            component={IndividualInfo}
             appProps={{ isAuthenticated, setUserHasAuthenticated }}
           />
           

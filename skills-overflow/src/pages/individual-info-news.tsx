@@ -11,18 +11,17 @@ export default function IndividualPost(props: any) {
   const location = useLocation<{ topics: string[] }>();
   let { criteria, pageNo } = useParams();
   //aici trebuie sa iei postarile
-  const [job, setJob] = useState({
-      index:"",
-      jobTitle:"",
+  const [info, setInfo] = useState({
+    newsId:"",
+    title:"",
       description:"",
       createDate: "",
-      field: "",
-      salary:"",
+
 
 
   });
 
-  let jobId = (window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
+  let newsId = (window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
 
 
   let userlogged = localStorage.getItem("user");
@@ -35,10 +34,10 @@ export default function IndividualPost(props: any) {
   function getJobs() {
     localData();
 
-    axios.get("http://localhost:8080/job/" + jobId, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+    axios.get("http://localhost:8080/news/" + newsId, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
     .then(response => {
         console.log(response.data);
-     setJob(response.data)
+     setInfo(response.data)
     })
 
   }
@@ -51,30 +50,24 @@ export default function IndividualPost(props: any) {
 
  
   useEffect(() => {
-    console.log("SOCRA TA");
     getJobs();
-    console.log("Done Jobs");
-
   }, [effects]);
 
   
-  console.log("PACALEALE FRAIERRIOLOR");
-  console.log(job);
+ 
+  console.log(info);
       return (
       <Card className="cardText">
         <Card.Body>
           <Card.Title>
-              {job.jobTitle}
+              {info.title}
           </Card.Title>
-          <Card.Text>{job.description}</Card.Text>
+          <Card.Text>{info.description}</Card.Text>
 
           <Card.Text> <span className="font-weight-bold">Created on: </span>
-            {job.createDate}
+            {info.createDate}
           </Card.Text>
-          <Card.Text> <span className="font-weight-bold">Field: </span>  {job.field}</Card.Text>
-          <Card.Text> <span className="font-weight-bold">Salary: </span> {job.salary}</Card.Text>
-          <Card.Text> <span className="font-weight-bold">Posted by: </span> {job.salary}</Card.Text>
-          
+
         </Card.Body>
       </Card >
       );
