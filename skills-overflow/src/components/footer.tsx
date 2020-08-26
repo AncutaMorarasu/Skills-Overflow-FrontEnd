@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="footer">
       <p>
-        Created with <FontAwesomeIcon icon={faHeart} /> by The Brogrammers
+        Created by Paul Condurachi
       </p>
     </footer>
   );

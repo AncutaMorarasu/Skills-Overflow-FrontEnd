@@ -48,7 +48,7 @@ export default function NameChange() {
             return;
         } else {
             axios
-                .put("http://localhost:8081/userProfile/changeName", nameDetails, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+                .put("http://localhost:8080/changeName", nameDetails, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
                 .then(() => {
                     cogoToast.success(" You have successfully changed your details");
                     handleCloseModalName();

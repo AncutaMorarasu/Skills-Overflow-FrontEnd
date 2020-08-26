@@ -48,7 +48,7 @@ export default function PasswordChange() {
             newPassword: changedPassword.newPassword
         }
         if (checkPassword()) {
-            axios.put("http://localhost:8081/userProfile/resetPasswordInUserProfile", passReset, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+            axios.put("http://localhost:8080/resetPasswordInUserProfile", passReset, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
                 .then(response => {
                     if (response.data === "old password doesn't match the input") {
                         cogoToast.error("Incorrect current password.", { hideAfter: 5 });

@@ -91,7 +91,8 @@ input::placeholder,
 }
 
 .header {
-  margin: 20px 0 0 50px;
+  margin: 0 0 0 0;
+  text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
@@ -245,7 +246,12 @@ input::placeholder,
   background-color: white;
 }
 
-.cardText,
+.cardText {
+  color: #393e46;
+  width: 50%;
+  margin-left: 25%;
+
+}
 .modal-header,
 .modal-body {
   color: #393e46;

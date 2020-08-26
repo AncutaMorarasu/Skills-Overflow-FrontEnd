@@ -51,7 +51,7 @@ function QuestionCard(props: any) {
     }
   }
 
-  function getPosts() {
+  function getJobs() {
     localData();
     //0 in caz ca intra direct pe dashboard
     let actualPageNo = pageNo ? pageNo - 1 : 0;
@@ -97,7 +97,7 @@ function QuestionCard(props: any) {
   }
 
   useEffect(() => {
-    getPosts();
+    getJobs();
     console.log("the search param is --> ", searchParam);
 
   }, [effects]);

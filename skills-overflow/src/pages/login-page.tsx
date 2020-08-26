@@ -10,7 +10,7 @@ import {
   useHistory
 } from "react-router-dom";
 import PasswordRecPage from "../pages/password-rec-page";
-import RegisterPage from "../pages/register-page";
+import RegisterPage from "./student-register-page";
 import axios from "axios";
 import Dashboard from "./dashboard-page";
 import cogoToast from "cogo-toast";
@@ -43,7 +43,7 @@ function LoginPage(props: any) {
       });
       return;
     } else {
-      axios.post("http://localhost:8081/logIn", values).then(
+      axios.post("http://localhost:8080/logIn", values).then(
         response => {
           if (response.status === 200) {
             let userLog = JSON.stringify(response.data);
@@ -73,12 +73,22 @@ function LoginPage(props: any) {
         //history.push("/dashboard");
         cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
         break;
-      case "[approved user]":
+      case "[student]":
         setUserHasAuthenticated(true);
         //history.push("/dashboard");
         cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
         break;
-      case "[pending user]":
+      case "[company]":
+        setUserHasAuthenticated(true);
+        //history.push("/dashboard");
+        cogoToast.success("Yay, you're logged in.", { hideAfter: 5 });
+        break;
+      case "[pending student]":
+        cogoToast.warn("Your account request is pending approval.", {
+          hideAfter: 5
+        });
+        break;
+      case "[pending company  ]":
         cogoToast.warn("Your account request is pending approval.", {
           hideAfter: 5
         });
@@ -100,7 +110,7 @@ function LoginPage(props: any) {
 
   return (
     <div className="container">
-      <h1>Welcome to Skills Overflow</h1>
+      <h1>Welcome to University LinkedIn</h1>
       <Container className="formContainer">
         <h2 className="border-bottom">Log In</h2>
         <Form onSubmit={handleSubmit}>
@@ -131,11 +141,8 @@ function LoginPage(props: any) {
           >
             Submit
           </Button>{" "}
-          <div className="flex-column ">
-            <Link to="/recovery" className="help-links">
-              Forgot your password?
-            </Link>
-            <Link to="/register" className="help-links">
+          <div >
+            <Link to="/choose/register" className="help-links">
               Don't have an account? Sign up here!
             </Link>
           </div>

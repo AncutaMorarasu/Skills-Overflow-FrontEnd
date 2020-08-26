@@ -8,7 +8,7 @@ import axios from "axios";
 
 export default function UsernameChange() {
     const [showModalUser, setShowModalUser] = useState(false);
-    const [username, setUsername] = useState("");
+    const [phoneNumber, setUsername] = useState("");
 
     const handleShowModalUser = () => setShowModalUser(true);
     const handleCloseModalUser = () => setShowModalUser(false);
@@ -33,13 +33,13 @@ export default function UsernameChange() {
     }
     function submit() {
         localData();
-        if (username.length === 0) {
-            cogoToast.error("Please fill in the username field.", { hideAfter: 5 });
+        if (phoneNumber.length === 0) {
+            cogoToast.error("Please fill your new phone number.", { hideAfter: 5 });
             return;
         } else {
-            console.log(username)
+            console.log(phoneNumber)
             axios
-                .put("http://localhost:8081/userProfile/changeUsername", username, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+                .put("http://localhost:8080/changePhoneNumber", phoneNumber, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
                 .then(() => {
                     cogoToast.success("Successfully changed the username");
                     handleCloseModalUser();
@@ -51,7 +51,7 @@ export default function UsernameChange() {
     }
     return (
         <div className='border-bottom'>
-            <button className='add-comm-btn' onClick={handleShowModalUser}>Update your username</button>
+            <button className='add-comm-btn' onClick={handleShowModalUser}>Update your phone number</button>
             <Modal show={showModalUser} className=" d-flex align-items-center justify-content-center" onHide={handleCloseModalUser} aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Header closeButton>

@@ -6,16 +6,21 @@ import axios from "axios";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 
+import {
+  Link
+} from "react-router-dom";
+
 export default function RegisterPage() {
   const [values, setValues] = useState({
     email: "",
-    userName: "",
+    //userName: "",
     password: "",
     secPassword: "",
-    firstName: "",
-    lastName:"",
+    name: "",
+    location:"",
+    companyNumber:"",
     backValueEmail: "email already taken",
-    backValueUser: "username already taken"
+    //backValueUser: "username already taken"
   });
   const [check, setCheck] = useState(true);
   const history = useHistory();
@@ -31,7 +36,7 @@ export default function RegisterPage() {
   function handleSubmit(event: any) {
     event.preventDefault();
     values.backValueEmail= "email already taken";
-    values.backValueUser= "username already taken";
+    //values.backValueUser= "username already taken";
   
   }
 
@@ -42,17 +47,15 @@ export default function RegisterPage() {
   }
 
   function checkAndRegister() {
-    axios.post("http://localhost:8081/signUp", values).then(
+    axios.post("http://localhost:8080/company/signUp", values).then(
       response => {
         console.log(response)
         if (JSON.stringify(values.backValueEmail) === JSON.stringify(response.data)) {
           cogoToast.error("This email is already taken.", { hideAfter: 5 });
           return;
-        } else if (JSON.stringify(values.backValueUser) === JSON.stringify(response.data)) {
-          cogoToast.error("This username is already taken.", { hideAfter: 5 });
-          return;
+
         } else {
-          cogoToast.success(" Thanks for joining us. You will receive a confirmation email in the following minutes.", { hideAfter: 5 });
+          cogoToast.success(" Thanks for joining us!", { hideAfter: 5 });
           history.push("/");
         }
       }, error => {
@@ -62,11 +65,8 @@ export default function RegisterPage() {
   };
 
   function checkPassword() {
-    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 || values.userName.length === 0 || values.lastName.length === 0 || values.firstName.length === 0 ) {
+    if (values.password.length === 0 || values.secPassword.length === 0 || values.email.length === 0 ||  values.name.length === 0 || values.companyNumber.length === 0 ) {
       cogoToast.error("Please fill in all the required fields.", { hideAfter: 5 });
-      return false;
-    } else if (values.userName.length < 2) {
-      cogoToast.error("Your username must have at least 2 characters.", { hideAfter: 5 });
       return false;
     } else if (values.password.length < 5 || values.secPassword.length < 5 || values.password.length > 20 || values.secPassword.length > 20) {
       cogoToast.error("Your password should contain at least 5 characters but no more than 20 characters.", { hideAfter: 5 });
@@ -101,23 +101,18 @@ export default function RegisterPage() {
 
   return (
     <div className="container">
-      <h1>Join the community</h1>
+      <h1>Join the community
+      
+      </h1>
+
+
       <Container className="formRegisterContainer">
         <h2 className="border-bottom">Register</h2>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="validationCustomUsername">
-            <Form.Control
-              type="userName"
-              placeholder="Enter your user name"
-              name="userName"
-              value={values.userName}
-              onChange={handleChange}
-            />
-          </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Control
               type="email"
-              placeholder="Enter your email address"
+              placeholder="Enter email address"
               name="email"
               value={values.email}
               onChange={handleChange}
@@ -125,26 +120,36 @@ export default function RegisterPage() {
           </Form.Group>
           <Form.Group controlId="validationCustomUsername">
             <Form.Control
-              type="firstName"
-              placeholder="Enter your first name"
-              name="firstName"
-              value={values.firstName}
+              type="name"
+              placeholder="Enter company name"
+              name="name"
+              value={values.name}
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group controlId="validationCustomUsername">
             <Form.Control
-              type="lastName"
-              placeholder="Enter your last name"
-              name="lastName"
-              value={values.lastName}
+              type="location"
+              placeholder="Enter company location"
+              name="location"
+              value={values.location}
+              onChange={handleChange}
+            />
+            </Form.Group>
+          <Form.Group controlId="validationCustomUsername">
+            <Form.Control
+              type="companyNumber"
+              placeholder="Enter company number"
+              name="companyNumber"
+              value={values.companyNumber}
               onChange={handleChange}
             />
           </Form.Group>
+          
           <Form.Group controlId="formBasicPassword">
             <Form.Control
               type="password"
-              placeholder="Enter your password"
+              placeholder="Enter password"
               name="password"
               value={values.password}
               onChange={handleChange}
@@ -153,7 +158,7 @@ export default function RegisterPage() {
           <Form.Group controlId="formBasicPassword">
             <Form.Control
               type="password"
-              placeholder="Confirm your password"
+              placeholder="Confirm password"
               name="secPassword"
               value={values.secPassword}
               onChange={handleChange}
