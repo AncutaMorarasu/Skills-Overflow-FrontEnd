@@ -88,7 +88,7 @@ function ProfilePage() {
                     
                     
                     {studentJobs.map(({ jobId: jobId, jobTitle: title }) => {
-                        return (<Link to={`/singleJob/${jobId}`} >{title} </Link>
+                        return (<Link to={`/singlePost/${jobId}`} >{title} </Link>
                         )
                     })}
                 </div>

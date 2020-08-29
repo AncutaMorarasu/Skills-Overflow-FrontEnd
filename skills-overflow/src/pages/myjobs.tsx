@@ -118,6 +118,13 @@ export default function ExistingProfiles(props: any) {
     setModal(!modal);
   }
 
+  function redirect( id:any ) {
+  
+     history.push(`/singlePost/${id}`)
+     //return <Redirect to='/dashboard' />  
+   
+ }
+
   //Filter input
   const filteredUsers = userProfile.filter((job: any) => {
     return job.field.toLowerCase().includes(searchTerm.toLowerCase())
@@ -133,7 +140,7 @@ export default function ExistingProfiles(props: any) {
       <SidenavAdmin />
       <div className="tables">
         <h1 className="request_header">
-          Approved jobs
+          My jobs
       </h1>
       <input type="text" className="form-control table-search" placeholder="Search by field"  value={searchTerm} onChange={handleChange}/>
       </div>
@@ -159,7 +166,7 @@ export default function ExistingProfiles(props: any) {
                   <td>{createDate}</td> 
                   <td>{salary}</td>
                   <td>
-                  <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); console.log(jobId); setUserId(jobId); setModalMessage("Are you sure you want to approve this Job?"); setSave(false); }}>Candidats  </Button>
+                  <Button type="button" className="btn btn-success btn-table" onClick={() => { redirect(jobId); console.log(jobId); setUserId(jobId); setModalMessage("Are you sure you want to approve this Job?"); setSave(false); }}>Candidats  </Button>
                   <Button type="button" className="btn btn-danger btn-table" onClick={() => { toggle(); setUserId(jobId); setModalMessage("Are you sure you want to delete this job?"); setSave(true) }}>Delete</Button>
                   </td>
                 </tr>

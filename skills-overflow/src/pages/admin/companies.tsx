@@ -73,7 +73,7 @@ export default function ExistingProfiles(props: any) {
   // Display pending users
   function getUsers() {
     localData();
-    axios.get('http://localhost:8080//allCompanies', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
+    axios.get('http://localhost:8080/allCompanies', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
