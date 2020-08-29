@@ -264,6 +264,10 @@ input::placeholder,
   margin-top: -0.4rem;
 }
 
+.centr{
+  justify-content: center;
+}
+
 .card,
 .quest-cont {
   margin-bottom: 1rem;

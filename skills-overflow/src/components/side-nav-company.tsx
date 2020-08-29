@@ -2,7 +2,7 @@ import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 
-function SidenavUser() {
+function SidenavCompany () {
   return (
     <ListGroup className="nav flex-column sidenav">
       <ListGroup.Item variant="light" className="nav-item">
@@ -12,19 +12,13 @@ function SidenavUser() {
       </ListGroup.Item>
 
       <ListGroup.Item >
-        <Link className="nav-link " to="/profile">
-          job requests
+        <Link className="nav-link " to="/myjobs">
+          my jobs
         </Link>
       </ListGroup.Item>
 
       <ListGroup.Item >
-        <Link className="nav-link " to="/profile">
-          my profile
-        </Link>
-      </ListGroup.Item>
-
-      <ListGroup.Item >
-        <Link className="nav-link " to="/profile">
+        <Link className="nav-link " to="/news">
           news
         </Link>
       </ListGroup.Item>
@@ -32,4 +26,4 @@ function SidenavUser() {
   );
 }
 
-export default SidenavUser;
+export default SidenavCompany;

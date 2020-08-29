@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SidenavAdmin from "../components/side-nav-admin";
 import SidenavStudent from "../components/side-nav-student";
+import SidenavCompany from "../components/side-nav-company"
 import { useHistory, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import JobCard from "../components/job cards";
@@ -24,6 +25,7 @@ function Dashboard(props: any) {
   let history = useHistory();
   let userlogged = localStorage.getItem("user");
   let currentUser: any;
+  const [searchTerm, setSearchTerm] = useState("");
   const [url, setUrl] = useState('');
   const { isAuthenticated, setUserHasAuthenticated } = props;
 
@@ -97,28 +99,23 @@ function Dashboard(props: any) {
       <div className="d-flex justify-content-around custom-dash">
         <form action="" className="searchForm" >
           <div className="input-group mb-4 border rounded-pill p-1 searchInput">
-            <input
-              type="text"
-              placeholder="What are you searching for?"
-              aria-describedby="button-addon3"
-              className="form-control bg-none border-0 searchInput"
-              value={searchParam}
-              onChange={changeParams}
-            />
+           
+            
             <div className="input-group-append border-0">
               <button
                 id="button-addon3"
                 type="button"
                 className="btn btn-link text-success"
               >
-                <FontAwesomeIcon icon={faSearch} onClick={sendToChild} />
+               
               </button>
             </div>
           </div>
         </form>
       </div>
-      <div>{role === "ADMIN" ? <SidenavAdmin /> : (role === "STUDENT" ? <SidenavStudent /> : null)}</div>
-
+      <div>{role === "ADMIN" ? <SidenavAdmin /> : (role === "STUDENT" ? <SidenavStudent /> : <SidenavCompany/>) }</div>
+      
+      
       <JobCard
       effects={effects}></JobCard>
 

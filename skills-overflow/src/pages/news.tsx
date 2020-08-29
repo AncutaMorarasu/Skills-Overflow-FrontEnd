@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SidenavAdmin from "../components/side-nav-admin";
 import SidenavUser from "../components/side-nav-student";
+import SidenavCompany from "../components/side-nav-company"
 import { Link } from "react-router-dom";
 import PhoneNumberChange from '../components/phoneNumber-change';
 import NameChange from '../components/name-change';
@@ -9,6 +10,7 @@ import axios from "axios";
 
 function ProfilePage() {
     const [showAdmin, setShowAdmin] = useState(false);
+    const [showStudent, setShowStudent] = useState(false);
     const [Info, setUserProfile] = useState({
         newsId: "",
         email: "",
@@ -55,8 +57,9 @@ function ProfilePage() {
             console.log(currentUser);
             if (currentUser.role === "[admin]") {
                 setShowAdmin(true);
-            } else {
+            } else if (currentUser.role === "[student]"){
                 setShowAdmin(false);
+                setShowStudent(true);
             }
         }
         localData();
@@ -66,7 +69,7 @@ function ProfilePage() {
     //  const renderPostsList= 
     return (
         <div>
-            <div>{showAdmin ? <SidenavAdmin /> : <SidenavUser />}</div>
+            <div>{showAdmin ? <SidenavAdmin /> : showStudent?<SidenavUser /> : <SidenavCompany></SidenavCompany>}</div>
             <div>
                 <h1 className='text-center'>Here are some news from University </h1>
             </div>

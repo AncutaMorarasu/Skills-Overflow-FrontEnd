@@ -33,6 +33,9 @@ import News from "./pages/news"
 import StudentProfile from "./pages/profile-student"
 
 import IndividualInfo from "./pages/individual-info-news"
+import JobForCompanyPage from "./pages/job for company page"
+
+import MyJobs from "./pages/myjobs"
 
 function App() {
   const bol = useAuth();
@@ -59,6 +62,10 @@ function App() {
           <Route path="/choose/register">
             <ChooseRegistration />
           </Route>
+          <Route path="/company/job">
+            <JobForCompanyPage />
+          </Route>
+          JobForCompanyPage
 
           <Route path="/myprofile">
             <StudentProfile />
@@ -66,6 +73,11 @@ function App() {
 
           <Route path="/news">
             <News />
+          </Route>
+
+          
+          <Route path="/myjobs">
+            <MyJobs />
           </Route>
           
 

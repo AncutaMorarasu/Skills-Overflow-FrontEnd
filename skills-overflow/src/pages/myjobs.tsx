@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import ModalComponent from "../../components/modal";
+import ModalComponent from "../components/modal";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
-import SidenavAdmin from '../../components/side-nav-admin'
+import SidenavAdmin from '../components/side-nav-company'
 //import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 export default function ExistingProfiles(props: any) {
@@ -33,10 +33,11 @@ export default function ExistingProfiles(props: any) {
   // Get users from database
   useEffect(() => {
     localData();
-    axios.get('http://localhost:8080/allUnapprovedJobs', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+    axios.get('http://localhost:8080/company/myJobs', { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
       .then(response => {
         const setData = response.data;
         setUserProfile(setData);
+        console.log(tokenCheck.token)
       }).catch(function (error) {
         if (error.request.status === 403) {
           history.push("/forbidden-page")
@@ -49,6 +50,7 @@ export default function ExistingProfiles(props: any) {
       localData();
       axios.delete(`http://localhost:8080/job/remove/${getUserId}`, { headers: { Authorization: 'Bearer ' + tokenCheck.token, "Content-type": "application/json" } }).then(
         response => {
+          console.log(tokenCheck.token)
           console.log(save);
   
           if (response.status === 200) {
@@ -85,7 +87,7 @@ export default function ExistingProfiles(props: any) {
   // Display pending users
   function getUsers() {
     localData();
-    axios.get('http://localhost:8080/allUnapprovedJobs', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
+    axios.get('http://localhost:8080/company/myJobs', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
       response => {
         const setData = response.data;
         setUserProfile(setData);
@@ -131,7 +133,7 @@ export default function ExistingProfiles(props: any) {
       <SidenavAdmin />
       <div className="tables">
         <h1 className="request_header">
-          Unapproved jobs
+          Approved jobs
       </h1>
       <input type="text" className="form-control table-search" placeholder="Search by field"  value={searchTerm} onChange={handleChange}/>
       </div>
@@ -157,7 +159,7 @@ export default function ExistingProfiles(props: any) {
                   <td>{createDate}</td> 
                   <td>{salary}</td>
                   <td>
-                  <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); console.log(jobId); setUserId(jobId); setModalMessage("Are you sure you want to approve this Job?"); setSave(false); }}>Approve</Button>
+                  <Button type="button" className="btn btn-success btn-table" onClick={() => { toggle(); console.log(jobId); setUserId(jobId); setModalMessage("Are you sure you want to approve this Job?"); setSave(false); }}>Candidats  </Button>
                   <Button type="button" className="btn btn-danger btn-table" onClick={() => { toggle(); setUserId(jobId); setModalMessage("Are you sure you want to delete this job?"); setSave(true) }}>Delete</Button>
                   </td>
                 </tr>
