@@ -5,6 +5,7 @@ import ModalComponent from "../components/modal";
 import cogoToast from "cogo-toast";
 import { useHistory } from "react-router-dom";
 import SidenavAdmin from '../components/side-nav-company'
+import AddJob from '../components/add-job'
 //import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 export default function ExistingProfiles(props: any) {
@@ -18,6 +19,7 @@ export default function ExistingProfiles(props: any) {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState("");
   const { isAuthenticated, setUserHasAuthenticated } = props;
+  
   
  
   function handleChange(event: any){
@@ -120,7 +122,7 @@ export default function ExistingProfiles(props: any) {
 
   function redirect( id:any ) {
   
-     history.push(`/singlePost/${id}`)
+     history.push(`/company/job/${id}`)
      //return <Redirect to='/dashboard' />  
    
  }
@@ -133,9 +135,7 @@ export default function ExistingProfiles(props: any) {
   return (
     <div className="requests_page">
             <div className="d-flex justify-content-end">
-        <Button onClick={signOut} variant="light" className="accountBtn">
-          Log Out
-        </Button>
+      <AddJob></AddJob>
       </div>
       <SidenavAdmin />
       <div className="tables">

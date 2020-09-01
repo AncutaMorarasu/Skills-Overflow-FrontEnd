@@ -28,7 +28,7 @@ function JobCard(props: any) {
   function getJobs() {
     localData();
 
-    axios.get("http://localhost:8080/allJobs", { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+    axios.get("http://localhost:8080/allApprovedJobs", { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
     .then(response => {
         console.log(response.data);
      setJobs(response.data)
@@ -55,7 +55,7 @@ function JobCard(props: any) {
   console.log(jobs);
   const renderPosts = jobs.map(
     (
-      { jobId, jobTitle, description, createDate, field, salary },
+      { jobId, jobTitle, description, createDate, field, salary,company },
       index
     ) => {
       return (
@@ -76,7 +76,7 @@ function JobCard(props: any) {
           </Card.Text>
           <Card.Text> <span className="font-weight-bold">Field: </span>  {field}</Card.Text>
           <Card.Text> <span className="font-weight-bold">Salary: </span> {salary}</Card.Text>
-          <Card.Text> <span className="font-weight-bold">Posted by: </span> {salary}</Card.Text>
+          <Card.Text> <span className="font-weight-bold">Posted by: </span> {company}</Card.Text>
         </Card.Body>
       </Card >
       );

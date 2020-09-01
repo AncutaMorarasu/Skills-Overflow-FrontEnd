@@ -25,6 +25,7 @@ export default function IndividualPost(props: any) {
       createDate: "",
       field: "",
       salary:"",
+      company:"",
 
 
   });
@@ -122,7 +123,7 @@ export default function IndividualPost(props: any) {
           </Card.Text>
           <Card.Text> <span className="font-weight-bold">Field: </span>  {job.field}</Card.Text>
           <Card.Text> <span className="font-weight-bold">Salary: </span> {job.salary}</Card.Text>
-          <Card.Text> <span className="font-weight-bold">Posted by: </span> {job.salary}</Card.Text>
+          <Card.Text> <span className="font-weight-bold">Posted by: </span> {job.company}</Card.Text>
           
           <div>{role === "ADMIN" ? null : (role === "STUDENT" ? <Button type="button" className="btn btn-success btn-table" onClick={() => {  console.log(jobId); submit() }}>Apply</Button> : null)}</div>
           

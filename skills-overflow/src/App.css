@@ -348,6 +348,7 @@ textarea {
   position: relative;
   left: 19%;
 }
+.table_container2 { display: flex; justify-content: center; margin-top: 3%; width: 75%; text-align: center; position: relative; left:8%; }
 
 .table-bordered {
   height: 100%;

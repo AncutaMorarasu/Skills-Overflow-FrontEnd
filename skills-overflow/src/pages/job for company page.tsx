@@ -11,7 +11,9 @@ import cogoToast from "cogo-toast";
 export default function IndividualPost(props: any) {
     const { effects } = props;
     let tokenCheck: any;
+    const [userProfile, setUserProfile] = useState([]);
   const history = useHistory();
+  const [searchTerm, setSearchTerm] = useState("");
   let [userToken, setUserToken] = useState<number>(0);
   const location = useLocation<{ topics: string[] }>();
   const { isAuthenticated, setUserHasAuthenticated } = props;
@@ -25,10 +27,15 @@ export default function IndividualPost(props: any) {
       createDate: "",
       field: "",
       salary:"",
+      company: "",
 
 
   });
 
+
+  function handleChange(event: any){
+    setSearchTerm(event.target.value);
+  }
   const [values, setValues] = useState({
     declined:"already applied",
     accepted:"applyed succesfully",
@@ -76,6 +83,29 @@ export default function IndividualPost(props: any) {
     }
     );
 };
+function getUsers() {
+  localData();
+  axios.get('http://localhost:8080/allStudents', { headers: { Authorization: 'Bearer ' + tokenCheck.token } }).then(
+    response => {
+      const setData = response.data;
+      setUserProfile(setData);
+      //console.log(save);
+    }
+  )
+}
+useEffect(() => {
+  localData();
+  axios.get('http://localhost:8080/students/job/'+ jobId, { headers: { Authorization: 'Bearer ' + tokenCheck.token } })
+    .then(response => {
+      const setData = response.data;
+      setUserProfile(setData);
+    }).catch(function (error) {
+      if (error.request.status === 403) {
+        history.push("/forbidden-page")
+      }
+    })
+}, [searchTerm]);
+
 
   let userlogged = localStorage.getItem("user");
   let currentUser;
@@ -95,6 +125,10 @@ export default function IndividualPost(props: any) {
     })
 
   }
+
+  const filteredUsers = userProfile.filter((user: any) => {
+    return user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  })
 
 
 
@@ -122,9 +156,43 @@ export default function IndividualPost(props: any) {
           </Card.Text>
           <Card.Text> <span className="font-weight-bold">Field: </span>  {job.field}</Card.Text>
           <Card.Text> <span className="font-weight-bold">Salary: </span> {job.salary}</Card.Text>
-          <Card.Text> <span className="font-weight-bold">Posted by: </span> {job.salary}</Card.Text>
+          <Card.Text> <span className="font-weight-bold">Posted by: </span> {job.company}</Card.Text>
           
-          <div>{role === "ADMIN" ? null : (role === "STUDENT" ? <Button type="button" className="btn btn-success btn-table" onClick={() => {  console.log(jobId); submit() }}>Apply</Button> : null)}</div>
+                <div className="table_container2">
+        <div className="table__container">
+          <table className="table table-bordered">
+            <thead className="table_head">
+              <tr>
+                <th scope="col">Student id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Skills</th>
+                <th scope="col">Education</th>
+                <th scope="col">Work Experience</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map(({studentId, firstName, lastName, email, phoneNumber, skills,education,workExperience}) => (
+                <tr key={studentId}>
+                  <td>{studentId}</td>
+                  <td>{firstName}</td>
+                  <td>{lastName}</td>
+                  <td>{email}</td> 
+                  <td>{phoneNumber}</td>
+                  <td>{skills}</td>
+                  <td>{education}</td>
+                  <td>{workExperience}</td>
+                 
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
           
           
         </Card.Body>

@@ -62,7 +62,7 @@ function App() {
           <Route path="/choose/register">
             <ChooseRegistration />
           </Route>
-          <Route path="/company/job">
+          <Route path="/company/job/:id">
             <JobForCompanyPage />
           </Route>
           JobForCompanyPage
